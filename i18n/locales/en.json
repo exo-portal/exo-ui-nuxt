@@ -1,5 +1,268 @@
 {
-  "welcome": "Welcome to Home in Page {dynamic}",
-  "signIn": "Sign In",
-  "forgotPassword": "Forgot Password?"
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "common": {
+    "back": "Back"
+  },
+  "errorMessage": {
+    "emailAlreadyExists": "Email already exists.",
+    "invalidEmailAndPassword": "Invalid email or password."
+  },
+  "register": {
+    "instruction": {
+      "register": {
+        "title": {
+          "1": "Get Started with us",
+          "2": "Create your account"
+        },
+        "subtitle": {
+          "1": "Choose two (2) types of sign up",
+          "2": "Provide required details."
+        },
+        "topBadge": {
+          "title": "Sign up using (Gmail, Github)",
+          "badgeTitle": {
+            "1": "Sign up using your existing accounts."
+          }
+        },
+        "bottomBadge": {
+          "title": "Sign up using email or phone number:",
+          "badgeTitle": {
+            "1": "Sign up using your email or phone number.",
+            "2": "Fill out username and password.",
+            "3": "Click continue"
+          }
+        }
+      },
+      "personalDetails": {
+        "topBadge": {
+          "title": "Continue creating your account:",
+          "badgeTitle": {
+            "1": "Fill out your personal details carefully.",
+            "2": "Click next button to continue."
+          }
+        }
+      },
+      "contactDetails": {
+        "topBadge": {
+          "title": "Continue creating your account:",
+          "badgeTitle": {
+            "1": "Fill out your contact details carefully.",
+            "2": "Click submit button to continue."
+          }
+        }
+      }
+    },
+    "form": {
+      "signUp": {
+        "title": "Sign Up Account",
+        "subtitle": "Register with your existing account",
+        "button": {
+          "google": "Google",
+          "github": "Github",
+          "continue": "Continue"
+        },
+        "or": "Or",
+        "input": {
+          "label": {
+            "email": "Email",
+            "password": "Password",
+            "reEnterPassword": "Re-enter password"
+          },
+          "placeholder": {
+            "email": "Enter your email",
+            "password": "Enter your password",
+            "reEnterPassword": "Re-enter your password"
+          }
+        },
+        "alreadyHaveAccount": {
+          "text": "Already have an account?",
+          "signIn": "Sign in",
+          "login": "Login"
+        }
+      },
+      "layout": {
+        "title": "Register Account",
+        "personalDetailsSubtitle": "Provide your personal details",
+        "contactDetailsSubtitle": "Provide your contact details"
+      },
+      "personalDetails": {
+        "input": {
+          "label": {
+            "firstName": "First name",
+            "lastName": "Last name",
+            "dateOfBirth": "Date of Birth",
+            "gender": "Gender"
+          },
+          "placeholder": {
+            "firstName": "Enter your first name",
+            "lastName": "Enter your last name",
+            "dateOfBirth": "Enter your date of birth",
+            "gender": "Select your gender"
+          }
+        },
+        "button": {
+          "next": "Next",
+          "back": "Back"
+        }
+      },
+      "contactDetails": {
+        "input": {
+          "label": {
+            "phoneNumber": "Phone number",
+            "address": "Address",
+            "city": "City",
+            "state": "State",
+            "country": "Country",
+            "postalCode": "Postal code",
+            "barangay": "Barangay"
+          },
+          "placeholder": {
+            "phoneNumber": "Enter your phone number",
+            "address": "Enter your address",
+            "city": "Select city",
+            "state": "Select state",
+            "country": "Select country",
+            "postalCode": "Select postal code",
+            "barangay": "Select barangay"
+          }
+        },
+        "button": {
+          "submit": "Submit",
+          "cancel": "Cancel"
+        }
+      }
+    }
+  },
+  "login": {
+    "instruction": {
+      "title": "Welcome back!",
+      "subtitle": "Please enter Username or phone number and password to continue.",
+      "topBadge": {
+        "title": "Login using (Gmail, Github)",
+        "badgeTitle": {
+          "1": "Sign in using your registered Gmail and Github account."
+        }
+      },
+      "bottomBadge": {
+        "title": "Login using your email",
+        "badgeTitle": {
+          "1": "Enter your email and password.",
+          "2": "Click sign in."
+        }
+      }
+    },
+    "form": {
+      "signIn": {
+        "title": "Sign In Account",
+        "subtitle": "Sign in with your existing accounts",
+        "button": {
+          "google": "Google",
+          "github": "Github",
+          "signIn": "Sign In",
+          "forgotPassword": "Forgot Password?"
+        },
+        "alreadyHaveAccount": {
+          "text": "Don't have an account yet?",
+          "signUp": "Sign up"
+        },
+        "or": "Or"
+      }
+    }
+  },
+  "forgotPassword": {
+    "instruction": {
+      "enterEmail": {
+        "title": "Forgot your password?",
+        "subtitle": "Enter your registered email or phone number to reset your password.",
+        "topBadge": {
+          "title": "Steps to reset your password:",
+          "badgeTitle": {
+            "1": "Enter your registered email address or phone number.",
+            "2": "Click the submit button to receive a verification code."
+          }
+        }
+      },
+      "otp": {
+        "title": "OTP Verification",
+        "subtitle": "Enter the code sent to your email or phone number to continue.",
+        "topBadge": {
+          "title": "OTP Verification Steps:",
+          "badgeTitle": {
+            "1": "Check your email or phone for the 4-digit code.",
+            "2": "Enter the code in the field below.",
+            "3": "Click verify to continue."
+          }
+        }
+      },
+      "reset": {
+        "title": "Reset your password",
+        "subtitle": "Create a new password to regain access.",
+        "topBadge": {
+          "title": "Reset Password Steps:",
+          "badgeTitle": {
+            "1": "Enter your new password.",
+            "2": "Re-enter your new password to confirm.",
+            "3": "Click Save Password to complete the reset."
+          }
+        }
+      }
+    },
+    "form": {
+      "alreadyHaveAccount": {
+        "text": "Already remembered your password?",
+        "signIn": "Sign in"
+      },
+      "enterEmail": {
+        "identifier": {
+          "label": "Email or phone number",
+          "placeholder": "Enter your registered email or phone number"
+        },
+        "header": {
+          "title": "Forgot Password",
+          "subtitle": "Please enter your email address or phone number to receive an OTP."
+        }
+      },
+      "otp": {
+        "header": {
+          "title": "OTP Verification",
+          "subtitle": "Enter the 4-digit code sent to your email or phone number."
+        },
+        "button": {
+          "verify": "Verify",
+          "didNotReceiveCode": {
+            "text": "Did not receive the code?",
+            "resend": "Resend Code"
+          }
+        }
+      },
+      "reset": {
+        "header": {
+          "title": "Set a New Password",
+          "subtitle": "Create a new password to regain access."
+        },
+        "input": {
+          "label": {
+            "newPassword": "Create new password",
+            "reEnterNewPassword": "Re-enter new password"
+          },
+          "placeholder": {
+            "newPassword": "Enter your new password",
+            "reEnterNewPassword": "Re-enter your new password"
+          }
+        },
+        "button": {
+          "savePassword": "Save Password"
+        }
+      }
+    },
+    "button": {
+      "submit": "Submit",
+      "verify": "Verify",
+      "savePassword": "Save Password",
+      "backToLogin": "Back to Login"
+    }
+  }
 }
