@@ -8,7 +8,16 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: ["shadcn-nuxt"],
+  modules: ["shadcn-nuxt", "@nuxtjs/i18n"],
+  i18n: {
+    locales: [
+      { code: "en", name: "English", file: "en.json" },
+      { code: "fr", name: "Français", file: "fr.json" },
+    ],
+    defaultLocale: "en",
+    lazy: true,
+    langDir: "locales/",
+  },
   shadcn: {
     /**
      * Prefix for all the imported component
