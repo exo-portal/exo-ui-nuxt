@@ -1,17 +1,17 @@
-<script lang="ts">
+<script setup>
 
 useHead({
     title: 'Exo Portal - Home',
 })
 
 definePageMeta({
-    layout: 'default'
+    layout: 'default'   
 })
 
 </script>
 
 <template>
-    <div class="">
-        <h1>{{ $t("welcome") }}</h1>
+    <div>
+        <h1>{{ $t("welcome", { dynamic: "testing" }) }}</h1>
     </div>
 </template>
