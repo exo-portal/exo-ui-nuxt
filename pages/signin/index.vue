@@ -1,21 +1,20 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'auth'
-})
+import { DividerForm, OauthForm, SigninForm } from '~/components/index';
 
 useHead({
   title: 'Exo - Sign In',
 })
+
+definePageMeta({
+  layout: 'auth'
+})
+
 </script>
 
 <template>
-  <div>
-    <h2 class="text-2xl font-bold mb-4">Welcome to Sign in Page</h2>
-    <NuxtLink to="/signup" class="text-blue-500 hover:underline">
-      Sign Up
-    </NuxtLink>
-    <NuxtLink to="/forgot-password" class="text-blue-500 hover:underline">
-      Forgot Password?
-    </NuxtLink>
-  </div>
+  <main class="basis-8/12 flex flex-col justify-center items-center">
+    <OauthForm />
+    <DividerForm />
+    <SigninForm />
+  </main>
 </template>
