@@ -1,5 +1,13 @@
+<script setup lang="ts">
+import { Button } from '@/components/ui/button'
+
+const handleClick = () => {
+  console.log('Button clicked')
+}
+</script>
+
 <template>
-  <h1 class="text-9xl text-red-950 font-bold underline">
-    Hello world!
-  </h1>
+  <div class="">
+    <Button @click="handleClick">Click me</Button>
+  </div>
 </template>
