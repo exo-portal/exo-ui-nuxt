@@ -19,7 +19,6 @@ import type { AnchorHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from '
 
 interface FormFieldInputProps {
     componentType: 'input' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'datePicker' | 'tel' | 'otp-input'
-    componentField?: any
     label?: string
     name: string
     otherProps?: Partial<HTMLAttributes & AnchorHTMLAttributes & InputHTMLAttributes>
