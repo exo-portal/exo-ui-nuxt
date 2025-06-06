@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import Instruction from '~/components/auth-instruction/instruction.vue';
 </script>
 
 <template>
-  <div class="bg-neutral-100 min-h-screen">
-    <span>LOGIN LAYOUT</span>
+  <main class="flex min-h-screen bg-neutral-50">
+    <Instruction />
     <slot />
-  </div>
+  </main>
 </template>
