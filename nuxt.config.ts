@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: ["shadcn-nuxt", "@nuxtjs/i18n"],
+  modules: ["shadcn-nuxt", "@nuxtjs/i18n", "@pinia/nuxt"],
   i18n: {
     locales: [
       { code: "en", name: "English", file: "en.json" },
