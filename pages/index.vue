@@ -8,16 +8,10 @@ definePageMeta({
     layout: 'default'
 })
 
-import { translate } from "@/lib/translate";
-
-const welcomeText = translate('welcdwaome', { dynamic: 'yawas' });
-
-const number: number = "sadw";
-
-</script>   
+</script>
 
 <template>
     <div class="">
-        <h1>{{ welcomeText }}</h1>
+        <h1>{{ $t("welcome") }}</h1>
     </div>
 </template>
