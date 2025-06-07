@@ -1,4 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
+import svgLoader from "vite-svg-loader";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -6,9 +7,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), svgLoader()],
   },
-  modules: ["shadcn-nuxt", "@nuxtjs/i18n", "@pinia/nuxt"],
+  modules: ["shadcn-nuxt", "@nuxtjs/i18n", "@pinia/nuxt", "@nuxt/image"],
   i18n: {
     locales: [
       { code: "en", name: "English", file: "en.json" },
