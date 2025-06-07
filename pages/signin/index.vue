@@ -13,7 +13,7 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="basis-8/12 flex flex-col justify-center items-center">
+  <main class="basis-8/12 flex gap-9 flex-col justify-center items-center">
     <SignInOauthForm />
     <SignInDividerForm />
     <SigninForm />
