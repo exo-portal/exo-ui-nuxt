@@ -1,4 +1,4 @@
-// Common COmponents
+// Common Components
 export { default as BackButton } from "./common/BackButton.vue";
 
 // SignIn components
