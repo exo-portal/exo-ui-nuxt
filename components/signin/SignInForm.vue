@@ -45,7 +45,7 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
 </script>
 
 <template>
-    <form class="flex flex-col gap-6" @submit="onSubmit">
+    <form class="flex flex-col gap-6" @submit="onSubmit" autoComplete="on">
         <!-- Email Field -->
         <FormFieldInput name="email" componentType="input" max="10" maxLength="5"
             :label="translate('register.form.signUp.input.label.email')" :other-props="{
