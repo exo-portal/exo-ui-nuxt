@@ -17,4 +17,5 @@ export { default as ForgotPasswordHeader } from "./forgot-password/ForgotPasswor
 export { default as ForgotPasswordForm } from "./forgot-password/ForgotPasswordForm.vue";
 
 // Otp Components
+export { default as OtpHeader } from "./forgot-password/OtpHeader.vue";
 export { default as OtpForm } from "./forgot-password/OtpForm.vue";
