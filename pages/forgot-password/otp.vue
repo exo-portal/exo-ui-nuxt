@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import { BackButton, OtpForm, OtpHeader } from '~/components/index';
+import { metaTItleBuilder } from '~/lib';
 
 definePageMeta({
     layout: 'auth'
 })
 
 useHead({
-    title: 'Exo - Forgot Password | OTP',
+    title: metaTItleBuilder("Forgot Password | OTP"),
 })
-
-const router = useRouter()
 </script>
 
 <template>
-    <main class="basis-8/12 flex gap-9 flex-col justify-center items-center">
-        <section class="flex flex-col w-lg justify-start">
+    <section class="basis-8/12 flex gap-9 flex-col justify-center items-center">
+        <div class="flex flex-col w-lg justify-start">
             <BackButton />
             <OtpHeader />
             <OtpForm />
-        </section>
-    </main>
+        </div>
+    </section>
 </template>

@@ -1,20 +1,22 @@
 <script setup lang="ts">
+import { BackButton, ResetPasswordForm, ResetPasswordHeader } from '~/components/index';
+import { metaTItleBuilder } from '~/lib';
 definePageMeta({
     layout: 'auth'
 })
 
 
 useHead({
-    title: 'Exo - Forgot Password | OTP',
+    title: metaTItleBuilder("Forgot Password | RESET"),
 })
 
-const router = useRouter()
 </script>
 <template>
-    <div class="min-h-screen">
-        <h2 class="text-2xl font-bold mb-4">Wellcome to Forgot Password - reset</h2>
-        <button @click="router.back()" class="mt-4 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
-            Back
-        </button>
-    </div>
+    <section class="basis-8/12 flex gap-9 flex-col justify-center items-center">
+        <div class="flex flex-col w-lg justify-start">
+            <BackButton />
+            <ResetPasswordHeader />
+            <ResetPasswordForm />
+        </div>
+    </section>
 </template>
