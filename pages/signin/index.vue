@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { DividerForm, OauthForm, SigninForm } from '~/components/index';
+import { SignInDividerForm, SigninForm, SignInOauthForm } from '~/components/index';
+import { metaTItleBuilder } from '~/lib/utils';
 
 useHead({
-  title: 'Exo - Sign In',
+  title: metaTItleBuilder("Sign In"),
 })
 
 definePageMeta({
@@ -13,8 +14,8 @@ definePageMeta({
 
 <template>
   <main class="basis-8/12 flex flex-col justify-center items-center">
-    <OauthForm />
-    <DividerForm />
+    <SignInOauthForm />
+    <SignInDividerForm />
     <SigninForm />
   </main>
 </template>
