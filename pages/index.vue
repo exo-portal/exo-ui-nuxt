@@ -18,7 +18,6 @@ onMounted(() => {
 
 <template>
     <div>
-        <h1>{{ $t("welcome", { dynamic: "testing" }) }}</h1>
         <button @click="counter.increment">Count: {{ counter.count }}</button>
     </div>
 </template>

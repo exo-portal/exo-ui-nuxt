@@ -11,7 +11,7 @@ const props = defineProps<{
   defaultValue?: string | number
   modelValue?: string | number
   class?: HTMLAttributes['class'],
-  inputSuffixIcon?: import('vue').VNode,
+  inputSuffixIcon?: import('vue').VNode | string | object,
   type?: InputTypeHTMLAttribute;
 }>()
 
@@ -61,9 +61,7 @@ const inputType = computed(() => {
         props.class,
       )">
       <span v-if="props.inputSuffixIcon" class="absolute right-3 top-1/2 -translate-y-1/2">
-        <slot name="inputSuffixIcon">
-          {{ props.inputSuffixIcon }}
-        </slot>
+        <component :is="props.inputSuffixIcon" />
       </span>
     </div>
   </template>

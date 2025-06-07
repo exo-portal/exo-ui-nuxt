@@ -21,7 +21,9 @@ interface FormFieldInputProps {
     componentType: 'input' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'datePicker' | 'tel' | 'otp-input'
     label?: string
     name: string
-    otherProps?: Partial<HTMLAttributes & AnchorHTMLAttributes & InputHTMLAttributes>
+    otherProps?: Partial<HTMLAttributes & AnchorHTMLAttributes & InputHTMLAttributes> & {
+        inputSuffixIcon?: import('vue').VNode | string | object,
+    }
 }
 
 const { name, componentType, label, otherProps } = defineProps<FormFieldInputProps>()

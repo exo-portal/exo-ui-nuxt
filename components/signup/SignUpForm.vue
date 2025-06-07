@@ -6,6 +6,7 @@ import FormFieldInput from '../common/FormFieldInput.vue'
 import { Button } from '../ui/button'
 import { PATH } from '~/config'
 import { translate } from '~/lib'
+import { UserIcon } from '~/assets'
 
 const rawSchema = z
     .object({
@@ -64,6 +65,7 @@ const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormVa
                 type: 'email',
                 placeholder: translate('register.form.signUp.input.placeholder.email'),
                 autocomplete: 'email',
+                inputSuffixIcon: UserIcon
             }" />
 
         <!-- Password Field -->
