@@ -54,7 +54,7 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
                 type: 'email',
                 placeholder: translate('register.form.signUp.input.placeholder.email'),
                 autocomplete: 'email',
-                inputSuffixIcon: UserIcon
+                inputSuffixIcon: UserIcon as Object
             }" />
 
         <!-- Password Field -->

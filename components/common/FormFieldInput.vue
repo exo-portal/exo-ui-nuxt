@@ -22,7 +22,7 @@ interface FormFieldInputProps {
     label?: string
     name: string
     otherProps?: Partial<HTMLAttributes & AnchorHTMLAttributes & InputHTMLAttributes> & {
-        inputSuffixIcon?: import('vue').VNode | string | object,
+        inputSuffixIcon?: object | Function,
     }
 }
 
