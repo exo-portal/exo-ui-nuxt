@@ -58,7 +58,6 @@ const onSubmit = form.handleSubmit(({ password, confirmPassword }: FormValues) =
 
 <template>
     <form class="flex flex-col gap-6" @submit="onSubmit" autoComplete="on">
-
         <!-- Password Field -->
         <FormFieldInput id="password" name="password" componentType="input"
             :label="$t('forgotPassword.form.reset.input.label.newPassword')" :other-props="{
