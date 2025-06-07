@@ -7,7 +7,6 @@ import { Button } from '../ui/button'
 import { PATH } from '~/config'
 import { translate } from '~/lib'
 
-
 const rawSchema = z
     .object({
         email: z

@@ -26,7 +26,6 @@ interface FormFieldInputProps {
 
 const { name, componentType, label, otherProps } = defineProps<FormFieldInputProps>()
 
-
 const resolvedComponent = computed(() => {
     switch (componentType) {
         case 'input':
