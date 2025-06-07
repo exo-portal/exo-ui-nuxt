@@ -15,3 +15,6 @@ export { default as SignUpOauthForm } from "./signup/OauthForm.vue";
 // ForgotPassword components
 export { default as ForgotPasswordHeader } from "./forgot-password/ForgotPasswordHeader.vue";
 export { default as ForgotPasswordForm } from "./forgot-password/ForgotPasswordForm.vue";
+
+// Otp Components
+export { default as OtpForm } from "./forgot-password/OtpForm.vue";

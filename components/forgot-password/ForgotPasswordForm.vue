@@ -54,7 +54,7 @@ const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
       {{ $t("forgotPassword.button.submit") }}
     </Button>
 
-    <!-- {/* Sign In Link */} -->
+    <!-- Sign Up Link -->
     <div class="text-center mt-2 text-neutral-500 text-label">
       {{ $t("forgotPassword.form.alreadyHaveAccount.text") }}
       <NuxtLink :to="PATH.SIGNUP.path" class="text-main-700 underline px-1">
