@@ -32,12 +32,15 @@ const form = useForm({
   validateOnMount: false
 })
 
+
 const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
+  // setting the flow cookie to indicate the current step
+  const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
+  flowCookie.value.step = "otp";
+
+  // TODO: Add logic to handle the identifier (email or phone number) for sending OTP or reset link
+  // This function is called when the form is submitted
   console.log('Form submitted!', { identifier })
-
-const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
-flowCookie.value.step = "otp";
-
   router.push(PATH.FORGOT_PASSWORD_OTP.path);
 })
 </script>

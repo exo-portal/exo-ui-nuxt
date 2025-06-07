@@ -22,20 +22,23 @@ const { handleSubmit, setFieldValue, values, } = useForm({
 })
 
 const onSubmit = handleSubmit(({ pin }) => {
-    // This function is called when the form is submitted
+    // setting the flow cookie to indicate the current step
     const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
     flowCookie.value.step = "reset";
 
+    // TODO: Add logic to handle the pin input for resetting the password
+    // This function is called when the form is submitted
     router.push(PATH.FORGOT_PASSWORD_RESET.path);
     console.log(pin.join(''));
 })
 
 const handleComplete = (e: string[]) => {
-    // This function is called when the pin input is completed
-
+    // setting the flow cookie to indicate the current step
     const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
     flowCookie.value.step = "reset";
 
+    // TODO: Add logic to handle the pin input for resetting the password
+    // This function is called when the pin input is completed
     console.log('Pin input completed:', e.join(''));
     router.push(PATH.FORGOT_PASSWORD_RESET.path);
 }
