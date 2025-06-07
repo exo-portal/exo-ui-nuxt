@@ -5,6 +5,7 @@ import GoogleIcon from "./GoogleIcon.svg";
 import GithubIcon from "./GithubIcon.svg";
 import CalendarIcon from "./CalendarIcon.svg";
 import ChevronDownIcon from "./ChevronDownIcon.svg";
+import UserIcon from "./User.svg";
 
 export {
   BackIcon,
@@ -14,4 +15,5 @@ export {
   GithubIcon,
   CalendarIcon,
   ChevronDownIcon,
+  UserIcon
 };
