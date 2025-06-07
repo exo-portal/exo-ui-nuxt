@@ -1,25 +1,22 @@
 <script setup lang="ts">
-import { PATH } from '~/config';
+import { BackButton, ForgotPasswordForm, ForgotPasswordHeader } from '~/components/index';
+import { metaTItleBuilder } from '~/lib';
 
 definePageMeta({
     layout: 'auth'
 })
 
 useHead({
-    title: 'Exo - Forgot Password',
+    title: metaTItleBuilder("Forgot Password"),
 })
-
-const router = useRouter()
 </script>
 
 <template>
-    <div class="min-h-screen">
-        <h2 class="text-2xl font-bold mb-4">Wellcome to Forgot Password</h2>
-        <NuxtLink :to="PATH.FORGOT_PASSWORD_OTP.path" class="mx-4 text-blue-500 hover:underline">
-            OTP
-        </NuxtLink>
-        <button @click="router.back()" class="mt-4 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
-            Back
-        </button>
-    </div>
+    <main class="basis-8/12 flex gap-9 flex-col justify-center items-center">
+        <section class="flex flex-col w-lg justify-start">
+            <BackButton />
+            <ForgotPasswordHeader />
+            <ForgotPasswordForm />
+        </section>
+    </main>
 </template>
