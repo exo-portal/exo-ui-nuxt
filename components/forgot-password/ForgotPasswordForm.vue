@@ -34,6 +34,10 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
   console.log('Form submitted!', { identifier })
+
+const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
+flowCookie.value.step = "otp";
+
   router.push(PATH.FORGOT_PASSWORD_OTP.path);
 })
 </script>

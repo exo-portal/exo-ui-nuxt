@@ -3,7 +3,8 @@ import { BackButton, OtpForm, OtpHeader } from '~/components/index';
 import { metaTItleBuilder } from '~/lib';
 
 definePageMeta({
-    layout: 'auth'
+    layout: 'auth',
+    middleware: ['forgot-flow-middleware']
 })
 
 useHead({
