@@ -5,6 +5,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import FormFieldInput from '../common/FormFieldInput.vue'
 import { Button } from '../ui/button'
 import { PATH } from '~/config'
+import { translate } from '~/lib'
 
 const rawSchema = z.object({
     email: z
@@ -46,22 +47,23 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
 <template>
     <form class="flex flex-col gap-6" @submit="onSubmit">
         <!-- Email Field -->
-        <FormFieldInput name="email" label="Email" componentType="input" max="10" placeholder="Enter Your Email"
-            maxLength="5" :other-props="{
+        <FormFieldInput name="email" componentType="input" max="10" maxLength="5"
+            :label="translate('register.form.signUp.input.label.email')" :other-props="{
                 class: 'w-lg',
                 type: 'email',
-                placeholder: 'Enter Your Email',
+                placeholder: translate('register.form.signUp.input.placeholder.email'),
                 autocomplete: 'email',
             }" />
 
         <!-- Password Field -->
         <div class="flex flex-col items-end gap-2">
-            <FormFieldInput name="password" label="Password" componentType="input" :other-props="{
-                class: 'w-lg',
-                type: 'password',
-                placeholder: 'Enter Your Password',
-                autocomplete: 'current-password',
-            }" />
+            <FormFieldInput name="password" componentType="input"
+                :label="translate('register.form.signUp.input.label.password')" :other-props="{
+                    class: 'w-lg',
+                    type: 'password',
+                    placeholder: translate('register.form.signUp.input.placeholder.password'),
+                    autocomplete: 'current-password',
+                }" />
             <NuxtLink :to="PATH.FORGOT_PASSWORD.path" class="text-main-700 text-label hover:underline">
                 {{ $t("login.form.signIn.button.forgotPassword") }}
             </NuxtLink>
