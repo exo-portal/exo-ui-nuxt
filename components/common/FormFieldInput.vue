@@ -1,6 +1,6 @@
 <template>
     <FormField v-slot="{ componentField }" :name="name">
-        <FormItem>
+        <FormItem class="w-full">
             <FormLabel>{{ label }}</FormLabel>
             <FormControl>
                 <component :is="resolvedComponent" v-bind="{ ...componentField, ...otherProps }" />

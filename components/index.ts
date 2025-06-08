@@ -12,6 +12,10 @@ export { default as SignUpDividerForm } from "./signup/DividerForm.vue";
 export { default as SignUpForm } from "./signup/SignUpForm.vue";
 export { default as SignUpOauthForm } from "./signup/OauthForm.vue";
 
+// SignUp Personal Details components
+export { default as PersonalDetailsHeader } from "./signup/PersonalDetailsHeader.vue";
+export { default as PersonalDetailsForm } from "./signup/PersonalDetailsForm.vue";
+
 // ForgotPassword components
 export { default as ForgotPasswordHeader } from "./forgot-password/ForgotPasswordHeader.vue";
 export { default as ForgotPasswordForm } from "./forgot-password/ForgotPasswordForm.vue";
