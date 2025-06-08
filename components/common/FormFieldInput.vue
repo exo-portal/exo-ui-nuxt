@@ -102,7 +102,6 @@ const CustomSelect = defineComponent({
                         ),
                         h(SelectContent, {}, () => [
                             h(SelectGroup, {}, () => [
-                                h(SelectLabel, {}, 'Options'),
                                 ...(props.options?.map(option =>
                                     h(SelectItem, { value: option.value }, option.label ?? option.value)
                                 ) ?? []),

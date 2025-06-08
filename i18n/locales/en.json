@@ -125,7 +125,7 @@
             "city": "Select city",
             "state": "Select state",
             "country": "Select country",
-            "postalCode": "Select postal code",
+            "postalCode": "Enter postal code",
             "barangay": "Select barangay"
           }
         },
