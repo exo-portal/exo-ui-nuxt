@@ -6,11 +6,30 @@ import { useForm } from 'vee-validate';
 import { Button } from '../ui/button';
 
 
+const GENDER_OPTIONS = [
+    { value: "male", label: "male" },
+    { value: "female", label: "female" },
+    { value: "other", label: "other" },
+];
+
 const rawSchema = z.object({
     firstName: z.string().min(1, "Firstname is required"),
     lastName: z.string().min(1, "Lastname is required"),
     dateOfBirth: z.string().min(1, "Date of Birth is required"),
-    gender: z.string().min(1, "Date of Birth is required")
+    gender: z.enum(
+        [...GENDER_OPTIONS.map((option) => option.value)] as [
+            string,
+            ...string[]
+        ],
+        {
+            errorMap: (issue) => {
+                if (issue.code === "invalid_enum_value") {
+                    return { message: "Gender is required" };
+                }
+                return { message: "Gender must be one of: male, female, other" };
+            },
+        }
+    ),
 })
 type FormValues = z.infer<typeof rawSchema>
 
@@ -33,6 +52,8 @@ const onSubmit = form.handleSubmit(({ firstName, lastName }: FormValues) => {
     console.log('Form submitted!', { firstName, lastName });
     // You can add logic to handle the form submission here
 });
+
+
 
 
 </script>
@@ -61,11 +82,12 @@ const onSubmit = form.handleSubmit(({ firstName, lastName }: FormValues) => {
                 placeholder: $t('register.form.personalDetails.input.label.dateOfBirth'),
                 autocomplete: 'family-name'
             }" />
-        <FormFieldInput id="gender" name="gender" componentType="input"
+        <FormFieldInput id="gender" name="gender" componentType="select"
             :label="$t('register.form.personalDetails.input.label.gender')" :other-props="{
                 type: 'text',
                 placeholder: $t('register.form.personalDetails.input.label.gender'),
-                autocomplete: 'family-name'
+                autocomplete: 'family-name',
+                options: GENDER_OPTIONS
             }" />
         <Button class="mt-4" type="submit">
             {{ $t('register.form.personalDetails.button.next') }}
