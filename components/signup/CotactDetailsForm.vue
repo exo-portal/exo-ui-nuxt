@@ -3,6 +3,8 @@ import z from 'zod';
 import FormFieldInput from '../common/FormFieldInput.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
+import { Label } from '../ui/label';
+import PhoneNumber from '../ui/phone-number/PhoneNumber.vue';
 
 const COUNTRY_OPTIONS = [
     { label: "Philippines", value: "Philippines" },
@@ -65,20 +67,7 @@ const onSubmit = form.handleSubmit(({ country, phoneNumber, address, state, city
                 placeholder: $t('register.form.contactDetails.input.placeholder.country'),
             }" />
 
-        <!-- Phone Number -->
-        <div class="flex items-start">
-            <FormFieldInput id="state" name="state" component-type="select"
-                :label="$t('register.form.contactDetails.input.label.state')" :other-props="{
-                    options: STATE_OPTIONS,
-                    placeholder: $t('register.form.contactDetails.input.placeholder.state'),
-                }" />
-            <FormFieldInput id="phoneNumber" name="phoneNumber" component-type="input"
-                :label="$t('register.form.contactDetails.input.label.phoneNumber')" :other-props="{
-                    type: 'tel',
-                    placeholder: $t('register.form.contactDetails.input.placeholder.phoneNumber'),
-                    autocomplete: 'tel'
-                }" />
-        </div>
+        <PhoneNumber />
 
         <!-- Address -->
         <FormFieldInput id="address" name="address" component-type="input"
