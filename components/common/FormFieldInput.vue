@@ -3,8 +3,16 @@
         <FormItem class="w-full">
             <FormLabel>{{ label }}</FormLabel>
             <FormControl>
-                {{ field.value }}
-                <component :aria-invalid="errors && errors.length > 0 ? 'true' : 'false'" :is="resolvedComponent(field, errors)" v-bind="{ ...componentField, ...otherProps }" />
+                <component :aria-invalid="errors && errors.length > 0 ? 'true' : 'false'" :is="resolvedComponent"
+                    v-bind="{
+                        ...componentField,
+                        ...otherProps,
+                        modelValue: field.value,
+                        'onUpdate:modelValue': field.onChange,
+                        options: otherProps?.options,
+                        placeholder: otherProps?.placeholder,
+                        hasError: errors && errors.length > 0
+                    }" />
             </FormControl>
             <FormMessage />
         </FormItem>
@@ -16,7 +24,6 @@ import { computed, defineProps } from 'vue'
 import { Input } from '@/components/ui/input'
 import type { AnchorHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'vue'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
-import type { FieldBindingObject } from 'vee-validate';
 
 interface FormFieldInputProps {
     componentType: 'input' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'datePicker' | 'tel';
@@ -29,50 +36,61 @@ interface FormFieldInputProps {
 }
 
 const { name, componentType, label, otherProps } = defineProps<FormFieldInputProps>()
-const resolvedComponent = computed(() => {
-    return (field: FieldBindingObject<any>, errors?: string[]) => {
-        switch (componentType) {
-            case 'input':
-                return Input;
-            case 'select':
-                return customSelectWithSubComponent(field, otherProps?.options, errors);
-            default:
-                return Input;
-        }
-    }
-})
 
-const customSelectWithSubComponent = (
-    field: FieldBindingObject<any>,
-    options?: Array<{ value: string; label?: string }>,
-    errors?: string[]) => {
-    return h(Select, () => [
-        h(
-            SelectTrigger,
-            {
-                class: otherProps?.class ? otherProps.class : 'w-full',
-                value: field.value,
-                hasError: errors && errors.length > 0,
-                onClear: () => {
-                    field.onChange('');
+const resolvedComponent = computed(() => {
+    switch (componentType) {
+        case 'input':
+            return Input;
+        case 'select':
+            return CustomSelect;
+        default:
+            return Input;
+    }
+});
+
+const CustomSelect = defineComponent({
+    props: {
+        modelValue: [String, Number],
+        options: Array<{ value: string; label?: string }>,
+        placeholder: String,
+        hasError: Boolean,
+    },
+    emits: ['update:modelValue'],
+    setup(props, { emit }) {
+        return () =>
+            h(
+                Select,
+                {
+                    modelValue: props.modelValue,
+                    'onUpdate:modelValue': (val: any) => emit('update:modelValue', val),
                 },
-                enableClear: true,
-            },
-            () => [
-                h(
-                    SelectValue,
-                    { placeholder: otherProps?.placeholder ? otherProps.placeholder : 'Select an option' }
-                )
-            ]
-        ),
-        h(SelectContent, {}, () => [
-            h(SelectGroup, {}, () => [
-                h(SelectLabel, {}, 'Options'),
-                ...(options?.map(option => h(SelectItem, { value: option.value },
-                    option.label ?? option.value
-                )) ?? [])
-            ])
-        ])
-    ])
-}
+                {
+                    default: () => [
+                        h(
+                            SelectTrigger,
+                            {
+                                class: 'w-full',
+                                hasError: props.hasError,
+                                enableClear: true,
+                                value: props.modelValue,
+                                onClear: () => emit('update:modelValue', ''),
+                            },
+                            () => [
+                                h(SelectValue, { placeholder: props.placeholder || 'Select an option' }),
+                            ]
+                        ),
+                        h(SelectContent, {}, () => [
+                            h(SelectGroup, {}, () => [
+                                h(SelectLabel, {}, 'Options'),
+                                ...(props.options?.map(option =>
+                                    h(SelectItem, { value: option.value }, option.label ?? option.value)
+                                ) ?? []),
+                            ]),
+                        ]),
+                    ],
+                }
+            );
+    },
+});
+
 </script>
