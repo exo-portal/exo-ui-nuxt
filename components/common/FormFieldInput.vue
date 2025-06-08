@@ -1,9 +1,10 @@
 <template>
-    <FormField v-slot="{ componentField, errors }" :name="name">
+    <FormField v-slot="{ componentField, field, errors }" :name="name">
         <FormItem class="w-full">
             <FormLabel>{{ label }}</FormLabel>
             <FormControl>
-                <component :is="resolvedComponent(errors)" v-bind="{ ...componentField, ...otherProps }" />
+                {{ field.value }}
+                <component :aria-invalid="errors && errors.length > 0 ? 'true' : 'false'" :is="resolvedComponent(field, errors)" v-bind="{ ...componentField, ...otherProps }" />
             </FormControl>
             <FormMessage />
         </FormItem>
@@ -13,10 +14,9 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
 import { Input } from '@/components/ui/input'
-// import other components as needed
-
 import type { AnchorHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'vue'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
+import type { FieldBindingObject } from 'vee-validate';
 
 interface FormFieldInputProps {
     componentType: 'input' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'datePicker' | 'tel';
@@ -30,25 +30,33 @@ interface FormFieldInputProps {
 
 const { name, componentType, label, otherProps } = defineProps<FormFieldInputProps>()
 const resolvedComponent = computed(() => {
-    return (errors?: string[]) => {
+    return (field: FieldBindingObject<any>, errors?: string[]) => {
         switch (componentType) {
             case 'input':
                 return Input;
             case 'select':
-                return customSelectWithSubComponent(otherProps?.options, errors);
+                return customSelectWithSubComponent(field, otherProps?.options, errors);
             default:
                 return Input;
         }
     }
 })
 
-const customSelectWithSubComponent = (options?: Array<{ value: string; label?: string }>, errors?: string[]) => {
+const customSelectWithSubComponent = (
+    field: FieldBindingObject<any>,
+    options?: Array<{ value: string; label?: string }>,
+    errors?: string[]) => {
     return h(Select, () => [
         h(
             SelectTrigger,
             {
                 class: otherProps?.class ? otherProps.class : 'w-full',
-                'aria-invalid': errors && errors.length > 0 ? 'true' : 'false'
+                value: field.value,
+                hasError: errors && errors.length > 0,
+                onClear: () => {
+                    field.onChange('');
+                },
+                enableClear: true,
             },
             () => [
                 h(
