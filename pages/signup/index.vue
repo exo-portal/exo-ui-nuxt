@@ -12,9 +12,9 @@ useHead({
 </script>
 
 <template>
-    <main class="basis-8/12 flex gap-9 flex-col justify-center items-center">
+    <section class="basis-8/12 flex gap-9 flex-col justify-center items-center">
         <SignUpOauthForm />
         <SignUpDividerForm />
         <SignUpForm />
-    </main>
+    </section>
 </template>

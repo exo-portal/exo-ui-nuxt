@@ -44,7 +44,7 @@ const inputType = computed(() => {
         'aria-invalid:border-danger-300 aria-invalid:bg-transparent aria-invalid:ring-4 aria-invalid:ring-danger-100',
         props.class,
       )">
-      <span class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1" tabindex="0" role="button"
+      <span class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1" tabindex="-1" role="button"
         @click="showPassword = !showPassword" @keydown.enter.prevent="showPassword = !showPassword"
         @keydown.space.prevent="showPassword = !showPassword"
         :aria-label="showPassword ? 'Hide password' : 'Show password'">
