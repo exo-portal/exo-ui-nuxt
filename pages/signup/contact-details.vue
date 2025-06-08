@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { BackButton, ContactDetailsForm, ContactDetailsHeader } from '~/components/index';
 import { metaTItleBuilder } from '~/lib';
 
 definePageMeta({
@@ -9,14 +10,14 @@ definePageMeta({
 useHead({
     title: metaTItleBuilder("Sign Up | Contact Details"),
 })
-const router = useRouter()
 </script>
 
 <template>
-    <div>
-        <h2 class="text-2xl font-bold mb-4">Welcome to Sign in Page CONTACT Details</h2>
-        <button @click="router.back()" class="mt-4 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
-            Back
-        </button>
-    </div>
+    <section class="basis-8/12 flex gap-9 flex-col justify-center items-center">
+        <div class="flex flex-col w-lg justify-start">
+            <BackButton />
+            <ContactDetailsHeader />
+            <ContactDetailsForm />
+        </div>
+    </section>
 </template>
