@@ -16,6 +16,10 @@ export { default as SignUpOauthForm } from "./signup/OauthForm.vue";
 export { default as PersonalDetailsHeader } from "./signup/PersonalDetailsHeader.vue";
 export { default as PersonalDetailsForm } from "./signup/PersonalDetailsForm.vue";
 
+// SignUp Contact Details Components
+export { default as ContactDetailsHeader } from "./signup/ContactDetailsHeader.vue";
+export { default as ContactDetailsForm } from "./signup/CotactDetailsForm.vue";
+
 // ForgotPassword components
 export { default as ForgotPasswordHeader } from "./forgot-password/ForgotPasswordHeader.vue";
 export { default as ForgotPasswordForm } from "./forgot-password/ForgotPasswordForm.vue";
