@@ -2,7 +2,7 @@ import { PATH } from "~/config";
 
 type RegistrationFlowStep = "register" | "personal" | "contact";
 
-type ForgotFlow = {
+type RegistrationFlow = {
   step?: RegistrationFlowStep;
 };
 
@@ -14,7 +14,7 @@ const stepToPath = {
 };
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  const flowCookie = useCookie<ForgotFlow>("registrationFlow", {
+  const flowCookie = useCookie<RegistrationFlow>("registrationFlow", {
     default: () => ({ step: "register" }),
   });
 
