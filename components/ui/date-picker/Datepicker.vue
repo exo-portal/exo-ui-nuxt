@@ -8,7 +8,8 @@ import moment from 'moment';
 import { XIcon } from 'lucide-vue-next';
 
 const props = defineProps<{
-  value: any
+  value: any,
+  hasError?: boolean,
 }>();
 
 const emit = defineEmits<{
@@ -54,21 +55,19 @@ const resetDate = () => {
 <template>
 
   <Popover>
-    <Input class="no-calendar-icon" :aria-invalid="false" v-model="inputValue" :suffix-button="true" type="date">
+    <Input class="no-calendar-icon" :aria-invalid="hasError" v-model="inputValue" :suffix-button="true" type="date">
     <template #suffixButton>
       <template v-if="!inputValue">
         <PopoverTrigger as-child>
           <CalendarIcon />
         </PopoverTrigger>
-        <PopoverContent class="w-auto p-0">
+        <PopoverContent tabindex="-1" class="w-auto p-0">
           <Calendar v-model="inputValue" initial-focus mode="single"
             :selected="inputValue ? moment(inputValue, 'YYYY-MM-DD', true).toDate() : undefined"
             @change="(date: Date | null) => handleCalendarSelect(date)" />
         </PopoverContent>
       </template>
-      <button v-else>
-        <XIcon @click="resetDate" />
-      </button>
+      <XIcon @click="resetDate" v-else />
     </template>
     </Input>
   </Popover>

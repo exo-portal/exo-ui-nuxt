@@ -4,8 +4,9 @@ import FormFieldInput from '../common/FormFieldInput.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
 import { Button } from '../ui/button';
-import { DatePicker } from '../ui/date-picker';
+import { PATH } from '~/config';
 
+const router = useRouter();
 
 const GENDER_OPTIONS = [
     { value: "male", label: "male" },
@@ -32,10 +33,9 @@ const rawSchema = z.object({
         }
     ),
 })
+
 type FormValues = z.infer<typeof rawSchema>
-
 const FormSchema = toTypedSchema(rawSchema)
-
 
 const form = useForm({
     validationSchema: FormSchema,
@@ -48,10 +48,11 @@ const form = useForm({
     validateOnMount: false
 })
 
-const onSubmit = form.handleSubmit(({ firstName, lastName }: FormValues) => {
+const onSubmit = form.handleSubmit(({ firstName, lastName, dateOfBirth, gender }: FormValues) => {
     // This function is called when the form is submitted
-    console.log('Form submitted!', { firstName, lastName });
+    console.log('Form submitted!', { firstName, lastName, dateOfBirth, gender });
     // You can add logic to handle the form submission here
+    router.push(PATH.SIGNUP_CONTACT_DETAILS.path);
 });
 </script>
 
@@ -73,16 +74,16 @@ const onSubmit = form.handleSubmit(({ firstName, lastName }: FormValues) => {
                     autocomplete: 'family-name'
                 }" />
         </div>
-        <DatePicker
-            :value="form.values.dateOfBirth"
-            @update:value="form.setFieldValue('dateOfBirth', $event)"
-        />
-        <FormFieldInput id="dateOfBirth" name="dateOfBirth" componentType="input"
+
+        <!-- Date of Birth -->
+        <FormFieldInput id="dateOfBirth" name="dateOfBirth" componentType="datePicker"
             :label="$t('register.form.personalDetails.input.label.dateOfBirth')" :other-props="{
                 type: 'text',
-                placeholder: $t('register.form.personalDetails.input.label.dateOfBirth'),
+                placeholder: $t('register.form.personalDetails.input.placeholder.dateOfBirth'),
                 autocomplete: 'family-name'
             }" />
+
+        <!-- Gender -->
         <FormFieldInput id="gender" name="gender" componentType="select"
             :label="$t('register.form.personalDetails.input.label.gender')" :other-props="{
                 type: 'text',
@@ -90,6 +91,8 @@ const onSubmit = form.handleSubmit(({ firstName, lastName }: FormValues) => {
                 autocomplete: 'family-name',
                 options: GENDER_OPTIONS
             }" />
+
+        <!-- Next Button -->
         <Button class="mt-4" type="submit">
             {{ $t('register.form.personalDetails.button.next') }}
         </Button>

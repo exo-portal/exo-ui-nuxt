@@ -24,6 +24,7 @@ import { computed, defineProps } from 'vue'
 import { Input } from '@/components/ui/input'
 import type { AnchorHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'vue'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
+import { DatePicker } from '../ui/date-picker';
 
 interface FormFieldInputProps {
     componentType: 'input' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'datePicker' | 'tel';
@@ -41,12 +42,32 @@ const resolvedComponent = computed(() => {
     switch (componentType) {
         case 'input':
             return Input;
+        case 'datePicker':
+            return CustomDatePicker;
         case 'select':
             return CustomSelect;
         default:
             return Input;
     }
 });
+
+const CustomDatePicker = defineComponent({
+    props: {
+        modelValue: [String, Date],
+        placeholder: String,
+        hasError: Boolean
+    },
+    emits: ['update:modelValue'],
+    setup(props, { emit }) {
+        return () =>
+            h(DatePicker, {
+                value: props.modelValue,
+                'onUpdate:value': (val: any) => emit('update:modelValue', val),
+                placeholder: props.placeholder,
+                hasError: props.hasError
+            });
+    }
+})
 
 const CustomSelect = defineComponent({
     props: {

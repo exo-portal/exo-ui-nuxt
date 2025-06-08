@@ -66,9 +66,9 @@ const inputType = computed(() => {
         class="absolute right-3 top-1/2 -translate-y-1/2">
         <component :is="props.inputSuffixIcon" />
       </span>
-      <span v-if="suffixButton" class="absolute right-3 top-1/2 -translate-y-1/2">
-        <slot name="suffixButton"></slot>
-      </span>
+      <button type="button" v-if="suffixButton" class="absolute right-3 top-1/2 cursor-pointer -translate-y-1/2 z-10 focus:outline-0 focus:border-0 focus:ring-0">
+        <slot name="suffixButton"/>
+      </button>
     </div>
   </template>
 </template>
