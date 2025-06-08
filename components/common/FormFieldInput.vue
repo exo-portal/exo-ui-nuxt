@@ -1,6 +1,6 @@
 <template>
     <FormField v-slot="{ componentField, field, errors }" :name="name">
-        <FormItem class="w-full">
+        <FormItem :class="otherProps?.notFullWidth ? '' : 'w-full'">
             <FormLabel>{{ label }}</FormLabel>
             <FormControl>
                 <component :aria-invalid="errors && errors.length > 0 ? 'true' : 'false'" :is="resolvedComponent"
@@ -11,7 +11,7 @@
                         'onUpdate:modelValue': field.onChange,
                         options: otherProps?.options,
                         placeholder: otherProps?.placeholder,
-                        hasError: errors && errors.length > 0
+                        hasError: errors && errors.length > 0,
                     }" />
             </FormControl>
             <FormMessage />
@@ -23,7 +23,7 @@
 import { computed, defineProps } from 'vue'
 import { Input } from '@/components/ui/input'
 import type { AnchorHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'vue'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { DatePicker } from '../ui/date-picker';
 
 interface FormFieldInputProps {
@@ -33,6 +33,7 @@ interface FormFieldInputProps {
     otherProps?: Partial<HTMLAttributes & AnchorHTMLAttributes & InputHTMLAttributes> & {
         inputSuffixIcon?: object | Function,
         options?: Array<{ value: string; label?: string }>;
+        notFullWidth?: boolean;
     }
 }
 
@@ -111,6 +112,25 @@ const CustomSelect = defineComponent({
                 }
             );
     },
+});
+
+const CustomTel = defineComponent({
+    props: {
+        modelValue: String,
+        placeholder: String,
+        hasError: Boolean
+    },
+    emits: ['update:modelValue'],
+    setup(props, { emit }) {
+        return () =>
+            h(Input, {
+                type: 'tel',
+                value: props.modelValue,
+                'onUpdate:modelValue': (val: any) => emit('update:modelValue', val),
+                placeholder: props.placeholder,
+                hasError: props.hasError
+            });
+    }
 });
 
 </script>

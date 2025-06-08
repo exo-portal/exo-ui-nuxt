@@ -53,7 +53,7 @@ const inputType = computed(() => {
       </span>
     </div>
   </template>
-  <template v-else>
+  <template v-else-if="props.inputSuffixIcon">
     <div class="relative w-full">
       <input v-model="modelValue" :type="props.type" v-bind="$attrs" data-slot="input" :class="cn(
         'bg-neutral-50 border border-neutral-200 placeholder:text-neutral-400 text-body-normal font-normal rounded-lg px-3.5 py-2.5 w-full outline-none text-neutral-800',
@@ -66,9 +66,18 @@ const inputType = computed(() => {
         class="absolute right-3 top-1/2 -translate-y-1/2">
         <component :is="props.inputSuffixIcon" />
       </span>
-      <button type="button" v-if="suffixButton" class="absolute right-3 top-1/2 cursor-pointer -translate-y-1/2 z-10 focus:outline-0 focus:border-0 focus:ring-0">
-        <slot name="suffixButton"/>
+      <button type="button" v-if="suffixButton"
+        class="absolute right-3 top-1/2 cursor-pointer -translate-y-1/2 z-10 focus:outline-0 focus:border-0 focus:ring-0">
+        <slot name="suffixButton" />
       </button>
     </div>
+  </template>
+  <template v-else>
+    <input v-model="modelValue" :type="props.type" v-bind="$attrs" data-slot="input" :class="cn(
+      'bg-neutral-50 border border-neutral-200 placeholder:text-neutral-400 text-body-normal font-normal rounded-lg px-3.5 py-2.5 w-full outline-none text-neutral-800',
+      'focus-visible:bg-main-50 focus-visible:border-main-400 focus-visible:ring-4 focus-visible:ring-main-100',
+      'aria-invalid:border-danger-300 aria-invalid:bg-transparent aria-invalid:ring-4 aria-invalid:ring-danger-100',
+      props.class,
+    )">
   </template>
 </template>
