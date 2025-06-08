@@ -49,9 +49,12 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit(({ firstName, lastName, dateOfBirth, gender }: FormValues) => {
-    // This function is called when the form is submitted
-    console.log('Form submitted!', { firstName, lastName, dateOfBirth, gender });
+    // setting the flow cookie to indicate the current step
+    const flowCookie = useCookie<{ step?: "register" | "personal" | "contact" }>('registrationFlow', { default: () => ({ step: "register" }) });
+    flowCookie.value.step = "contact";
+
     // You can add logic to handle the form submission here
+    console.log('Form submitted!', { firstName, lastName, dateOfBirth, gender });
     router.push(PATH.SIGNUP_CONTACT_DETAILS.path);
 });
 </script>
