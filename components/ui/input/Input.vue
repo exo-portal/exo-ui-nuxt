@@ -13,6 +13,7 @@ const props = defineProps<{
   class?: HTMLAttributes['class'],
   inputSuffixIcon?: object | Function,
   type?: InputTypeHTMLAttribute;
+  suffixButton?: boolean;
 }>()
 
 
@@ -54,7 +55,7 @@ const inputType = computed(() => {
   </template>
   <template v-else>
     <div class="relative w-full">
-      <input v-model="modelValue" v-bind="$attrs" data-slot="input" :class="cn(
+      <input v-model="modelValue" :type="props.type" v-bind="$attrs" data-slot="input" :class="cn(
         'bg-neutral-50 border border-neutral-200 placeholder:text-neutral-400 text-body-normal font-normal rounded-lg px-3.5 py-2.5 w-full outline-none text-neutral-800',
         'focus-visible:bg-main-50 focus-visible:border-main-400 focus-visible:ring-4 focus-visible:ring-main-100',
         'aria-invalid:border-danger-300 aria-invalid:bg-transparent aria-invalid:ring-4 aria-invalid:ring-danger-100',
@@ -64,6 +65,9 @@ const inputType = computed(() => {
         v-if="props.inputSuffixIcon && (typeof props.inputSuffixIcon === 'object' || typeof props.inputSuffixIcon === 'function')"
         class="absolute right-3 top-1/2 -translate-y-1/2">
         <component :is="props.inputSuffixIcon" />
+      </span>
+      <span v-if="suffixButton" class="absolute right-3 top-1/2 -translate-y-1/2">
+        <slot name="suffixButton"></slot>
       </span>
     </div>
   </template>

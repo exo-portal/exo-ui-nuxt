@@ -4,6 +4,7 @@ import FormFieldInput from '../common/FormFieldInput.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
 import { Button } from '../ui/button';
+import { DatePicker } from '../ui/date-picker';
 
 
 const GENDER_OPTIONS = [
@@ -52,10 +53,6 @@ const onSubmit = form.handleSubmit(({ firstName, lastName }: FormValues) => {
     console.log('Form submitted!', { firstName, lastName });
     // You can add logic to handle the form submission here
 });
-
-
-
-
 </script>
 
 <template>
@@ -76,6 +73,10 @@ const onSubmit = form.handleSubmit(({ firstName, lastName }: FormValues) => {
                     autocomplete: 'family-name'
                 }" />
         </div>
+        <DatePicker
+            :value="form.values.dateOfBirth"
+            @update:value="form.setFieldValue('dateOfBirth', $event)"
+        />
         <FormFieldInput id="dateOfBirth" name="dateOfBirth" componentType="input"
             :label="$t('register.form.personalDetails.input.label.dateOfBirth')" :other-props="{
                 type: 'text',
