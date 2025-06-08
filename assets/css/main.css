@@ -223,3 +223,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Chrome, Safari, Edge */
+.no-calendar-icon::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Firefox */
+.no-calendar-icon {
+  appearance: none;
+  -moz-appearance: textfield;
+}

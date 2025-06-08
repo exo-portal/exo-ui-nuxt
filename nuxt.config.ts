@@ -9,7 +9,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss(), svgLoader()],
   },
-  modules: ["shadcn-nuxt", "@nuxtjs/i18n", "@pinia/nuxt", "@nuxt/image"],
+  modules: [
+    "shadcn-nuxt",
+    "@nuxtjs/i18n",
+    "@pinia/nuxt",
+    "@nuxt/image"
+  ],
   i18n: {
     locales: [
       { code: "en", name: "English", file: "en.json" },
