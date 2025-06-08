@@ -29,6 +29,7 @@ const forwardedProps = useForwardProps(delegatedProps)
       'data-[placeholder]:text-neutral-400 text-neutral-800 text-body-normal',
       'px-3.5 py-[22px] bg-neutral-50 border border-neutral-200 text-neutral-400 text-body-normal',
       'aria-invalid:border-danger-300 aria-invalid:bg-transparent aria-invalid:ring-4 aria-invalid:ring-danger-100',
+      'focus-visible:bg-main-50 focus-visible:border-main-400 focus-visible:ring-4 focus-visible:ring-main-100',
       props.class,
     )">
       <slot />
@@ -38,7 +39,7 @@ const forwardedProps = useForwardProps(delegatedProps)
     </SelectTrigger>
     <button type="button" v-if="value && enableClear" :tabIndex="'-1'" @click="onClear"
       className="absolute right-3 top-1/2 cursor-pointer -translate-y-1/2 z-10 focus:outline-0 focus:border-0 focus:ring-0">
-      <!-- TODO:: change into custom X icon -->
+      <!-- TODO:: change into custom X icon  -->
       <XIcon :tabIndex="'-1'" />
     </button>
   </div>
