@@ -53,6 +53,11 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormValues) => {
+    // setting the flow cookie to indicate the current step
+    const flowCookie = useCookie<{ step?: "register" | "personal" | "contact" }>('registrationFlow', { default: () => ({ step: "register" }) });
+    flowCookie.value.step = "personal";
+
+    // redirecting to the next step
     console.log('Form submitted!', { email, password, confirmPassword })
     router.push(PATH.SIGNUP_PERSONAL_DETAILS.path);
 })

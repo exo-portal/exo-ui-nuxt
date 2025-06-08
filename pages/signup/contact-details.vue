@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { PATH } from '~/config';
+import { metaTItleBuilder } from '~/lib';
 
 definePageMeta({
-    layout: 'auth'
+    layout: 'auth',
+    middleware: ['signup-flow-middleware']
 })
 
 useHead({
-    title: 'Exo - Sign Up | Contact Details',
+    title: metaTItleBuilder("Sign Up | Contact Details"),
 })
 const router = useRouter()
 </script>

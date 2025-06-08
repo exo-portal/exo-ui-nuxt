@@ -3,7 +3,8 @@ import { BackButton, PersonalDetailsForm, PersonalDetailsHeader } from '~/compon
 import { metaTItleBuilder } from '~/lib';
 
 definePageMeta({
-    layout: 'auth'
+    layout: 'auth',
+    middleware: ['signup-flow-middleware']
 })
 
 useHead({
