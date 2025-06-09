@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils'
 import PasswordEyeIcon from '@/assets/svg/PasswordEyeIcon.svg'
 import PasswordEyeSlashIcon from '@/assets/svg/PasswordEyeSlashIcon.svg'
 
-
 const props = defineProps<{
   defaultValue?: string | number
   modelValue?: string | number
@@ -14,8 +13,8 @@ const props = defineProps<{
   inputSuffixIcon?: object | Function,
   type?: InputTypeHTMLAttribute;
   suffixButton?: boolean;
+  enableClear?: boolean;
 }>()
-
 
 const emits = defineEmits<{
   (e: 'update:modelValue', payload: string | number): void
@@ -53,7 +52,7 @@ const inputType = computed(() => {
       </span>
     </div>
   </template>
-  <template v-else-if="props.inputSuffixIcon">
+  <template v-else-if="props.enableClear">
     <div class="relative w-full">
       <input v-model="modelValue" :type="props.type" v-bind="$attrs" data-slot="input" :class="cn(
         'bg-neutral-50 border border-neutral-200 placeholder:text-neutral-400 text-body-normal font-normal rounded-lg px-3.5 py-2.5 w-full outline-none text-neutral-800',
