@@ -55,7 +55,7 @@ const resetDate = () => {
 <template>
 
   <Popover>
-    <Input class="no-calendar-icon" :aria-invalid="hasError" v-model="inputValue" :suffix-button="true" type="date">
+    <Input class="no-calendar-icon" enable-clear :aria-invalid="hasError" v-model="inputValue" :suffix-button="true" type="date">
     <template #suffixButton>
       <template v-if="!inputValue">
         <PopoverTrigger as-child>
