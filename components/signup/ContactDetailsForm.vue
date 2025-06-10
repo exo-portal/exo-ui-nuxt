@@ -103,14 +103,12 @@ const onSubmit = form.handleSubmit(({ country, phoneNumber, address, state, city
         <div class="flex gap-4 items-start">
             <FormFieldInput id="barangay" name="barangay" component-type="select"
                 :label="$t('register.form.contactDetails.input.label.barangay')" :other-props="{
-                    type: 'text',
                     placeholder: $t('register.form.contactDetails.input.placeholder.barangay'),
                     autocomplete: 'address-level2',
                     options: BRGY_OPTIONS
                 }" />
             <FormFieldInput id="postalCode" name="postalCode" component-type="input"
-                :label="$t('register.form.contactDetails.input.label.postalCode')" :other-props="{
-                    type: 'text',
+                :label="$t('register.form.contactDetails.input.label.postalCode')" :other-props="{  
                     placeholder: $t('register.form.contactDetails.input.placeholder.postalCode'),
                     autocomplete: 'postal-code'
                 }" />

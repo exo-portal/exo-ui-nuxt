@@ -80,13 +80,24 @@ const onFocusTel = (e: FocusEvent) => {
 
     inputValue.value = formattedValue;
 }
+
+// ...existing code...
+const onSelectChange = (event: Event) => {
+    const select = event.target as HTMLSelectElement;
+    selected.value = select.value;
+    inputValue.value = '';
+    inputPlaceholder.value = selectedOption.value?.phonePlaceholder || '+639 291 2231';
+
+    emit('update:modelValue', '');
+};
+
 </script>
 
 <template>
     <div :class="cn('has-[input:focus-within]:bg-main-50 has-[input:focus-visible]:border-main-400 has-[input:focus-visible]:ring-4 has-[input:focus-visible]:ring-main-100',
         'flex group bg-neutral-50 border border-neutral-200 rounded-lg w-full'
     )">
-        <Select v-model="selected">
+        <Select v-model="selected" @change="onSelectChange">
             <SelectTrigger is-input-group class="w-[130px]">
                 <SelectValue>
                     <template #default>

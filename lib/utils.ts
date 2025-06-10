@@ -48,7 +48,6 @@ export const liveFormat = ({
 }): string => {
   if (country === "PH" || country === "US") {
     if (input.replace(countryCode, "").trim() === "") {
-      console.warn("Input is empty after removing country code");
       return "";
     }
 
