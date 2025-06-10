@@ -55,7 +55,7 @@ const form = useForm({
 const { t } = useI18n();
 
 const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormValues) => {
-    validateEmail({ email: email })
+    validateEmail({ email })
         .then((respone) => {
             if (respone.status === 200) {
                 // setting the flow cookie to indicate the current step
