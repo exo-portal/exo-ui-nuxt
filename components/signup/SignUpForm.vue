@@ -5,8 +5,9 @@ import { toTypedSchema } from '@vee-validate/zod'
 import FormFieldInput from '../common/FormFieldInput.vue'
 import { Button } from '../ui/button'
 import { PATH } from '~/config'
-import { translate } from '~/lib'
+import { handleFieldErrors, translate } from '~/lib'
 import { UserIcon } from '~/assets'
+import type { ExoPortalErrorMessage } from '~/types/types'
 
 const router = useRouter();
 
@@ -51,15 +52,28 @@ const form = useForm({
     },
     validateOnMount: false
 })
+const { t } = useI18n();
 
 const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormValues) => {
-    // setting the flow cookie to indicate the current step
-    const flowCookie = useCookie<{ step?: "register" | "personal" | "contact" }>('registrationFlow', { default: () => ({ step: "register" }) });
-    flowCookie.value.step = "personal";
+    validateEmail({ email: email })
+        .then((respone) => {
+            if (respone.status === 200) {
+                // setting the flow cookie to indicate the current step
+                const flowCookie = useCookie<{ step?: "register" | "personal" | "contact" }>('registrationFlow', { default: () => ({ step: "register" }) });
+                flowCookie.value.step = "personal";
+                alert("Email is valid. Proceeding to the next step.");
+                router.push(PATH.SIGNUP_PERSONAL_DETAILS.path);
+            }
+        }).catch((error) => {
+            const errorResponse: ExoPortalErrorMessage = error.response.data;
 
-    // redirecting to the next step
-    console.log('Form submitted!', { email, password, confirmPassword })
-    router.push(PATH.SIGNUP_PERSONAL_DETAILS.path);
+            handleFieldErrors({
+                errorResponse: errorResponse,
+                setErrors: form.setErrors,
+                allowedFields: ["email"],
+                t: t
+            })
+        });
 })
 </script>
 
@@ -67,27 +81,27 @@ const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormVa
 <template>
     <form class="flex flex-col gap-6" @submit="onSubmit">
         <!-- Email Field -->
-        <FormFieldInput name="email" :label="translate('register.form.signUp.input.label.email')" componentType="input"
-            max="10" placeholder="Enter Your Email" maxLength="5" :other-props="{
+        <FormFieldInput name="email" :label="translate(t, 'register.form.signUp.input.label.email')"
+            componentType="input" max="10" placeholder="Enter Your Email" maxLength="5" :other-props="{
                 type: 'email',
-                placeholder: translate('register.form.signUp.input.placeholder.email'),
+                placeholder: translate(t, 'register.form.signUp.input.placeholder.email'),
                 autocomplete: 'email',
                 inputSuffixIcon: UserIcon as Object
             }" />
 
         <!-- Password Field -->
         <FormFieldInput name="password" componentType="input"
-            :label="translate('register.form.signUp.input.placeholder.password')" :other-props="{
+            :label="translate(t, 'register.form.signUp.input.placeholder.password')" :other-props="{
                 type: 'password',
-                placeholder: translate('register.form.signUp.input.placeholder.password'),
+                placeholder: translate(t, 'register.form.signUp.input.placeholder.password'),
                 autocomplete: 'current-password',
             }" />
 
         <!-- Confirm Password Field -->
         <FormFieldInput name="confirmPassword" componentType="input"
-            :label="translate('register.form.signUp.input.placeholder.reEnterPassword')" :other-props="{
+            :label="translate(t, 'register.form.signUp.input.placeholder.reEnterPassword')" :other-props="{
                 type: 'password',
-                placeholder: translate('register.form.signUp.input.placeholder.reEnterPassword'),
+                placeholder: translate(t, 'register.form.signUp.input.placeholder.reEnterPassword'),
                 autocomplete: 'current-password',
             }" />
 

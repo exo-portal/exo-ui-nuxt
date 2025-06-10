@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     "shadcn-nuxt",
     "@nuxtjs/i18n",
     "@pinia/nuxt",
-    "@nuxt/image"
+    "@nuxt/image",
   ],
   i18n: {
     locales: [

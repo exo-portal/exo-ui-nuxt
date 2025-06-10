@@ -29,7 +29,7 @@ export type InstructionConfig = {
 
 export type ExoPortalErrorMessage = {
   errorMessageList: {
-    errorMessage: string;
+    errorMessage: TxKeyPath;
     fieldName: string;
   }[];
   errorType: string;
