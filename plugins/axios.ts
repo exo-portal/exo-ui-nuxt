@@ -1,5 +1,8 @@
-import axios from "axios";
+import axios, { type AxiosInstance } from "axios";
 import { BASE_URL } from "~/config";
+import type { InjectionKey } from "vue";
+
+export const axiosKey: InjectionKey<AxiosInstance> = Symbol("axios");
 
 export default defineNuxtPlugin((nuxtApp) => {
   const axiosInstance = axios.create({
@@ -32,5 +35,5 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   );
 
-  nuxtApp.provide("axios", axiosInstance);
+  nuxtApp.provide(axiosKey, axiosInstance);
 });
