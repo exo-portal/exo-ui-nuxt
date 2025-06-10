@@ -7,9 +7,9 @@ import type { TxKeyPath } from "~/i18n/i18n";
  * @param options The options object containing dynamic values.
  */
 export const translate = (
+  t: ReturnType<typeof useI18n>["t"],
   key: TxKeyPath,
   options?: Record<string, string | number>
 ) => {
-  const { t } = useI18n();
   return key ? t(key, options ?? {}) : "";
 };

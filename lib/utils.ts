@@ -1,6 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import parsePhoneNumberFromString, { AsYouType } from "libphonenumber-js";
 import { twMerge } from "tailwind-merge";
+import type { TxKeyPath } from "~/i18n/i18n";
+import type { ExoPortalErrorMessage } from "~/types/types";
+import { translate } from "./translate";
 
 /**
  * Merges multiple class name values into a single string, removing duplicates and handling conditional classes.
@@ -84,4 +87,29 @@ export const formatPhoneNumber = ({
   }
 
   return value; // Return the original value if country is not supported
+};
+
+export const handleFieldErrors = ({
+  errorResponse,
+  allowedFields,
+  setErrors,
+  t,
+}: {
+  errorResponse: ExoPortalErrorMessage;
+  allowedFields: string[];
+  setErrors: (errors: Record<string, string>) => void;
+  t: any;
+}) => {
+  if (
+    typeof errorResponse.errorType === "string" &&
+    errorResponse.errorType === "field"
+  ) {
+    errorResponse.errorMessageList.forEach(
+      (err: { fieldName: string; errorMessage: TxKeyPath }) => {
+        if (allowedFields.includes(err.fieldName)) {
+          setErrors({ [err.fieldName]: translate(t, err.errorMessage) });
+        }
+      }
+    );
+  }
 };
