@@ -15,5 +15,5 @@ export {
   GithubIcon,
   CalendarIcon,
   ChevronDownIcon,
-  UserIcon
+  UserIcon,
 };

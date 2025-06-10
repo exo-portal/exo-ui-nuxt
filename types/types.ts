@@ -35,3 +35,11 @@ export type ExoPortalErrorMessage = {
   errorType: string;
   status: number;
 };
+
+export type PhoneOption = {
+  value: string;
+  label?: string;
+  icon?: string;
+  phonePlaceholder?: string;
+  countryCode?: string;
+};

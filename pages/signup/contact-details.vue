@@ -5,11 +5,11 @@ import { metaTItleBuilder } from '~/lib';
 definePageMeta({
     layout: 'auth',
     middleware: ['signup-flow-middleware']
-})
+});
 
 useHead({
     title: metaTItleBuilder("Sign Up | Contact Details"),
-})
+});
 </script>
 
 <template>
