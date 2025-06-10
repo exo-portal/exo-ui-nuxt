@@ -3,7 +3,6 @@ import z from 'zod';
 import FormFieldInput from '../common/FormFieldInput.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
-import { Label } from '../ui/label';
 import PhoneNumber from '../ui/phone-number/PhoneNumber.vue';
 
 const COUNTRY_OPTIONS = [
@@ -13,6 +12,10 @@ const COUNTRY_OPTIONS = [
 const CITY_OPTIONS = [{ label: "Cebu City", value: "Cebu City" }];
 const STATE_OPTIONS = [{ label: "Cebu", value: "Cebu" }];
 const BRGY_OPTIONS = [{ label: "Quiot Pardo", value: "Quiot Pardo" }];
+const PHONE_OPTIONS = [
+    { label: "PH", value: "PH", icon: "/svg/national-flag/PH.svg", countryCode: "+63", phonePlaceholder: "+639 291 2231" },
+    { label: "US", value: "US", icon: "/svg/national-flag/US.svg", countryCode: "+1", phonePlaceholder: "+1 123 456 7890" },
+];
 
 const rawSchema = z.object({
     phoneNumber: z.string().min(1, "Phone number is required"),
@@ -67,7 +70,7 @@ const onSubmit = form.handleSubmit(({ country, phoneNumber, address, state, city
                 placeholder: $t('register.form.contactDetails.input.placeholder.country'),
             }" />
 
-        <PhoneNumber />
+        <PhoneNumber :options="PHONE_OPTIONS" />
 
         <!-- Address -->
         <FormFieldInput id="address" name="address" component-type="input"
