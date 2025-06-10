@@ -3,7 +3,7 @@ import z from 'zod';
 import FormFieldInput from '../common/FormFieldInput.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
-import PhoneNumber from '../ui/phone-number/PhoneNumber.vue';
+import type { PhoneOption } from '~/types/types';
 
 const COUNTRY_OPTIONS = [
     { label: "Philippines", value: "Philippines" },
@@ -12,7 +12,7 @@ const COUNTRY_OPTIONS = [
 const CITY_OPTIONS = [{ label: "Cebu City", value: "Cebu City" }];
 const STATE_OPTIONS = [{ label: "Cebu", value: "Cebu" }];
 const BRGY_OPTIONS = [{ label: "Quiot Pardo", value: "Quiot Pardo" }];
-const PHONE_OPTIONS = [
+const PHONE_OPTIONS: PhoneOption[] = [
     { label: "PH", value: "PH", icon: "/svg/national-flag/PH.svg", countryCode: "+63", phonePlaceholder: "+639 291 2231" },
     { label: "US", value: "US", icon: "/svg/national-flag/US.svg", countryCode: "+1", phonePlaceholder: "+1 123 456 7890" },
 ];
@@ -70,7 +70,12 @@ const onSubmit = form.handleSubmit(({ country, phoneNumber, address, state, city
                 placeholder: $t('register.form.contactDetails.input.placeholder.country'),
             }" />
 
-        <PhoneNumber :options="PHONE_OPTIONS" />
+        <!-- <PhoneNumber :options="PHONE_OPTIONS" /> -->
+        <FormFieldInput id="phoneNumber" name="phoneNumber" component-type="tel"
+            :label="$t('register.form.contactDetails.input.label.phoneNumber')" :other-props="{
+                options: PHONE_OPTIONS,
+                autocomplete: 'tel',
+            }" />
 
         <!-- Address -->
         <FormFieldInput id="address" name="address" component-type="input"

@@ -25,6 +25,8 @@ import { Input } from '@/components/ui/input'
 import type { AnchorHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'vue'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { DatePicker } from '../ui/date-picker';
+import { PhoneNumber } from '../ui/phone-number';
+import type { PhoneOption } from '~/types/types';
 
 interface FormFieldInputProps {
     componentType: 'input' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'datePicker' | 'tel';
@@ -32,7 +34,7 @@ interface FormFieldInputProps {
     name: string;
     otherProps?: Partial<HTMLAttributes & AnchorHTMLAttributes & InputHTMLAttributes> & {
         inputSuffixIcon?: object | Function,
-        options?: Array<{ value: string; label?: string }>;
+        options?: Array<{ value: string; label?: string, icon?: string, phonePlaceholder?: string, countryCode?: string }>;
         notFullWidth?: boolean;
     }
 }
@@ -47,6 +49,8 @@ const resolvedComponent = computed(() => {
             return CustomDatePicker;
         case 'select':
             return CustomSelect;
+        case 'tel':
+            return CustomTel;
         default:
             return Input;
     }
@@ -118,15 +122,19 @@ const CustomTel = defineComponent({
     props: {
         modelValue: String,
         placeholder: String,
-        hasError: Boolean
+        hasError: Boolean,
+        options: {
+            type: Array as PropType<PhoneOption[]>,
+            default: () => []
+        }
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
         return () =>
-            h(Input, {
-                type: 'tel',
-                value: props.modelValue,
+            h(PhoneNumber, {
+                modelValue: props.modelValue ?? '',
                 'onUpdate:modelValue': (val: any) => emit('update:modelValue', val),
+                options: props.options,
                 placeholder: props.placeholder,
                 hasError: props.hasError
             });

@@ -1,26 +1,85 @@
 <script setup lang="ts">
-import { cn } from '~/lib';
+import { cn, formatPhoneNumber, liveFormat } from '~/lib';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from '../select';
 import { Input } from '../input';
+import type { PhoneOption } from '~/types/types';
 
-const props = defineProps({
-    options: Array<{ value: string; label?: string, icon?: string, phonePlaceholder?: string }>
-});
+// Define props for the component
+const props = defineProps<{
+    options: PhoneOption[];
+    modelValue: string;
+}>();
 
+// Define emits for the component
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: string): void
+}>();
+
+// Reactive references for selected option and input value
 const selected = ref(props.options?.[0]?.value || ''); // default to first option or empty
 
+// Ensure selected is always a valid option
 const selectedOption = computed(() =>
     props.options?.find(o => o.value === selected.value)
 );
 
+// Ensure selectedOption is always defined
+const inputValue = ref(props.modelValue ?? '');
+
 // Default placeholder if not set in option
 const inputPlaceholder = ref(selectedOption.value?.phonePlaceholder || '+639 291 2231');
 
+// Watch for changes in selected option to update placeholder
 watch(selected, (val) => {
     const opt = props.options?.find(o => o.value === val);
     inputPlaceholder.value = opt?.phonePlaceholder || '+639 291 2231';
 }, { immediate: true });
 
+
+// Handle input change
+const onInputTel = (e: Event) => {
+    const input = e.target as HTMLInputElement;
+    const rawValue = input.value;
+    const country = selectedOption.value?.label || '';
+    const countryCode = selectedOption.value?.countryCode || '';
+
+    // Live format for display only
+    inputValue.value = liveFormat({
+        input: rawValue,
+        country,
+        countryCode,
+    });
+}
+
+// Emit only on blur (or you can debounce)
+const onBlurTel = () => {
+    const country = selectedOption.value?.countryCode || '';
+    emit('update:modelValue', inputValue.value ? formatPhoneNumber({
+        value: inputValue.value,
+        country,
+    }) : '');
+}
+
+// Handle focus to format the input value
+const onFocusTel = (e: FocusEvent) => {
+    const input = e.target as HTMLInputElement;
+    const rawValue = input.value;
+    const country = selectedOption.value?.label || '';
+    const countryCode = selectedOption.value?.countryCode || '';
+
+    const stringValue = liveFormat({
+        input: rawValue,
+        country,
+        countryCode,
+    });
+
+    const formattedValue = formatPhoneNumber({
+        value: stringValue,
+        country,
+    });
+
+    inputValue.value = formattedValue;
+}
 </script>
 
 <template>
@@ -56,6 +115,7 @@ watch(selected, (val) => {
         </Select>
         <Input
             class="w-full border-l-0 rounded-l-none bg-transparent border-0 rounded-none focus-visible:ring-0 focus-visible:border-0 focus-visible:bg-transparent group-focus-within:bg-main-50"
-            :placeholder="inputPlaceholder" />
+            :placeholder="inputPlaceholder" v-model="inputValue" @input="onInputTel" @blur="onBlurTel"
+            @focus="onFocusTel" />
     </div>
 </template>
