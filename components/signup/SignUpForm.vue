@@ -111,7 +111,9 @@ onMounted(() => {
             <form class="flex flex-col gap-6" @submit.prevent="onSubmit">
                 <!-- Email Field -->
                 <FormFieldInput name="email" :label="translate(t, 'register.form.signUp.input.label.email')"
-                    componentType="input" max="10" placeholder="Enter Your Email" maxLength="5" :other-props="{
+                    componentType="input" max="10"
+                    :placeholder="translate(t, 'register.form.signUp.input.placeholder.email')" maxLength="5"
+                    :other-props="{
                         type: 'email',
                         placeholder: translate(t, 'register.form.signUp.input.placeholder.email'),
                         autocomplete: 'email',
