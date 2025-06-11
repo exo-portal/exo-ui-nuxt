@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "cross-env NUXT_DEV_MODE=production nuxt build",
     "dev": "nuxt dev",
+    "prepare": "tw-patch install",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -36,7 +37,9 @@
   },
   "devDependencies": {
     "@types/moment": "^2.13.0",
+    "tailwindcss-patch": "^7.1.1",
     "typescript": "^5.8.3",
+    "unplugin-tailwindcss-mangle": "^4.1.1",
     "vite-svg-loader": "^5.1.0"
   }
 }
