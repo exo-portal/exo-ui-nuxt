@@ -65,7 +65,7 @@ const { t } = useI18n();
                 :label="translate(t, 'register.form.signUp.input.label.password')" :other-props="{
                     class: 'w-lg',
                     type: 'password',
-                    placeholder: translate(t    , 'register.form.signUp.input.placeholder.password'),
+                    placeholder: translate(t, 'register.form.signUp.input.placeholder.password'),
                     autocomplete: 'current-password',
                 }" />
             <NuxtLink :to="PATH.FORGOT_PASSWORD.path" class="text-main-700 text-label hover:underline">

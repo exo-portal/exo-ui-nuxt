@@ -9,18 +9,18 @@ export default defineNuxtPlugin((nuxtApp) => {
     timeout: 5000, // Set timeout to 5000ms (5 seconds)
   });
 
+  const loadingStore = useLoadingStore();
+
   // Add a request interceptor
   axiosInstance.interceptors.request.use(
     (config) => {
       // You can modify the request config here if needed
-      const loadingStore = useLoadingStore();
       loadingStore.setLoading(true);
 
       return config;
     },
     (error) => {
       // Handle request error
-      const loadingStore = useLoadingStore();
       loadingStore.setLoading(false);
 
       return Promise.reject(error);
@@ -31,17 +31,13 @@ export default defineNuxtPlugin((nuxtApp) => {
   axiosInstance.interceptors.response.use(
     (response) => {
       // You can process the response data here
-
-      const { setLoading } = useLoadingStore();
-      setLoading(false);
+      loadingStore.setLoading(false);
 
       return response;
     },
     (error) => {
       // Handle response error
-
-      const { setLoading } = useLoadingStore();
-      setLoading(false);
+      loadingStore.setLoading(false);
 
       return Promise.reject(error);
     }
