@@ -8,8 +8,9 @@ export interface ApiResponse<T = any> {
 
 export interface ApiResultModel<T = any> {
   isSuccess: boolean;
-  resultData?: T;
-  errorMessage?: string;
+  resultData: T;
+  errorMessage: string;
+  message: string;
 }
 
 export type InstructionConfig = {
@@ -43,3 +44,26 @@ export type PhoneOption = {
   phonePlaceholder?: string;
   countryCode?: string;
 };
+
+export type AccessLevelRole = 
+  // Admin Roles
+  "ROLE_SUPER_ADMIN" |
+  "ROLE_ADMIN" |
+  // HR Roles
+  "ROLE_FINANCE" |
+  "ROLE_HR" |
+  // Client Roles
+  "ROLE_CLIENT" |
+  // Employee Roles
+  "ROLE_MANAGER" |
+  "ROLE_PROJECT_LEAD" |
+  "ROLE_TEAM_LEAD" |
+  "ROLE_TECH_LEAD" |
+  "ROLE_SENIOR_EMPLOYEE" |
+  "ROLE_MID_LEVEL_EMPLOYEE" |
+  "ROLE_JUNIOR_EMPLOYEE" |
+  "ROLE_ENTRY_LEVEL_EMPLOYEE" |
+  "ROLE_INTERN" |
+  // External roles
+  "ROLE_GUEST" |
+  "ROLE_APPLICANT";
