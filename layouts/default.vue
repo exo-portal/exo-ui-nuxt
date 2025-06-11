@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { LoadingMask } from '~/components/index';
+
 useHead({
     title: 'Exo Portal',
     meta: [
@@ -19,6 +21,7 @@ useSeoMeta({
 
 <template>
     <main class="bg-neutral-100 min-h-screen">
+        <LoadingMask />
         <slot />
     </main>
 </template>
