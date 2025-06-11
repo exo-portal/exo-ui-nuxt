@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { set } from "zod/v4";
+import type { AccessLevelRole } from "~/types/types";
 
 export type GENDER_TYPE = "male" | "female" | "other";
 
@@ -17,12 +19,6 @@ export interface RegistrationData {
   city: string;
   barangay: string;
   postalCode: string;
-}
-
-interface RegistrationState {
-  data: RegistrationData;
-  setData: (data: Partial<RegistrationData>) => void;
-  reset: () => void;
 }
 
 export const DEFAULT_REGISTRATION_DATA: RegistrationData = {
@@ -46,6 +42,7 @@ const LOCAL_STORAGE_REGISTRATION_DATA_KEY = "registrationData";
 export const useRegistrationStore = defineStore("registration", {
   state: () => ({
     data: { ...DEFAULT_REGISTRATION_DATA },
+    redirectRole: "",
   }),
   actions: {
     setData(data: Partial<RegistrationData>) {
@@ -76,6 +73,9 @@ export const useRegistrationStore = defineStore("registration", {
     reset() {
       localStorage.removeItem(LOCAL_STORAGE_REGISTRATION_DATA_KEY);
       this.data = { ...DEFAULT_REGISTRATION_DATA };
+    },
+    setRedirectRole(role: AccessLevelRole | "") {
+      this.redirectRole = role;
     },
   },
 });

@@ -75,6 +75,61 @@ export const PUBLIC_PATH: PathInterface = {
   },
 };
 
+export const ADMIN_PATH: PathInterface = {
+  ADMIN_HOME: {
+    name: "admin",
+    path: "/internal/admin",
+    value: "internal/admin",
+    getPath: (locale: string) => `/${locale}/internal/admin`,
+    isProtected: true,
+  },
+};
+
+export const HR_PATH: PathInterface = {
+  HR_HOME: {
+    name: "hr-dashboard",
+    path: "/internal/hr",
+    value: "internal/hr",
+    getPath: (locale: string) => `/${locale}/internal/hr`,
+    isProtected: true,
+  },
+};
+
+export const PROJECT_TEAM_PATH: PathInterface = {
+  PROJECT_TEAM_HOME: {
+    name: "project-team",
+    path: "/internal/project-team",
+    value: "internal/project-team",
+    getPath: (locale: string) => `/${locale}/internal/project-team`,
+    isProtected: true,
+  },
+};
+
+export const APPLICANT_PATH: PathInterface = {
+  APPLICANT_HOME: {
+    name: "applicant",
+    path: "/external/applicant",
+    value: "external/applicant",
+    getPath: (locale: string) => `/${locale}/external/applicant`,
+    isProtected: true,
+  },
+};
+
+export const CLIENT_PATH: PathInterface = {
+  CLIENT_HOME: {
+    name: "client",
+    path: "/external/client",
+    value: "external/client",
+    getPath: (locale: string) => `/${locale}/external/client`,
+    isProtected: true,
+  },
+};
+
 export const PATH: PathInterface = {
   ...PUBLIC_PATH,
+  ...ADMIN_PATH,
+  ...HR_PATH,
+  ...PROJECT_TEAM_PATH,
+  ...APPLICANT_PATH,
+  ...CLIENT_PATH,
 };

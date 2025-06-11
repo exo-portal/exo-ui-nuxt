@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 import type { TxKeyPath } from "~/i18n/i18n";
 import type { ExoPortalErrorMessage } from "~/types/types";
 import { translate } from "./translate";
+import { PATH } from "~/config";
 
 /**
  * Merges multiple class name values into a single string, removing duplicates and handling conditional classes.
@@ -113,3 +114,48 @@ export const handleFieldErrors = ({
     );
   }
 };
+
+/**
+ * Redirects the user to the appropriate dashboard based on their role.
+ *
+ * @param userRole - The role of the user (e.g., "ROLE_ADMIN", "ROLE_CLIENT").
+ * @param router - The router instance used for navigation.
+ * @param PATH - An object containing route paths for different dashboards.
+ */
+export function redirectByUserRole(
+  userRole: string,
+  router: { push: (path: string) => void },
+) {
+  console.log("Redirecting user based on role:", userRole);
+  switch (userRole) {
+    case "ROLE_ADMIN":
+    case "ROLE_SUPER_ADMIN":
+      router.push(PATH.ADMIN_HOME.path);
+      break;
+    case "ROLE_FINANCE":
+    case "ROLE_HR":
+      router.push(PATH.HR_HOME.path);
+      break;
+    case "ROLE_CLIENT":
+      router.push(PATH.CLIENT_HOME.path);
+      break;
+    case "ROLE_MANAGER":
+    case "ROLE_PROJECT_LEAD":
+    case "ROLE_TEAM_LEAD":
+    case "ROLE_TECH_LEAD":
+    case "ROLE_SENIOR_EMPLOYEE":
+    case "ROLE_MID_LEVEL_EMPLOYEE":
+    case "ROLE_JUNIOR_EMPLOYEE":
+    case "ROLE_ENTRY_LEVEL_EMPLOYEE":
+    case "ROLE_INTERN":
+      router.push(PATH.PROJECT_TEAM_HOME.path);
+      break;
+    case "ROLE_GUEST":
+    case "ROLE_APPLICANT":
+      router.push(PATH.APPLICANT_HOME.path);
+      break;
+    default:
+      router.push(PATH.PROJECT_TEAM_HOME.path);
+      break;
+  }
+}
