@@ -43,16 +43,18 @@ const form = useForm({
 const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
     console.log('Form submitted!', { email, password })
 })
+
+const { t } = useI18n();
 </script>
 
 <template>
     <form class="flex flex-col gap-6" @submit="onSubmit" autoComplete="on">
         <!-- Email Field -->
         <FormFieldInput name="email" componentType="input" max="10" maxLength="5"
-            :label="translate('register.form.signUp.input.label.email')" :other-props="{
+            :label="translate(t, 'register.form.signUp.input.label.email')" :other-props="{
                 class: 'w-lg',
                 type: 'email',
-                placeholder: translate('register.form.signUp.input.placeholder.email'),
+                placeholder: translate(t, 'register.form.signUp.input.placeholder.email'),
                 autocomplete: 'email',
                 inputSuffixIcon: UserIcon as Object
             }" />
@@ -60,10 +62,10 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
         <!-- Password Field -->
         <div class="flex flex-col items-end gap-2">
             <FormFieldInput name="password" componentType="input"
-                :label="translate('register.form.signUp.input.label.password')" :other-props="{
+                :label="translate(t, 'register.form.signUp.input.label.password')" :other-props="{
                     class: 'w-lg',
                     type: 'password',
-                    placeholder: translate('register.form.signUp.input.placeholder.password'),
+                    placeholder: translate(t    , 'register.form.signUp.input.placeholder.password'),
                     autocomplete: 'current-password',
                 }" />
             <NuxtLink :to="PATH.FORGOT_PASSWORD.path" class="text-main-700 text-label hover:underline">

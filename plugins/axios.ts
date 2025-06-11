@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "~/config";
+import { useLoadingStore } from "~/stores/useLoadingStore";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const axiosInstance = axios.create({
@@ -11,11 +12,17 @@ export default defineNuxtPlugin((nuxtApp) => {
   // Add a request interceptor
   axiosInstance.interceptors.request.use(
     (config) => {
-      // You can add custom headers or modify the request here
+      // You can modify the request config here if needed
+      const loadingStore = useLoadingStore();
+      loadingStore.setLoading(true);
+
       return config;
     },
     (error) => {
       // Handle request error
+      const loadingStore = useLoadingStore();
+      loadingStore.setLoading(false);
+
       return Promise.reject(error);
     }
   );
@@ -24,10 +31,18 @@ export default defineNuxtPlugin((nuxtApp) => {
   axiosInstance.interceptors.response.use(
     (response) => {
       // You can process the response data here
+
+      const { setLoading } = useLoadingStore();
+      setLoading(false);
+
       return response;
     },
     (error) => {
       // Handle response error
+
+      const { setLoading } = useLoadingStore();
+      setLoading(false);
+
       return Promise.reject(error);
     }
   );
