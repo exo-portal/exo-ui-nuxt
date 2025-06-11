@@ -3,12 +3,12 @@ import z from 'zod';
 import FormFieldInput from '../common/FormFieldInput.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
-import { Label } from '../ui/label';
-import PhoneNumber from '../ui/phone-number/PhoneNumber.vue';
+
+const registrationStore = useRegistrationStore();
 
 const COUNTRY_OPTIONS = [
-    { label: "Philippines", value: "Philippines" },
-    { label: "United States", value: "United States" },
+    { label: "Philippines", value: "PH" },
+    { label: "United States", value: "US" },
 ];
 const CITY_OPTIONS = [{ label: "Cebu City", value: "Cebu City" }];
 const STATE_OPTIONS = [{ label: "Cebu", value: "Cebu" }];
@@ -30,13 +30,13 @@ const FormSchema = toTypedSchema(rawSchema)
 const form = useForm({
     validationSchema: FormSchema,
     initialValues: {
-        country: "",
-        phoneNumber: "",
-        address: "",
-        state: "",
-        city: "",
-        barangay: "",
-        postalCode: "",
+        country: registrationStore.data.country || "PH",
+        phoneNumber: registrationStore.data.phoneNumber || "",
+        address: registrationStore.data.address || "",
+        state: registrationStore.data.state || "",
+        city: registrationStore.data.city || "",
+        barangay: registrationStore.data.barangay || "",
+        postalCode: registrationStore.data.postalCode || "",
     },
     validateOnMount: false
 })
@@ -46,14 +46,14 @@ const onSubmit = form.handleSubmit(({ country, phoneNumber, address, state, city
     const flowCookie = useCookie<{ step?: "register" | "personal" | "contact" | {} }>('registrationFlow', { default: () => ({ step: "register" }) });
     flowCookie.value.step = {};
 
-    console.log("Form submitted with values:", {
-        country,
-        phoneNumber,
-        address,
-        state,
-        city,
-        barangay,
-        postalCode
+    registrationStore.setData({
+        country: country,
+        phoneNumber: phoneNumber,
+        address: address,
+        state: state,
+        city: city,
+        barangay: barangay,
+        postalCode: postalCode,
     });
 });
 </script>
@@ -67,7 +67,11 @@ const onSubmit = form.handleSubmit(({ country, phoneNumber, address, state, city
                 placeholder: $t('register.form.contactDetails.input.placeholder.country'),
             }" />
 
-        <PhoneNumber />
+        <!-- Phone Number -->
+        <FormFieldInput id="phoneNumber" name="phoneNumber" component-type="tel"
+            :label="$t('register.form.contactDetails.input.label.phoneNumber')" :other-props="{
+                placeholder: $t('register.form.contactDetails.input.placeholder.phoneNumber'),
+            }" />
 
         <!-- Address -->
         <FormFieldInput id="address" name="address" component-type="input"

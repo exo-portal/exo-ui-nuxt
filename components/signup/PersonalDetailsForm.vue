@@ -7,6 +7,7 @@ import { Button } from '../ui/button';
 import { PATH } from '~/config';
 
 const router = useRouter();
+const registrationStore = useRegistrationStore();
 
 const GENDER_OPTIONS = [
     { value: "male", label: "male" },
@@ -40,10 +41,10 @@ const FormSchema = toTypedSchema(rawSchema)
 const form = useForm({
     validationSchema: FormSchema,
     initialValues: {
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        gender: "",
+        firstName: registrationStore.data.firstName || "",
+        lastName: registrationStore.data.lastName || "",
+        dateOfBirth: registrationStore.data.dateOfBirth || "",
+        gender: registrationStore.data.gender || "",
     },
     validateOnMount: false
 })
@@ -54,9 +55,19 @@ const onSubmit = form.handleSubmit(({ firstName, lastName, dateOfBirth, gender }
     flowCookie.value.step = "contact";
 
     // You can add logic to handle the form submission here
-    console.log('Form submitted!', { firstName, lastName, dateOfBirth, gender });
+    registrationStore.setData({
+        firstName: firstName,
+        lastName: lastName,
+        dateOfBirth: dateOfBirth,
+        gender: gender as any
+    });
     router.push(PATH.SIGNUP_CONTACT_DETAILS.path);
 });
+
+onMounted(() => {
+    // Load data from local storage when the component is mounted
+    registrationStore.loadFromLocalStorage();
+})
 </script>
 
 <template>
