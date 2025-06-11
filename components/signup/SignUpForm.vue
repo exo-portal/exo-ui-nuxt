@@ -45,9 +45,9 @@ const rawSchema = z
         path: ["confirmPassword"],
     });
 
-type FormValues = z.infer<typeof rawSchema>
+type FormValues = z.infer<typeof rawSchema>;
 
-const FormSchema = toTypedSchema(rawSchema)
+const FormSchema = toTypedSchema(rawSchema);
 
 const form = useForm({
     validationSchema: FormSchema,
@@ -69,7 +69,7 @@ watch(
         })
     },
     { immediate: true, deep: true }
-)
+);
 
 const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormValues) => {
     validateEmail({ email })
@@ -97,8 +97,7 @@ const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormVa
                 t: t
             })
         });
-})
-
+});
 
 onMounted(() => {
     registrationStore.loadFromLocalStorage();
