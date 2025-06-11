@@ -3,7 +3,7 @@ import z from 'zod';
 import FormFieldInput from '../common/FormFieldInput.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
-import type { AccessLevelRole, ApiResultModel, PhoneOption } from '~/types/types';
+import type { AccessLevelRole, ApiResponse, ApiResultModel, AuthenticationResponse, PhoneOption, UserInterface } from '~/types/types';
 import ExoSuspense from '../common/ExoSuspense.vue';
 import { Skeleton } from '../ui/skeleton';
 import { redirectByUserRole } from '~/lib';
@@ -62,63 +62,43 @@ watch(() => registrationStore.data, (newData) => {
     });
 });
 
-
-interface UserInterface {
-    id: number;
-    login: string;
-    userName: string;
-    email: string;
-    mobileNumber: string;
-    fullName: string;
-    avatarUrl: string;
-    googleId: string;
-    githubId: string;
-    emailId: string;
-}
-
-interface AuthenticationResponse {
-    accessLevelRole: AccessLevelRole;
-    featureKeys: string[];
-    user: UserInterface;
-    roleNames: string[];
-}
-
 const router = useRouter();
 
-const onSubmit = form.handleSubmit((FormValues: FormValues) => {
-    // setting the flow cookie to indicate the current step
+import DOMPurify from 'dompurify'
 
+const onSubmit = form.handleSubmit((FormValues: FormValues) => {
     registrationStore.setData({
         ...FormValues
     });
 
+    // TODO:: add sanization for all fields
+    // Sanitize all string fields in FormValues using DOMPurify
+    const sanitizedData: RegistrationData = Object.fromEntries(
+        Object.entries(FormValues).map(([key, value]) => [
+            key,
+            typeof value === 'string' ? DOMPurify.sanitize(value) : value
+        ])
+    ) as unknown as RegistrationData;
+
+    // Proceed with registration using the sanitized data
     registerUser(registrationStore.data)
-        .then((response: any) => {
+        .then((response: ApiResponse<ApiResultModel<AuthenticationResponse>>) => {
             const result: ApiResultModel<AuthenticationResponse> = response.data;
 
             if (result && result.isSuccess && result.resultData) {
                 const user: UserInterface = result.resultData.user;
                 const userRole: AccessLevelRole = result.resultData.accessLevelRole || "ROLE_GUEST";
+                const flowCookie = useCookie('registrationFlow');
+                flowCookie.value = null;
 
-                registrationStore.setRedirectRole(userRole);
+                registrationStore.reset();
+                redirectByUserRole(userRole, router, user.id);
             }
         }).catch((error) => {
             const errorResponse = error.response;
             console.error("Error during registration:", error);
             console.log(errorResponse);
-        }).finally(() => {
-            // Clearing the registration store
-            const flowCookie = useCookie('registrationFlow');
-            flowCookie.value = null;
-
-            registrationStore.reset();
-
-            // Redirect if needed
-            if (registrationStore.redirectRole) {
-                redirectByUserRole(registrationStore.redirectRole, router);
-                registrationStore.setRedirectRole("");
-            }
-        })
+        });
 });
 
 onMounted(() => {

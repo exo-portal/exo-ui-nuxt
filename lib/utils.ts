@@ -124,20 +124,24 @@ export const handleFieldErrors = ({
  */
 export function redirectByUserRole(
   userRole: string,
-  router: { push: (path: string) => void },
+  router: {
+    push: (options: { path: string; query?: Record<string, any> }) => void;
+  },
+  userId?: string | number,
 ) {
   console.log("Redirecting user based on role:", userRole);
+  let path = PATH.PROJECT_TEAM_HOME.path;
   switch (userRole) {
     case "ROLE_ADMIN":
     case "ROLE_SUPER_ADMIN":
-      router.push(PATH.ADMIN_HOME.path);
+      path = PATH.ADMIN_HOME.path;
       break;
     case "ROLE_FINANCE":
     case "ROLE_HR":
-      router.push(PATH.HR_HOME.path);
+      path = PATH.HR_HOME.path;
       break;
     case "ROLE_CLIENT":
-      router.push(PATH.CLIENT_HOME.path);
+      path = PATH.CLIENT_HOME.path;
       break;
     case "ROLE_MANAGER":
     case "ROLE_PROJECT_LEAD":
@@ -148,14 +152,15 @@ export function redirectByUserRole(
     case "ROLE_JUNIOR_EMPLOYEE":
     case "ROLE_ENTRY_LEVEL_EMPLOYEE":
     case "ROLE_INTERN":
-      router.push(PATH.PROJECT_TEAM_HOME.path);
+      path = PATH.PROJECT_TEAM_HOME.path;
       break;
     case "ROLE_GUEST":
     case "ROLE_APPLICANT":
-      router.push(PATH.APPLICANT_HOME.path);
+      path = PATH.APPLICANT_HOME.path;
       break;
     default:
-      router.push(PATH.PROJECT_TEAM_HOME.path);
+      path = PATH.PROJECT_TEAM_HOME.path;
       break;
   }
+  router.push({ path, query: userId ? { userId } : undefined });
 }

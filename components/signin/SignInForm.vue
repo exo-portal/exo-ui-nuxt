@@ -5,17 +5,22 @@ import { toTypedSchema } from '@vee-validate/zod'
 import FormFieldInput from '../common/FormFieldInput.vue'
 import { Button } from '../ui/button'
 import { PATH } from '~/config'
-import { translate } from '~/lib'
+import { redirectByUserRole, translate } from '~/lib'
 import { UserIcon } from '~/assets'
+import DOMPurify from 'dompurify'
+import type { AccessLevelRole, ApiResponse, ApiResultModel, AuthenticationResponse, UserInterface } from '~/types/types'
 
 const rawSchema = z.object({
     email: z
         .string()
+        .trim()
         .min(1, "Email is required")
         .email("Invalid email address")
-        .min(8, "Email must be at least 8 characters"),
+        .min(8, "Email must be at least 8 characters")
+        .transform(val => val.replace(/[<>'"]/g, "")), // Remove potentially dangerous characters
     password: z
         .string()
+        .trim()
         .min(1, "Password is required")
         .min(8, "Password must be at least 8 characters")
         .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
@@ -24,7 +29,8 @@ const rawSchema = z.object({
         .regex(
             /[^A-Za-z0-9]/,
             "Password must contain at least one special character"
-        ),
+        )
+        .transform(val => val.replace(/[<>'"]/g, "")), // Remove potentially dangerous characters
 })
 
 type FormValues = z.infer<typeof rawSchema>
@@ -40,8 +46,27 @@ const form = useForm({
     validateOnMount: false
 })
 
+const router = useRouter();
+
 const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
-    console.log('Form submitted!', { email, password })
+    const cleanCredentials = {
+        email: DOMPurify.sanitize(email),
+        password: DOMPurify.sanitize(password)
+    }
+    loginUser(cleanCredentials)
+        .then((response: ApiResponse<ApiResultModel<AuthenticationResponse>>) => {
+            const result: ApiResultModel<AuthenticationResponse> = response.data;
+            // Handle successful login
+            if (result && result.isSuccess && result.resultData && result.resultData.user) {
+                const user: UserInterface = result.resultData.user;
+                const userRole: AccessLevelRole = result.resultData.accessLevelRole;
+                redirectByUserRole(userRole, router, user.id);
+            }
+        })
+        .catch((error) => {
+            // Handle login error
+            console.error("Login failed:", error);
+        });
 })
 
 const { t } = useI18n();
