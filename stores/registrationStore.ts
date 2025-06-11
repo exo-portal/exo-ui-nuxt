@@ -49,12 +49,11 @@ export const useRegistrationStore = defineStore("registration", {
   }),
   actions: {
     setData(data: Partial<RegistrationData>) {
-      const newData = { ...this.data, ...data };
-      this.data = newData;
+      Object.assign(this.data, data);
       if (typeof window !== "undefined") {
         localStorage.setItem(
           LOCAL_STORAGE_REGISTRATION_DATA_KEY,
-          JSON.stringify(newData)
+          JSON.stringify(this.data)
         );
       }
     },
