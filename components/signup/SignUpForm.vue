@@ -14,7 +14,7 @@ import type { ExoPortalErrorMessage } from '~/types/types'
 
 const router = useRouter();
 const { t } = useI18n();
-const registratioStore = useRegistrationStore();
+const registrationStore = useRegistrationStore();
 const loading = ref(true);
 
 const rawSchema = z
@@ -52,15 +52,15 @@ const FormSchema = toTypedSchema(rawSchema)
 const form = useForm({
     validationSchema: FormSchema,
     initialValues: {
-        email: registratioStore.data.email || "",
-        password: registratioStore.data.password || "",
-        confirmPassword: registratioStore.data.confirmPassword || "",
+        email: registrationStore.data.email || "",
+        password: registrationStore.data.password || "",
+        confirmPassword: registrationStore.data.confirmPassword || "",
     },
     validateOnMount: false
 });
 
 watch(
-    () => registratioStore.data,
+    () => registrationStore.data,
     (newData) => {
         form.setValues({
             email: newData.email || "",
@@ -75,7 +75,7 @@ const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormVa
     validateEmail({ email })
         .then((respone) => {
             if (respone.status === 200) {
-                registratioStore.setData({
+                registrationStore.setData({
                     email: email,
                     password: password,
                     confirmPassword: confirmPassword,
@@ -101,7 +101,7 @@ const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormVa
 
 
 onMounted(() => {
-    registratioStore.loadFromLocalStorage();
+    registrationStore.loadFromLocalStorage();
     loading.value = false
 });
 </script>

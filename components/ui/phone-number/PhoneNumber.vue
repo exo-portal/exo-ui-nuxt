@@ -5,11 +5,13 @@ import { Input } from '../input';
 import type { PhoneOption } from '~/types/types';
 
 // Define props for the component
-const props = defineProps<{
+const props = withDefaults(defineProps<{
     options: PhoneOption[];
     modelValue: string;
     hasError?: boolean;
-}>();
+}>(), {
+    hasError: false
+});
 
 // Define emits for the component
 const emit = defineEmits<{
