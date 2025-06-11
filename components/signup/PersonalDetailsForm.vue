@@ -7,6 +7,7 @@ import { Button } from '../ui/button';
 import { PATH } from '~/config';
 import ExoSuspense from '../common/ExoSuspense.vue';
 import { Skeleton } from '../ui/skeleton';
+import { useRegistrationStore } from '~/stores/registrationStore';
 
 const router = useRouter();
 const registrationStore = useRegistrationStore();
