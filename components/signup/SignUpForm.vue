@@ -15,6 +15,7 @@ import type { ExoPortalErrorMessage } from '~/types/types'
 const router = useRouter();
 const { t } = useI18n();
 const registratioStore = useRegistrationStore();
+const loading = ref(true);
 
 const rawSchema = z
     .object({
@@ -98,7 +99,7 @@ const onSubmit = form.handleSubmit(({ email, password, confirmPassword }: FormVa
         });
 })
 
-const loading = ref(true)
+
 onMounted(() => {
     registratioStore.loadFromLocalStorage();
     loading.value = false

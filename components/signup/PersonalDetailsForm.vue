@@ -5,9 +5,12 @@ import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
 import { Button } from '../ui/button';
 import { PATH } from '~/config';
+import ExoSuspense from '../common/ExoSuspense.vue';
+import { Skeleton } from '../ui/skeleton';
 
 const router = useRouter();
 const registrationStore = useRegistrationStore();
+const loading = ref(true);
 
 const GENDER_OPTIONS = [
     { value: "male", label: "male" },
@@ -35,8 +38,8 @@ const rawSchema = z.object({
     ),
 })
 
-type FormValues = z.infer<typeof rawSchema>
-const FormSchema = toTypedSchema(rawSchema)
+const FormSchema = toTypedSchema(rawSchema);
+type FormValues = z.infer<typeof rawSchema>;
 
 const form = useForm({
     validationSchema: FormSchema,
@@ -47,7 +50,17 @@ const form = useForm({
         gender: registrationStore.data.gender || "",
     },
     validateOnMount: false
-})
+});
+
+watch(() => registrationStore.data, (newData) => {
+    form.setValues({
+        firstName: registrationStore.data.firstName || "",
+        lastName: registrationStore.data.lastName || "",
+        dateOfBirth: registrationStore.data.dateOfBirth || "",
+        gender: registrationStore.data.gender || "",
+    })
+}, { immediate: true, deep: true });
+
 
 const onSubmit = form.handleSubmit(({ firstName, lastName, dateOfBirth, gender }: FormValues) => {
     // setting the flow cookie to indicate the current step
@@ -64,51 +77,85 @@ const onSubmit = form.handleSubmit(({ firstName, lastName, dateOfBirth, gender }
     router.push(PATH.SIGNUP_CONTACT_DETAILS.path);
 });
 
+
+// Load data from local storage when the component is mounted
 onMounted(() => {
-    // Load data from local storage when the component is mounted
     registrationStore.loadFromLocalStorage();
+    loading.value = false;
 })
 </script>
 
 <template>
-    <form class="flex flex-col gap-6 w-lg" @submit="onSubmit" autoComplete="on">
-        <div class="flex gap-4 items-start w-full">
-            <!-- First Name -->
-            <FormFieldInput id="firstName" name="firstName" componentType="input"
-                :label="$t('register.form.personalDetails.input.label.firstName')" :other-props="{
-                    type: 'text',
-                    placeholder: $t('register.form.personalDetails.input.placeholder.firstName'),
-                    autocomplete: 'given-name'
-                }" />
-            <!-- First Name -->
-            <FormFieldInput id="lastName" name="lastName" componentType="input"
-                :label="$t('register.form.personalDetails.input.label.lastName')" :other-props="{
-                    type: 'text',
-                    placeholder: $t('register.form.personalDetails.input.placeholder.lastName'),
-                    autocomplete: 'family-name'
-                }" />
-        </div>
+    <ExoSuspense :loading="loading">
+        <template #default>
+            <form class="flex flex-col gap-6 w-lg" @submit="onSubmit" autoComplete="on">
+                <div class="flex gap-4 items-start w-full">
+                    <!-- First Name -->
+                    <FormFieldInput id="firstName" name="firstName" componentType="input"
+                        :label="$t('register.form.personalDetails.input.label.firstName')" :other-props="{
+                            type: 'text',
+                            placeholder: $t('register.form.personalDetails.input.placeholder.firstName'),
+                            autocomplete: 'given-name'
+                        }" />
+                    <!-- First Name -->
+                    <FormFieldInput id="lastName" name="lastName" componentType="input"
+                        :label="$t('register.form.personalDetails.input.label.lastName')" :other-props="{
+                            type: 'text',
+                            placeholder: $t('register.form.personalDetails.input.placeholder.lastName'),
+                            autocomplete: 'family-name'
+                        }" />
+                </div>
 
-        <!-- Date of Birth -->
-        <FormFieldInput id="dateOfBirth" name="dateOfBirth" componentType="datePicker"
-            :label="$t('register.form.personalDetails.input.label.dateOfBirth')" :other-props="{
-                type: 'text',
-                placeholder: $t('register.form.personalDetails.input.placeholder.dateOfBirth'),
-                autocomplete: 'family-name'
-            }" />
+                <!-- Date of Birth -->
+                <FormFieldInput id="dateOfBirth" name="dateOfBirth" componentType="datePicker"
+                    :label="$t('register.form.personalDetails.input.label.dateOfBirth')" :other-props="{
+                        type: 'text',
+                        placeholder: $t('register.form.personalDetails.input.placeholder.dateOfBirth'),
+                        autocomplete: 'family-name'
+                    }" />
 
-        <!-- Gender -->
-        <FormFieldInput id="gender" name="gender" componentType="select"
-            :label="$t('register.form.personalDetails.input.label.gender')" :other-props="{
-                type: 'text',
-                placeholder: $t('register.form.personalDetails.input.label.gender'),
-                autocomplete: 'family-name',
-                options: GENDER_OPTIONS
-            }" />
+                <!-- Gender -->
+                <FormFieldInput id="gender" name="gender" componentType="select"
+                    :label="$t('register.form.personalDetails.input.label.gender')" :other-props="{
+                        type: 'text',
+                        placeholder: $t('register.form.personalDetails.input.label.gender'),
+                        autocomplete: 'family-name',
+                        options: GENDER_OPTIONS
+                    }" />
 
-        <!-- Next Button -->
-        <Button class="mt-4" type="submit">
-            {{ $t('register.form.personalDetails.button.next') }}
-        </Button>
-    </form>
+                <!-- Next Button -->
+                <Button class="mt-4" type="submit">
+                    {{ $t('register.form.personalDetails.button.next') }}
+                </Button>
+            </form>
+        </template>
+        <template #fallback>
+            <div data-testid="personal-details-form-skeleton" class="flex flex-col gap-4 w-lg" role="status"
+                aria-busy="true">
+                <!-- first name and last name skeleton -->
+                <div class="flex gap-4 items-start">
+                    <div class="flex flex-col gap-2 w-full">
+                        <Skeleton class="h-4 w-26" />
+                        <Skeleton class="h-10 w-full rounded-xl" />
+                    </div>
+                    <div class="flex flex-col gap-2 w-full">
+                        <Skeleton class="h-4 w-26" />
+                        <Skeleton class="h-10 w-full rounded-xl" />
+                    </div>
+                </div>
+                <!-- Date of birth skeleton -->
+                <div class="flex flex-col gap-2">
+                    <Skeleton class="h-4 w-24" />
+                    <Skeleton class="h-10 w-full rounded-xl" />
+                </div>
+                <!-- Gender Skeleton -->
+                <div class="flex flex-col gap-2">
+                    <Skeleton class="h-4 w-20" />
+                    <Skeleton class="h-10 w-full rounded-xl" />
+                </div>
+                <!-- Next Button Skeleton -->
+                <Skeleton class="h-10 w-full mt-4 rounded-xl" />
+            </div>
+        </template>
+    </ExoSuspense>
 </template>
