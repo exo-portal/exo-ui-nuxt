@@ -13,12 +13,13 @@ export default defineNuxtRouteMiddleware((to) => {
     if (!(window as any).__idleWatcherSet) {
       const { idle } = useIdle(10 * 1000);
       const router = useRouter();
-      watch(idle, (isIdle) => {
+      watch(idle, async (isIdle) => {
         if (isIdle) {
           try {
-            $fetch("/api/logout", { method: "POST" });
+            await $fetch("/api/logout", { method: "POST" });
           } catch (e) {
             // Optionally handle error
+            console.error("Logout failed:", e); // Optionally handle error
           }
           router.push(PATH.SIGNIN.path);
         }
