@@ -7,6 +7,10 @@ const userId = route.query.userId as string | undefined;
 useHead({
     title: metaTItleBuilder('Project Team'),
 })
+
+definePageMeta({
+    requireAuth: true,
+});
 </script>
 
 <template>

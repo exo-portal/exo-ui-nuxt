@@ -47,3 +47,8 @@ export const loginUser = ({
     password,
   });
 };
+
+export const logoutUser = () => {
+  const { $axios } = useNuxtApp();
+  return $axios.post(`${AUTH_SERVICE_ENDPOINT}/authentication/logout`);
+};
