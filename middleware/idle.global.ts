@@ -1,7 +1,7 @@
 import { useIdle } from "@vueuse/core";
 import { watch } from "vue";
 import { useRouter } from "vue-router";
-import { PATH } from "~/config";
+import { DEFAULT_IDLE_TIMEOUT, PATH } from "~/config";
 
 export default defineNuxtRouteMiddleware((to) => {
   //   // Only run on client
@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware((to) => {
   if (to.meta.requireAuth) {
     // Prevent multiple watchers
     if (!(window as any).__idleWatcherSet) {
-      const { idle } = useIdle(10 * 1000);
+      const { idle } = useIdle(DEFAULT_IDLE_TIMEOUT * 1000);
       const router = useRouter();
       watch(idle, async (isIdle) => {
         if (isIdle) {
