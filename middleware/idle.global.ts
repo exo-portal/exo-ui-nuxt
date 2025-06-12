@@ -19,7 +19,19 @@ export default defineNuxtRouteMiddleware((to) => {
             await $fetch("/api/logout", { method: "POST" });
           } catch (e) {
             // Optionally handle error
+
             console.error("Logout failed:", e); // Optionally handle error
+          } finally {
+            document.cookie.split(";").forEach((c) => {
+              document.cookie = c
+                .replace(/^ +/, "")
+                .replace(
+                  /=.*/,
+                  "=;expires=" + new Date(0).toUTCString() + ";path=/"
+                );
+            });
+            if (window.sessionStorage) window.sessionStorage.clear();
+            if (window.localStorage) window.localStorage.clear();
           }
           router.push(PATH.SIGNIN.path);
         }
