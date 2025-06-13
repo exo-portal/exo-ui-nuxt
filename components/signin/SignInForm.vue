@@ -47,6 +47,7 @@ const form = useForm({
 })
 
 const router = useRouter();
+const authStore = useAuthStore();
 
 const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
     const cleanCredentials = {
@@ -60,6 +61,8 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
             if (result && result.isSuccess && result.resultData && result.resultData.user) {
                 const user: UserInterface = result.resultData.user;
                 const userRole: AccessLevelRole = result.resultData.accessLevelRole;
+                // TODO:: Store user data in the auth store
+                authStore.setIsLoggedIn(true);
                 redirectByUserRole(userRole, router, user.id);
             }
         })
