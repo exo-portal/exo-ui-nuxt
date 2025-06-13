@@ -52,3 +52,8 @@ export const logoutUser = () => {
   const { $axios } = useNuxtApp();
   return $axios.post(`${AUTH_SERVICE_ENDPOINT}/authentication/logout`);
 };
+
+export const verifySession = () => {
+  const { $axios } = useNuxtApp();
+  return $axios.get(`${AUTH_SERVICE_ENDPOINT}/authentication/verify-session`);
+}

@@ -7,7 +7,11 @@ import type { AccessLevelRole, ApiResponse, ApiResultModel, AuthenticationRespon
 import ExoSuspense from '../common/ExoSuspense.vue';
 import { Skeleton } from '../ui/skeleton';
 import { redirectByUserRole } from '~/lib';
+import DOMPurify from 'dompurify'
 
+
+const authStore = useAuthStore();
+const router = useRouter();
 const registrationStore = useRegistrationStore();
 const loading = ref(true);
 
@@ -62,10 +66,6 @@ watch(() => registrationStore.data, (newData) => {
     });
 });
 
-const router = useRouter();
-
-import DOMPurify from 'dompurify'
-
 const onSubmit = form.handleSubmit((FormValues: FormValues) => {
     registrationStore.setData({
         ...FormValues
@@ -92,6 +92,8 @@ const onSubmit = form.handleSubmit((FormValues: FormValues) => {
                 flowCookie.value = null;
 
                 registrationStore.reset();
+                // TODO:: set user data in authStore
+                authStore.setIsLoggedIn(true);
                 redirectByUserRole(userRole, router, user.id);
             }
         }).catch((error) => {
