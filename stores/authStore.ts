@@ -28,4 +28,5 @@ export const useAuthStore = defineStore("auth", {
       this.isTokenValid = false;
     },
   },
+  persist: true, // Enable persistence
 });

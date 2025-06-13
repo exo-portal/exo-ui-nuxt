@@ -26,6 +26,7 @@
     "moment": "^2.30.1",
     "nuxt": "^3.17.5",
     "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.3.0",
     "reka-ui": "^2.3.0",
     "shadcn-nuxt": "2.2.0",
     "tailwind-merge": "^3.3.0",
