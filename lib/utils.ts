@@ -129,7 +129,6 @@ export function redirectByUserRole(
   },
   userId?: string | number
 ) {
-  console.log("Redirecting user based on role:", userRole);
   let path = PATH.PROJECT_TEAM_HOME.path;
   switch (userRole) {
     case "ROLE_ADMIN":
