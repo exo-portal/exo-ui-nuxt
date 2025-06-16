@@ -37,5 +37,9 @@ export const useAuthStore = defineStore("auth", {
       this.isTokenValid = false;
     },
   },
-  persist: true, // Enable persistence
+  persist: {
+    afterRestore: (ctx: { store: AuthState }) => {
+      ctx.store.hydrated = true;
+    },
+  } as any, // Enable persistence
 });
