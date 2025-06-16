@@ -3,12 +3,21 @@ import { metaTItleBuilder } from '~/lib/utils';
 
 useHead({
     title: metaTItleBuilder('Project Team | Profile'),
-})
+});
+
+definePageMeta({
+    requireAuth: true,
+});
+
+const handleOnClickButton = () => {
+    console.log('Button clicked');
+}
 </script>
 
 <template>
-    <div>
+    <client-only>
         <h1>Project Team</h1>
         <p>This page will display the project team details.</p>
-    </div>
+        <button @click="handleOnClickButton">click me</button>
+    </client-only>
 </template>

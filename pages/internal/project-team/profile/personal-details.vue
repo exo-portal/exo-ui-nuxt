@@ -3,7 +3,11 @@ import { metaTItleBuilder } from '~/lib/utils';
 
 useHead({
     title: metaTItleBuilder('Project Team | Profile | Personal Details'),
-})
+});
+
+definePageMeta({
+    requireAuth: true,
+});
 </script>
 
 <template>

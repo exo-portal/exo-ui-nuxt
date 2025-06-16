@@ -4,6 +4,10 @@ import { metaTItleBuilder } from '~/lib/utils';
 useHead({
     title: metaTItleBuilder('Admin'),
 })
+
+definePageMeta({
+    requireAuth: true,
+});
 </script>
 
 <template>
