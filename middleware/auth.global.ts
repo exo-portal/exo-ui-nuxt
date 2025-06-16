@@ -29,7 +29,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
           return navigateTo(PATH.SIGNIN.path);
         }
       } catch (error: unknown) {
-        console.error("Session verification failed:", error);
         auth.setIsLoggedIn(false);
         auth.setIsTokenValid(false);
         return navigateTo(PATH.SIGNIN.path);

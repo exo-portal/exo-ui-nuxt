@@ -127,7 +127,7 @@ export function redirectByUserRole(
   router: {
     push: (options: { path: string; query?: Record<string, any> }) => void;
   },
-  userId?: string | number,
+  userId?: string | number
 ) {
   console.log("Redirecting user based on role:", userRole);
   let path = PATH.PROJECT_TEAM_HOME.path;
@@ -162,5 +162,5 @@ export function redirectByUserRole(
       path = PATH.PROJECT_TEAM_HOME.path;
       break;
   }
-  router.push({ path, query: userId ? { userId } : undefined });
+  router.push({ path });
 }
