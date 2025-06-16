@@ -3,7 +3,11 @@ import { metaTItleBuilder } from '~/lib/utils';
 
 useHead({
     title: metaTItleBuilder('HR | Profile'),
-})
+});
+
+definePageMeta({
+    requireAuth: true,
+});
 </script>
 
 <template>

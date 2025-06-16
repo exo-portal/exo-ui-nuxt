@@ -4,7 +4,7 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import FormFieldInput from '../common/FormFieldInput.vue'
 import { Button } from '../ui/button'
-import { PATH } from '~/config'
+import { PATH, ROLE_MAP } from '~/config'
 import { redirectByUserRole, translate } from '~/lib'
 import { UserIcon } from '~/assets'
 import DOMPurify from 'dompurify'
@@ -63,6 +63,9 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
                 const userRole: AccessLevelRole = result.resultData.accessLevelRole;
                 // TODO:: Store user data in the auth store
                 authStore.setIsLoggedIn(true);
+
+                const currentUserRole: UserMainRole = ROLE_MAP[userRole] || "guest";
+                authStore.setCurrentUserRole(currentUserRole);
                 redirectByUserRole(userRole, router, user.id);
             }
         })
