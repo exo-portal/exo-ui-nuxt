@@ -54,6 +54,17 @@ export const logoutUser = () => {
 };
 
 export const verifySession = () => {
-  const { $axios } = useNuxtApp();
+  const { $axios, ssrContext } = useNuxtApp();
+
+  // If running on server, forward cookies
+  if (process.server && ssrContext?.event?.req?.headers?.cookie) {
+    return $axios.get(`${AUTH_SERVICE_ENDPOINT}/authentication/verify-session`, {
+      headers: {
+        cookie: ssrContext.event.req.headers.cookie,
+      },
+    });
+  }
+
+  // On client, just call as usual
   return $axios.get(`${AUTH_SERVICE_ENDPOINT}/authentication/verify-session`);
 }
