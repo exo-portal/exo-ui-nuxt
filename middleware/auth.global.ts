@@ -99,9 +99,19 @@ export default defineNuxtRouteMiddleware(async (to) => {
         }
 
         return navigateTo(path);
+      } else {
+        // Fallback redirect if session is not valid
+        auth.setIsLoggedIn(false);
+        auth.setIsTokenValid(false);
+        auth.setCurrentUserRole("guest");
+        return navigateTo(PATH.SIGNIN.path);
       }
     } catch (error: unknown) {
-      return;
+      // Explicit redirect in case of error
+      auth.setIsLoggedIn(false);
+      auth.setIsTokenValid(false);
+      auth.setCurrentUserRole("guest");
+      return navigateTo(PATH.SIGNIN.path);
     }
   }
 
