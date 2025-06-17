@@ -3,7 +3,8 @@ import { SignUpDividerForm, SignUpForm, SignUpOauthForm } from '~/components/ind
 import { metaTItleBuilder } from '~/lib/utils';
 
 definePageMeta({
-    layout: 'auth'
+    layout: 'auth',
+    guestOnly: true
 })
 
 useHead({

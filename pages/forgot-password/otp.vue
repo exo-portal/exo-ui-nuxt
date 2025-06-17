@@ -4,7 +4,8 @@ import { metaTItleBuilder } from '~/lib';
 
 definePageMeta({
     layout: 'auth',
-    middleware: ['forgot-flow-middleware']
+    middleware: ['forgot-flow-middleware'],
+    guestOnly: true,
 })
 
 useHead({

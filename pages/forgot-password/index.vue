@@ -3,7 +3,8 @@ import { BackButton, ForgotPasswordForm, ForgotPasswordHeader } from '~/componen
 import { metaTItleBuilder } from '~/lib';
 
 definePageMeta({
-    layout: 'auth'
+    layout: 'auth',
+    guestOnly: true,
 })
 
 useHead({

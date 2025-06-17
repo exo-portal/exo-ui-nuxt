@@ -7,7 +7,8 @@ useHead({
 })
 
 definePageMeta({
-  layout: 'auth'
+  layout: 'auth',
+  guestOnly: true
 })
 
 </script>
@@ -17,5 +18,5 @@ definePageMeta({
     <SignInOauthForm />
     <SignInDividerForm />
     <SigninForm />
-  </main>
+  </main>+
 </template>
