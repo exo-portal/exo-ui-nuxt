@@ -16,7 +16,7 @@ useSeoMeta({
     ogTitle: 'Exo Portal',
     ogDescription: 'Access your personalized dashboard and resources with Exo Portal.',
     ogType: 'website'
-})
+});
 </script>
 
 <template>

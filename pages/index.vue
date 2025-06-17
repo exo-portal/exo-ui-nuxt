@@ -5,7 +5,8 @@ useHead({
 })
 
 definePageMeta({
-    layout: 'default'
+    layout: 'default',
+    guestOnly: true,
 })
 
 const counter = useCounterStore();
