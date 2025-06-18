@@ -18,5 +18,5 @@ definePageMeta({
     <SignInOauthForm />
     <SignInDividerForm />
     <SigninForm />
-  </main>+
+  </main>
 </template>
