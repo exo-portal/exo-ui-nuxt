@@ -1,4 +1,4 @@
-export function useAppConfig() {
+export function useCustomAppConfig() {
   const config = useRuntimeConfig();
   return {
     BASE_URL: config.public.baseUrl || "http://localhost:8080",

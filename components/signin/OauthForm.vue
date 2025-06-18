@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-const { GITHUB_OAUTH_FULL_URL, GOOGLE_OAUTH_FULL_URL } = useAppConfig();
+const { GITHUB_OAUTH_FULL_URL, GOOGLE_OAUTH_FULL_URL } = useCustomAppConfig();
 
 // Handlers for OAuth registration github provider
 const registerUsingGithubHandler = () => {
