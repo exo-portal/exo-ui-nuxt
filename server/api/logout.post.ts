@@ -1,7 +1,8 @@
 import { logoutUser } from "~/composables/useAuthenticationApi";
 
 export default defineEventHandler(async (event) => {
-  const backendUrl = process.env.NUXT_BASE_URL;
+  const config = useRuntimeConfig();
+  const backendUrl = config.public.baseUrl;
   if (!backendUrl) {
     return { success: false, error: "NUXT_BASE_URL not set" };
   }

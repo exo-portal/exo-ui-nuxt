@@ -1,8 +1,10 @@
 import axios from "axios";
-import { BASE_URL } from "~/config";
 import { useLoadingStore } from "~/stores/useLoadingStore";
 
 export default defineNuxtPlugin((nuxtApp) => {
+  const config = useRuntimeConfig();
+  const BASE_URL = config.public.baseUrl || "http://localhost:8080";
+
   const axiosInstance = axios.create({
     baseURL: BASE_URL,
     withCredentials: true, // Important: Send cookies with requests
