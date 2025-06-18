@@ -6,6 +6,14 @@ import svgLoader from "vite-svg-loader";
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.NUXT_BASE_URL,
+      githubOauthUrl: process.env.NUXT_GITHUB_OAUTH_URL,
+      googleOauthUrl: process.env.NUXT_GOOGLE_OAUTH_URL,
+      devMode: process.env.NUXT_DEV_MODE,
+    },
+  },
   css: ["~/assets/css/main.css"],
   vite: {
     plugins: [
