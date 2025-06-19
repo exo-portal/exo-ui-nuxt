@@ -41,6 +41,13 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* Breakpoints */
+  --breakpoint-xs: 40rem; /* 640px */
+  --breakpoint-sm: 48rem; /* 768px */
+  --breakpoint-md: 64rem; /* 1024px */
+  --breakpoint-lg: 90rem; /* 1440px */
+  --breakpoint-xl: 120rem; /* 1920px */
+
   /* Custom Typography */
   --text-heading-1: var(--heading-1);
   --text-heading-2: var(--heading-2);
