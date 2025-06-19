@@ -4,8 +4,11 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import FormFieldInput from '../common/FormFieldInput.vue'
 import { PATH } from '~/config'
+import type { ApiResponse, ApiResultModel, ExoPortalErrorMessage } from '~/types/types'
+import { handleFieldErrors } from '~/lib'
 
 const router = useRouter();
+const { t } = useI18n();
 
 const rawSchema = z.object({
   identifier: z
@@ -32,16 +35,26 @@ const form = useForm({
   validateOnMount: false
 })
 
-
 const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
-  // setting the flow cookie to indicate the current step
-  const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
-  flowCookie.value.step = "otp";
+  verifyEmailForForgotPassword({ email: identifier })
+    .then((response: ApiResponse<ApiResultModel<any>>) => {
+      if (response.data.isSuccess) {
+        // setting the flow cookie to indicate the current step
+        const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
+        flowCookie.value.step = "otp";
 
-  // TODO: Add logic to handle the identifier (email or phone number) for sending OTP or reset link
-  // This function is called when the form is submitted
-  console.log('Form submitted!', { identifier })
-  router.push(PATH.FORGOT_PASSWORD_OTP.path);
+        // Redirecting to the OTP page
+        router.push(PATH.FORGOT_PASSWORD_OTP.path);
+      }
+    }).catch((error) => {
+      const errorResponse: ExoPortalErrorMessage = error.response.data;
+      handleFieldErrors({
+        errorResponse: errorResponse,
+        setErrors: form.setErrors,
+        allowedFields: ["identifier"],
+        t: t
+      })
+    });
 })
 </script>
 
