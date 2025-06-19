@@ -48,11 +48,22 @@ export const loginUser = ({
   });
 };
 
+/**
+ * Logs out the current user by making a POST request to the authentication service's logout endpoint.
+ *
+ * @returns A Promise resolving to the response from the authentication service.
+ */
 export const logoutUser = () => {
   const { $axios } = useNuxtApp();
   return $axios.post(`${AUTH_SERVICE_ENDPOINT}/authentication/logout`);
 };
 
+/**
+ * Verifies the current session by making a GET request to the authentication service's verify-session endpoint.
+ * If running on the server, it forwards cookies from the request headers.
+ *
+ * @returns A Promise resolving to the response from the authentication service.
+ */
 export const verifySession = () => {
   const { $axios, ssrContext } = useNuxtApp();
 
@@ -68,3 +79,18 @@ export const verifySession = () => {
   // On client, just call as usual
   return $axios.get(`${AUTH_SERVICE_ENDPOINT}/authentication/verify-session`);
 }
+
+/**
+ * Verifies if the provided email exists for the forgot password process by making a GET request
+ * to the authentication service's verify-email endpoint.
+ *
+ * @param {Object} params - The parameters object.
+ * @param {string} params.email - The email address to verify.
+ * @returns A Promise resolving to the response from the authentication service.
+ */
+export const verifyEmailForForgotPassword = ({ email }: { email: string }) => {
+  const { $axios } = useNuxtApp();
+  return $axios.get(`${AUTH_SERVICE_ENDPOINT}/forgot-password/verify-email`, {
+    params: { email },
+  });
+};
