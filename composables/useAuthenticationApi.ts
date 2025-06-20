@@ -69,16 +69,19 @@ export const verifySession = () => {
 
   // If running on server, forward cookies
   if (process.server && ssrContext?.event?.req?.headers?.cookie) {
-    return $axios.get(`${AUTH_SERVICE_ENDPOINT}/authentication/verify-session`, {
-      headers: {
-        cookie: ssrContext.event.req.headers.cookie,
-      },
-    });
+    return $axios.get(
+      `${AUTH_SERVICE_ENDPOINT}/authentication/verify-session`,
+      {
+        headers: {
+          cookie: ssrContext.event.req.headers.cookie,
+        },
+      }
+    );
   }
 
   // On client, just call as usual
   return $axios.get(`${AUTH_SERVICE_ENDPOINT}/authentication/verify-session`);
-}
+};
 
 /**
  * Verifies if the provided email exists for the forgot password process by making a GET request
@@ -92,5 +95,26 @@ export const verifyEmailForForgotPassword = ({ email }: { email: string }) => {
   const { $axios } = useNuxtApp();
   return $axios.get(`${AUTH_SERVICE_ENDPOINT}/forgot-password/verify-email`, {
     params: { email },
+  });
+};
+
+/**
+ * Sends an OTP to the user's email for the forgot password process by making a POST request
+ * to the authentication service's send-otp endpoint.
+ *
+ * @param {Object} params - The parameters object.
+ * @param {string} params.email - The email address to send the OTP to.
+ * @returns A Promise resolving to the response from the authentication service.
+ */
+export const verifyOtpForForgotPassword = ({
+  email,
+  otpCode,
+}: {
+  email: string;
+  otpCode: string;
+}) => {
+  const { $axios } = useNuxtApp();
+  return $axios.get(`${AUTH_SERVICE_ENDPOINT}/forgot-password/verify-otp`, {
+    params: { email, otpCode },
   });
 };
