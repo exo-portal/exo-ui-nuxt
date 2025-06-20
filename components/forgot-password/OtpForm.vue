@@ -7,14 +7,18 @@ import { useForm } from 'vee-validate';
 import { Button } from '../ui/button';
 import { ref, watch } from 'vue';
 import { PATH } from '~/config';
+import type { ExoPortalErrorMessage } from '~/types/types';
+import { handleFieldErrors } from '~/lib';
+import FormMessage from '../ui/form/FormMessage.vue';
 
 const router = useRouter();
+const { t } = useI18n();
 
 const formSchema = toTypedSchema(z.object({
     pin: z.array(z.coerce.string()).length(5, { message: 'Invalid input' }),
 }))
 
-const { handleSubmit, setFieldValue, values, } = useForm({
+const { handleSubmit, setFieldValue, values, setErrors } = useForm({
     validationSchema: formSchema,
     initialValues: {
         pin: ['', '', '', ''],
@@ -22,25 +26,60 @@ const { handleSubmit, setFieldValue, values, } = useForm({
 })
 
 const onSubmit = handleSubmit(({ pin }) => {
-    // setting the flow cookie to indicate the current step
-    const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
-    flowCookie.value.step = "reset";
 
-    // TODO: Add logic to handle the pin input for resetting the password
-    // This function is called when the form is submitted
-    router.push(PATH.FORGOT_PASSWORD_RESET.path);
-    console.log(pin.join(''));
+    const otp = pin.join('');
+    verifyOtpForForgotPassword({ email: "javiergenepaul@gmail.com", otpCode: otp })
+        .then((response) => {
+            console.log('OTP verified successfully:', response);
+            // setting the flow cookie to indicate the current step
+            const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
+            flowCookie.value.step = "reset";
+
+            // TODO: Add logic to handle the pin input for resetting the password
+            // This function is called when the form is submitted
+            router.push(PATH.FORGOT_PASSWORD_RESET.path);
+        }).catch((error) => {
+            console.error('Error verifying OTP:', error);
+            const errorResponse: ExoPortalErrorMessage = error.response.data;
+            handleFieldErrors({
+                errorResponse: errorResponse,
+                setErrors: setErrors,
+                allowedFields: ["pin"],
+                t: t
+            })
+        });
 })
 
 const handleComplete = (e: string[]) => {
-    // setting the flow cookie to indicate the current step
-    const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
-    flowCookie.value.step = "reset";
+    const otp = e.join('');
+    verifyOtpForForgotPassword({ email: "javiergenepaul@gmail.com", otpCode: otp })
+        .then((response) => {
+            console.log('OTP verified successfully:', response);
+            // setting the flow cookie to indicate the current step
+            const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
+            flowCookie.value.step = "reset";
 
-    // TODO: Add logic to handle the pin input for resetting the password
-    // This function is called when the pin input is completed
-    console.log('Pin input completed:', e.join(''));
-    router.push(PATH.FORGOT_PASSWORD_RESET.path);
+            // TODO: Add logic to handle the pin input for resetting the password
+            // This function is called when the form is submitted
+            router.push(PATH.FORGOT_PASSWORD_RESET.path);
+        }).catch((error) => {
+            console.error('Error verifying OTP:', error);
+            const errorResponse: ExoPortalErrorMessage = error.response.data;
+            handleFieldErrors({
+                errorResponse: errorResponse,
+                setErrors: setErrors,
+                allowedFields: ["pin"],
+                t: t
+            })
+        });
+    // // setting the flow cookie to indicate the current step
+    // const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
+    // flowCookie.value.step = "reset";
+
+    // // TODO: Add logic to handle the pin input for resetting the password
+    // // This function is called when the pin input is completed
+    // console.log('Pin input completed:', e.join(''));
+    // router.push(PATH.FORGOT_PASSWORD_RESET.path);
 }
 
 const isPinComplete = ref(false);
@@ -68,6 +107,7 @@ watch(
                         </PinInputGroup>
                     </PinInput>
                 </FormControl>
+                <FormMessage />
             </FormItem>
         </FormField>
         <Button type="submit" :disabled="!isPinComplete" class="w-full">
