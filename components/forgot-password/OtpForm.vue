@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import z from 'zod';
-import { PATH, RESEND_OTP_TIME } from '~/config';
+import { PATH, RESEND_OTP_TIME_MINUTES } from '~/config';
 import { ref, watch } from 'vue';
 import { Button } from '../ui/button';
 import { useForm } from 'vee-validate';
@@ -15,7 +15,7 @@ const router = useRouter();
 const { t } = useI18n();
 
 const RESEND_OTP_KEY = 'otpResendTime';
-const RESEND_OTP_INTERVAL = RESEND_OTP_TIME * 60 * 1000;
+const RESEND_OTP_INTERVAL = RESEND_OTP_TIME_MINUTES * 60 * 1000;
 
 const resendCountdown = ref(0);
 let countdownInterval: ReturnType<typeof setInterval> | null = null;
