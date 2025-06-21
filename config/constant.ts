@@ -1,4 +1,4 @@
-export const RESEND_OTP_TIME = 3;
+export const RESEND_OTP_TIME_MINUTES = 3;
 
 export const ROLE_MAP: Record<string, UserMainRole> = {
   ROLE_SUPER_ADMIN: "admin",
