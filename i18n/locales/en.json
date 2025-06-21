@@ -7,6 +7,9 @@
     "back": "Back"
   },
   "errorMessage": {
+    "otpInvalid": "The code you entered is invalid.",
+    "otpRequired": "Please enter the verification code.",
+    "otpMaxLength": "Please enter a valid 4-digit code.",
     "emailAlreadyExists": "Email already exists.",
     "invalidEmailAndPassword": "Invalid email or password."
   },

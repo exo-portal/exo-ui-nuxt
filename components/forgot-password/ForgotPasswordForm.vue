@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import * as z from 'zod'
-import { useForm } from 'vee-validate'
-import { toTypedSchema } from '@vee-validate/zod'
 import FormFieldInput from '../common/FormFieldInput.vue'
 import { PATH } from '~/config'
-import type { ApiResponse, ApiResultModel, ExoPortalErrorMessage } from '~/types/types'
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
 import { handleFieldErrors } from '~/lib'
+import type { ApiResponse, ApiResultModel, ExoPortalErrorMessage } from '~/types/types'
 
 const router = useRouter();
 const { t } = useI18n();
@@ -39,9 +39,10 @@ const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
   verifyEmailForForgotPassword({ email: identifier })
     .then((response: ApiResponse<ApiResultModel<any>>) => {
       if (response.data.isSuccess) {
-        // setting the flow cookie to indicate the current step
-        const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
+        // setting the flow cookie to indicate the current step and store the email
+        const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset", email?: string }>('forgotFlow', { default: () => ({ step: "forgot" }) });
         flowCookie.value.step = "otp";
+        flowCookie.value.email = identifier;
 
         // Redirecting to the OTP page
         router.push(PATH.FORGOT_PASSWORD_OTP.path);
