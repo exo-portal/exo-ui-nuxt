@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import z from 'zod';
-import { PATH } from '~/config';
+import { PATH, RESEND_OTP_TIME } from '~/config';
 import { ref, watch } from 'vue';
 import { Button } from '../ui/button';
 import { useForm } from 'vee-validate';
@@ -13,6 +13,55 @@ import type { ApiResponse, ApiResultModel, ExoPortalErrorMessage } from '~/types
 
 const router = useRouter();
 const { t } = useI18n();
+
+const RESEND_OTP_KEY = 'otpResendTime';
+const RESEND_OTP_INTERVAL = RESEND_OTP_TIME * 60 * 1000;
+
+const resendCountdown = ref(0);
+let countdownInterval: ReturnType<typeof setInterval> | null = null;
+
+const getResendTime = () => {
+    const cookie = useCookie<number>(RESEND_OTP_KEY);
+    return cookie.value || 0;
+};
+
+const setResendTime = (timestamp: number) => {
+    const cookie = useCookie<number>(RESEND_OTP_KEY);
+    cookie.value = timestamp;
+};
+
+const clearCountdown = () => {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+};
+
+const startCountdown = () => {
+    clearCountdown();
+    const update = () => {
+        const now = Date.now();
+        const resendTime = getResendTime();
+        const diff = resendTime - now;
+        resendCountdown.value = diff > 0 ? Math.ceil(diff / 1000) : 0;
+        if (resendCountdown.value <= 0) {
+            clearCountdown();
+        }
+    };
+    update();
+    countdownInterval = setInterval(update, 1000);
+};
+
+onMounted(() => {
+    if (getResendTime() > Date.now()) {
+        startCountdown();
+    }
+});
+
+onUnmounted(() => {
+    clearCountdown();
+});
+
 
 const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset", email?: string }>('forgotFlow');
 const email = flowCookie.value.email || "";
@@ -78,6 +127,31 @@ const handleComplete = (e: string[]) => {
     });
 }
 
+/**
+ * Handles the logic for resending the OTP code during the forgot password process.
+ * - If an email is present, it calls the resendOtpForForgotPassword API with the email.
+ * - On successful response, updates the resend time and restarts the countdown timer.
+ * - On error, logs the error (TODO: add user-facing error handling).
+ * - If no email is present, navigates back to the previous route.
+ */
+const resendOtpCode = () => {
+    if (email) {
+        resendOtpForForgotPassword({ email: email })
+            .then((response: ApiResponse<ApiResultModel<any>>) => {
+                if (response.data.isSuccess) {
+                    const nextTime = Date.now() + RESEND_OTP_INTERVAL;
+                    setResendTime(nextTime);
+                    startCountdown();
+                }
+            }).catch((error) => {
+                // TODO:: add a toast for handling errors
+                console.error("Error resending OTP:", error);
+            });
+    } else {
+        router.back();
+    }
+}
+
 const isPinComplete = ref(false);
 
 watch(
@@ -112,8 +186,15 @@ watch(
         </Button>
         <div class="text-center text-neutral-500 text-label">
             {{ $t('forgotPassword.form.otp.button.didNotReceiveCode.text') }}
-            <Button class="text-main-700 underline px-1" variant="link">
-                {{ $t('forgotPassword.form.otp.button.didNotReceiveCode.resend') }}
+            <Button type="button" class="text-main-700 underline px-1" variant="link" @click="resendOtpCode"
+                :disabled="resendCountdown > 0">
+                <template v-if="resendCountdown > 0">
+                    {{ $t('forgotPassword.form.otp.button.didNotReceiveCode.resend') }} ({{ Math.floor(resendCountdown /
+                        60) }}:{{ (resendCountdown % 60).toString().padStart(2, '0') }})
+                </template>
+                <template v-else>
+                    {{ $t('forgotPassword.form.otp.button.didNotReceiveCode.resend') }}
+                </template>
             </Button>
         </div>
     </form>

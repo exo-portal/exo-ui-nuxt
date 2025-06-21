@@ -118,3 +118,10 @@ export const verifyOtpForForgotPassword = ({
     params: { email, otpCode },
   });
 };
+
+export const resendOtpForForgotPassword = ({ email }: { email: string }) => {
+  const { $axios } = useNuxtApp();
+  return $axios.get(`${AUTH_SERVICE_ENDPOINT}/forgot-password/resend-otp`, {
+    params: { email },
+  });
+};
