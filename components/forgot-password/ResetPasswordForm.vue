@@ -56,7 +56,6 @@ const onSubmit = form.handleSubmit(({ password }: FormValues) => {
         email: email,
         newPassword: password,
     }).then((response: ApiResponse<ApiResultModel<any>>) => {
-        console.log('Password reset response:', response);
         if (response.data.isSuccess) {
             // resetting the flow cookie to indicate the current step
             const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
