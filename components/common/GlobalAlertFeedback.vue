@@ -16,7 +16,7 @@ watch(
         if (newType === 'toast') {
             toast.error(
                 errorStore.errorMessage
-                    ? translate(t, errorStore.errorMessage ? errorStore.errorMessage as TxKeyPath : 'common.errorMessage.defaultMessage')
+                    ? translate(t, errorStore.errorMessage as TxKeyPath)
                     : translate(t, 'common.errorMessage.defaultMessage')
             )
             errorStore.clearError()
