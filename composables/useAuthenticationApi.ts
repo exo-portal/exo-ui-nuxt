@@ -119,9 +119,39 @@ export const verifyOtpForForgotPassword = ({
   });
 };
 
+/**
+ * Sends a request to resend the OTP (One-Time Password) for the forgot password process.
+ *
+ * @param email - The email address of the user requesting the OTP resend.
+ * @returns A Promise resolving to the Axios response of the resend OTP request.
+ */
 export const resendOtpForForgotPassword = ({ email }: { email: string }) => {
   const { $axios } = useNuxtApp();
   return $axios.get(`${AUTH_SERVICE_ENDPOINT}/forgot-password/resend-otp`, {
     params: { email },
   });
 };
+
+/**
+ * Updates the user's password for the forgot password process by making a POST request
+ * to the authentication service's update-password endpoint.
+ *
+ * @param params - An object containing the user's email and new password.
+ * @param params.email - The user's email address.
+ * @param params.newPassword - The new password to set.
+ * @returns A Promise resolving to the response from the authentication service.
+ */
+export const updatePasswordForForgotPassword = ({
+  email,
+  newPassword,
+}: {
+  email: string;
+  newPassword: string;
+}) => {
+  const { $axios } = useNuxtApp();
+  return $axios.put(`${AUTH_SERVICE_ENDPOINT}/forgot-password/reset-password`, {
+    email,
+    newPassword,
+  });
+};
+

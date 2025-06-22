@@ -4,8 +4,15 @@ import { useForm } from 'vee-validate'
 import z from 'zod'
 import { PATH } from '~/config';
 import FormFieldInput from '../common/FormFieldInput.vue';
+import { updatePasswordForForgotPassword } from '~/composables';
+import { handleFetchError } from '~/lib';
+import type { ApiErrorResponse, ApiResponse, ApiResultModel } from '~/types/types';
 
 const routerKey = useRouter();
+const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset", email?: string }>('forgotFlow');
+const email = flowCookie.value.email || "";
+const errorStore = useErrorStore();
+const { t } = useI18n();
 
 const rawSchema = z.object({
     password: z
@@ -41,17 +48,33 @@ const form = useForm({
         confirmPassword: "",
     },
     validateOnMount: false
-})
+});
 
-const onSubmit = form.handleSubmit(({ password, confirmPassword }: FormValues) => {
-    // resetting the flow cookie to indicate the current step
-    const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
-    flowCookie.value = {};
 
-    // TODO:: add logic to handle the password reset
-    console.log('Form submitted!', { password, confirmPassword });
-    console.log('Password reset successfully!');
-    routerKey.push(PATH.SIGNIN.path);
+const onSubmit = form.handleSubmit(({ password }: FormValues) => {
+    updatePasswordForForgotPassword({
+        email: email,
+        newPassword: password,
+    }).then((response: ApiResponse<ApiResultModel<any>>) => {
+        console.log('Password reset response:', response);
+        if (response.data.isSuccess) {
+            // resetting the flow cookie to indicate the current step
+            const flowCookie = useCookie<{ step?: "forgot" | "otp" | "reset" }>('forgotFlow', { default: () => ({ step: "forgot" }) });
+            flowCookie.value = {};
+
+            // TODO:: redirect to success reset password page
+            routerKey.push(PATH.SIGNIN.path);
+        }
+
+    }).catch((error: ApiErrorResponse) => {
+        handleFetchError({
+            allowedFields: ['password', 'confirmPassword'],
+            error: error,
+            setErrors: form.setErrors,
+            setErrorStore: errorStore.setError,
+            t: t,
+        });
+    });
 });
 
 </script>
