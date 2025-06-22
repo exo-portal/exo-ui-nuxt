@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { GlobalAlertDialog } from './components/index';
+import { GlobalAlertFeedback } from './components/index';
 
 
 </script>
 <template>
   <NuxtLayout>
-    <GlobalAlertDialog />
+    <GlobalAlertFeedback />
     <NuxtPage />
   </NuxtLayout>
 </template>
