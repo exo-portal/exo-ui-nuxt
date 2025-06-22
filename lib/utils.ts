@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import parsePhoneNumberFromString, { AsYouType } from "libphonenumber-js";
 import { twMerge } from "tailwind-merge";
 import type { TxKeyPath } from "~/i18n/i18n";
-import type { ExoPortalErrorMessage } from "~/types/types";
+import type { ApiErrorResponse, ExoPortalErrorMessage } from "~/types/types";
 import { translate } from "./translate";
 import { PATH } from "~/config";
 
@@ -90,6 +90,44 @@ export const formatPhoneNumber = ({
   return value; // Return the original value if country is not supported
 };
 
+export const handleFetchError = ({
+  error,
+  allowedFields,
+  setErrors,
+  t,
+  setErrorStore,
+}: {
+  error: ApiErrorResponse;
+  allowedFields: string[];
+  setErrors: (errors: Record<string, string>) => void;
+  setErrorStore: (
+    errorType: ErrorType,
+    errorMessage: TxKeyPath | string
+  ) => void;
+  t: any;
+}) => {
+  if (error.code === "ERR_NETWORK") {
+    setErrorStore("modal", "errorMessage.serverError");
+  } else if (error.response && error.response.data.errorType === "modal") {
+    setErrorStore(
+      "modal",
+      error.response.data.errorMessage ?? "errorMessage.serverError"
+    );
+  } else if (error.response && error.response.data.errorType === "toast") {
+    setErrorStore(
+      "toast",
+      error.response.data.errorMessage ?? "errorMessage.serverError"
+    );
+  } else if (error.response && error.response.data.errorType === "field") {
+    handleFieldErrors({
+      errorResponse: error.response.data,
+      allowedFields: allowedFields,
+      setErrors: setErrors,
+      t: t,
+    });
+  }
+};
+
 export const handleFieldErrors = ({
   errorResponse,
   allowedFields,
@@ -105,13 +143,15 @@ export const handleFieldErrors = ({
     typeof errorResponse.errorType === "string" &&
     errorResponse.errorType === "field"
   ) {
-    errorResponse.errorMessageList.forEach(
-      (err: { fieldName: string; errorMessage: TxKeyPath }) => {
-        if (allowedFields.includes(err.fieldName)) {
-          setErrors({ [err.fieldName]: translate(t, err.errorMessage) });
+    if (Array.isArray(errorResponse.errorMessageList)) {
+      errorResponse.errorMessageList.forEach(
+        (err: { fieldName: string; errorMessage: TxKeyPath }) => {
+          if (allowedFields.includes(err.fieldName)) {
+            setErrors({ [err.fieldName]: translate(t, err.errorMessage) });
+          }
         }
-      }
-    );
+      );
+    }
   }
 };
 

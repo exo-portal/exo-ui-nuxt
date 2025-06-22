@@ -6,6 +6,20 @@ export interface ApiResponse<T = any> {
   statusText: string;
 }
 
+export interface ApiErrorResponse {
+  code:
+    | "ERR_NETWORK"
+    | "ERR_BAD_REQUEST"
+    | "ERR_UNAUTHORIZED"
+    | "ERR_FORBIDDEN"
+    | "ERR_NOT_FOUND"
+    | "ERR_INTERNAL_SERVER_ERROR";
+  response?: {
+    data: ExoPortalErrorMessage;
+    status: number;
+  };
+}
+
 export interface ApiResultModel<T = any> {
   isSuccess: boolean;
   resultData: T;
@@ -29,11 +43,12 @@ export type InstructionConfig = {
 };
 
 export type ExoPortalErrorMessage = {
-  errorMessageList: {
+  errorMessage?: TxKeyPath;
+  errorMessageList?: {
     errorMessage: TxKeyPath;
     fieldName: string;
   }[];
-  errorType: string;
+  errorType: "field" | "toast" | "modal";
   status: number;
 };
 
@@ -87,4 +102,3 @@ export type AccessLevelRole =
   // External roles
   | "ROLE_GUEST"
   | "ROLE_APPLICANT";
-
