@@ -4,8 +4,8 @@ import FormFieldInput from '../common/FormFieldInput.vue'
 import { PATH } from '~/config'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
-import { handleFieldErrors } from '~/lib'
-import type { ApiResponse, ApiResultModel, ExoPortalErrorMessage } from '~/types/types'
+import { handleFetchError, handleFieldErrors } from '~/lib'
+import type { ApiErrorResponse, ApiResponse, ApiResultModel, ExoPortalErrorMessage } from '~/types/types'
 
 const router = useRouter();
 const { t } = useI18n();
@@ -47,13 +47,12 @@ const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
         // Redirecting to the OTP page
         router.push(PATH.FORGOT_PASSWORD_OTP.path);
       }
-    }).catch((error) => {
-      const errorResponse: ExoPortalErrorMessage = error.response.data;
-      handleFieldErrors({
-        errorResponse: errorResponse,
+    }).catch((error: ApiErrorResponse) => {
+      handleFetchError({
+        error: error,
         setErrors: form.setErrors,
-        allowedFields: ["identifier"],
-        t: t
+        t: t,
+        allowedFields: ["identifier"]
       })
     });
 })
