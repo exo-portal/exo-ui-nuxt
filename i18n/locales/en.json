@@ -4,9 +4,15 @@
     "about": "Go to the about page"
   },
   "common": {
+    "errorMessage": {
+      "continueButton": "Continue",
+      "title": "Error",
+      "defaultMessage": "An error occurred, please try again later."
+    },
     "back": "Back"
   },
   "errorMessage": {
+    "serverError": "Server error, please try again later.",
     "otpInvalid": "The code you entered is invalid.",
     "otpRequired": "Please enter the verification code.",
     "otpMaxLength": "Please enter a valid 4-digit code.",

@@ -35,6 +35,8 @@ const form = useForm({
   validateOnMount: false
 })
 
+const errorStore = useErrorStore();
+
 const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
   verifyEmailForForgotPassword({ email: identifier })
     .then((response: ApiResponse<ApiResultModel<any>>) => {
@@ -52,7 +54,8 @@ const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
         error: error,
         setErrors: form.setErrors,
         t: t,
-        allowedFields: ["identifier"]
+        allowedFields: ["identifier"],
+        setErrorStore: errorStore.setError,
       })
     });
 })
