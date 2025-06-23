@@ -45,7 +45,7 @@ const USER_ROLES = [
                 <div class="">Notification</div>
                 <div class="h-[40px] border-l-2"></div>
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
+                    <DropdownMenuTrigger class="cursor-pointer">
                         <Avatar>
                             <AvatarImage src="https://github.com/unovue.png" alt="@unovue" />
                             <AvatarFallback>CN</AvatarFallback>
