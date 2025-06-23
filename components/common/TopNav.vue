@@ -3,6 +3,7 @@ import { ChevronRight, LogOutIcon } from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { useRoute } from 'vue-router';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 
 const route = useRoute();
 
@@ -11,9 +12,18 @@ const router = useRouter();
 async function handleLogout() {
     logoutUser().then(() => {
         router.push('/signin');
-    }).catch((error) => {
     });
-}
+};
+
+const USER_ROLES = [
+    'Super Admin',
+    'Admin',
+    'Project Lead',
+    'Team Lead',
+    'Finance',
+    'Junior Developer',
+    'HR'
+];
 </script>
 
 <template>
@@ -54,13 +64,28 @@ async function handleLogout() {
                             </NuxtLink>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                        <DropdownMenuItem>Billing</DropdownMenuItem>
-                        <DropdownMenuItem>Team</DropdownMenuItem>
+                        <div class="text-body-normal text-neutral-400 px-2 pt-2 font-normal">Theme</div>
+
+                        <Accordion class="px-2" type="single" collapsible>
+                            <AccordionItem value="switch-role">
+                                <AccordionTrigger class="cursor-pointer text-body-normal text-neutral-400 font-normal">
+                                    Switch Role
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                    <template v-for="role in USER_ROLES" :key="role">
+                                        <DropdownMenuItem :disabled="role === 'Junior Developer'"
+                                            :class="role === 'Junior Developer' ? 'text-main-500 disabled:opacity-100 disabled:text-main-500' : ''">
+                                            {{ role }}
+                                        </DropdownMenuItem>
+                                    </template>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
                         <DropdownMenuSeparator />
+                        <!-- Logout -->
                         <DropdownMenuItem class="flex gap-2 items-center" @click="handleLogout">
                             <LogOutIcon class="text-neutral-400" />
-                            <span class="text-neutral-400 text-body-normal">
+                            <span class="">
                                 Logout
                             </span>
                         </DropdownMenuItem>
