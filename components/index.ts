@@ -3,6 +3,7 @@ export { default as BackButton } from "./common/BackButton.vue";
 export { default as LoadingMask } from "./common/LoadingMask.vue";
 export { default as Instruction } from "./auth-instruction/instruction.vue";
 export { default as GlobalAlertFeedback } from "./common/GlobalAlertFeedback.vue";
+export { default as TopNav } from "./common/TopNav.vue";
 
 // SignIn components
 export { default as SignInDividerForm } from "./signin/DividerForm.vue";
