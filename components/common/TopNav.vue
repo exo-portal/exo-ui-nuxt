@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { formatRoleName } from '~/lib';
 import type { AccessLevelRole } from '~/types/types';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 const route = useRoute();
 
@@ -38,16 +39,51 @@ async function handleLogout() {
                     $t('topNav.links.home') }}</a></li>
             </ul>
             <div class="flex items-center space-x-4 p-4  bg-white rounded-4xl shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
-                <div class="">{{ $t('topNav.profile.notifications') }}</div>
+                <!-- Notifications -->
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <img src="/svg/icons/bell.svg" alt="Notifications Icon" class="w-6 h-6 cursor-pointer" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{{ $t('topNav.profile.notifications') }}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+
+                <!-- Settings -->
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <img src="/svg/icons/settings.svg" alt="Settings Icon" class="w-6 h-6 cursor-pointer" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{{ $t('topNav.profile.settings') }}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+
                 <div class="h-[40px] border-l-2"></div>
+
+                <!-- My Account Dropdown -->
                 <DropdownMenu>
                     <DropdownMenuTrigger class="cursor-pointer">
-                        <Avatar>
-                            <AvatarImage
-                                :src="authStore.user?.avatarUrl ? authStore.user?.avatarUrl : 'https://github.com/unovue.png'"
-                                :alt="`${authStore.user?.fullName} avatar`" />
-                            <AvatarFallback>{{ $t('topNav.profile.avatarFallback') }}</AvatarFallback>
-                        </Avatar>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger as-child>
+                                    <Avatar>
+                                        <AvatarImage
+                                            :src="authStore.user?.avatarUrl ? authStore.user?.avatarUrl : 'https://github.com/unovue.png'"
+                                            :alt="`${authStore.user?.fullName} avatar`" />
+                                        <AvatarFallback>{{ $t('topNav.profile.avatarFallback') }}</AvatarFallback>
+                                    </Avatar>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>{{ $t('topNav.profile.myAccount') }}</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <!-- User Profile -->
@@ -57,7 +93,7 @@ async function handleLogout() {
                                 aria-label="Go to profile">
                                 <div class="flex flex-col">
                                     <h3 class="text-body-normal font-bold text-neutral-800">{{ authStore.user?.fullName
-                                        }}</h3>
+                                    }}</h3>
                                     <p class="text-body-small text-neutral-400">{{ authStore.user?.email }}</p>
                                 </div>
                                 <ChevronRight class="text-neutral-400" />
