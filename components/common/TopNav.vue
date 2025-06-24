@@ -41,26 +41,35 @@ async function handleLogout() {
                 <DropdownMenu>
                     <DropdownMenuTrigger class="cursor-pointer">
                         <Avatar>
-                            <AvatarImage src="https://github.com/unovue.png" alt="@unovue" />
-                            <AvatarFallback>CN</AvatarFallback>
+                            <AvatarImage
+                                :src="authStore.user?.avatarUrl ? authStore.user?.avatarUrl : 'https://github.com/unovue.png'"
+                                :alt="`${authStore.user?.fullName} avatar`" />
+                            <AvatarFallback>EXO</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
+                        <!-- User Profile -->
                         <DropdownMenuLabel as="div" class="p-2">
                             <NuxtLink :to="`${route.path}/profile`"
                                 class="flex items-center space-x-4 cursor-pointer no-underline focus:outline-none"
                                 aria-label="Go to profile">
                                 <div class="flex flex-col">
-                                    <h3 class="text-body-normal font-bold text-neutral-800">Rochenette Legaspina</h3>
-                                    <p class="text-body-small text-neutral-400">rochenette@gmail.com</p>
+                                    <h3 class="text-body-normal font-bold text-neutral-800">{{ authStore.user?.fullName
+                                        }}</h3>
+                                    <p class="text-body-small text-neutral-400">{{ authStore.user?.email }}</p>
                                 </div>
                                 <ChevronRight class="text-neutral-400" />
                             </NuxtLink>
                         </DropdownMenuLabel>
+
+                        <!-- Divider -->
                         <DropdownMenuSeparator />
+                        <!-- Theme Switcher -->
                         <div class="text-body-normal text-neutral-400 px-2 pt-2 font-normal">Theme</div>
 
-                        <Accordion v-if="authStore.roleNames && authStore.roleNames.length > 0" class="px-2" type="single" collapsible>
+                        <!-- Role Switcher -->
+                        <Accordion v-if="authStore.roleNames && authStore.roleNames.length > 0" class="px-2"
+                            type="single" collapsible>
                             <AccordionItem value="switch-role">
                                 <AccordionTrigger class="cursor-pointer text-body-normal text-neutral-400 font-normal">
                                     Switch Role
@@ -75,6 +84,8 @@ async function handleLogout() {
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
+
+                        <!-- Divider -->
                         <DropdownMenuSeparator />
 
                         <!-- Logout -->
