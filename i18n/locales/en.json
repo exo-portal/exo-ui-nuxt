@@ -281,6 +281,8 @@
       "home": "Home"
     },
     "profile": {
+      "myAccount": "My Account",
+      "settings": "Settings",
       "notifications": "Notifications",
       "avatarFallback": "EXO",
       "items": {
