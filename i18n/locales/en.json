@@ -275,5 +275,19 @@
       "savePassword": "Save Password",
       "backToLogin": "Back to Login"
     }
+  },
+  "topNav": {
+    "links": {
+      "home": "Home"
+    },
+    "profile": {
+      "notifications": "Notifications",
+      "avatarFallback": "EXO",
+      "items": {
+        "theme": "Theme",
+        "switchRole": "Switch Role",
+        "logout": "Logout"
+      }
+    }
   }
 }
