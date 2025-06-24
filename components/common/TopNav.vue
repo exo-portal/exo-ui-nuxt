@@ -31,12 +31,14 @@ async function handleLogout() {
             <ul
                 class="flex justify-between items-center space-x-4 bg-white rounded-4xl py-2.5 px-4 shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
                 <li class="px-10 py-4 rounded-2xl bg-main-500"><a class="text-neutral-50 font-bold text-body-normal"
-                        href="/">Home</a></li>
-                <li class="px-10 py-4"><a class="text-neutral-300 text-body-normal" href="/about">Home</a></li>
-                <li class="px-10 py-4"><a class="text-neutral-300 text-body-normal" href="/contact">Home</a></li>
+                        href="/">{{ $t('topNav.links.home') }}</a></li>
+                <li class="px-10 py-4"><a class="text-neutral-300 text-body-normal" href="/about">{{
+                    $t('topNav.links.home') }}</a></li>
+                <li class="px-10 py-4"><a class="text-neutral-300 text-body-normal" href="/contact">{{
+                    $t('topNav.links.home') }}</a></li>
             </ul>
             <div class="flex items-center space-x-4 p-4  bg-white rounded-4xl shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
-                <div class="">Notification</div>
+                <div class="">{{ $t('topNav.profile.notifications') }}</div>
                 <div class="h-[40px] border-l-2"></div>
                 <DropdownMenu>
                     <DropdownMenuTrigger class="cursor-pointer">
@@ -44,7 +46,7 @@ async function handleLogout() {
                             <AvatarImage
                                 :src="authStore.user?.avatarUrl ? authStore.user?.avatarUrl : 'https://github.com/unovue.png'"
                                 :alt="`${authStore.user?.fullName} avatar`" />
-                            <AvatarFallback>EXO</AvatarFallback>
+                            <AvatarFallback>{{ $t('topNav.profile.avatarFallback') }}</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
@@ -92,7 +94,7 @@ async function handleLogout() {
                         <DropdownMenuItem class="flex gap-2 items-center" @click="handleLogout">
                             <LogOutIcon class="text-neutral-400" />
                             <span class="">
-                                Logout
+                                {{ $t('topNav.profile.items.logout') }}
                             </span>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
