@@ -5,10 +5,10 @@ import { toTypedSchema } from '@vee-validate/zod'
 import FormFieldInput from '../common/FormFieldInput.vue'
 import { Button } from '../ui/button'
 import { PATH, ROLE_MAP } from '~/config'
-import { redirectByUserRole, translate } from '~/lib'
+import { handleFetchError, redirectByUserRole, translate } from '~/lib'
 import { UserIcon } from '~/assets'
 import DOMPurify from 'dompurify'
-import type { AccessLevelRole, ApiResponse, ApiResultModel, AuthenticationResponse, UserInterface } from '~/types/types'
+import type { AccessLevelRole, ApiErrorResponse, ApiResponse, ApiResultModel, AuthenticationResponse, UserInterface } from '~/types/types'
 
 const rawSchema = z.object({
     email: z
@@ -48,6 +48,8 @@ const form = useForm({
 
 const router = useRouter();
 const authStore = useAuthStore();
+const { t } = useI18n();
+const errorStore = useErrorStore();
 
 const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
     const cleanCredentials = {
@@ -61,21 +63,32 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
             if (result && result.isSuccess && result.resultData && result.resultData.user) {
                 const user: UserInterface = result.resultData.user;
                 const userRole: AccessLevelRole = result.resultData.accessLevelRole;
-                // TODO:: Store user data in the auth store
+
+                console.log("Login successful:", user, userRole);
+
+                // Set user data in the auth store
                 authStore.setIsLoggedIn(true);
+                authStore.setUser(user);
+                authStore.setRoleNames(result.resultData.roleNames || []);
+                authStore.setFeatureKeys(result.resultData.featureKeys || []);
+                authStore.setAccessLevelRole(userRole);
 
                 const currentUserRole: UserMainRole = ROLE_MAP[userRole] || "guest";
                 authStore.setCurrentUserRole(currentUserRole);
                 redirectByUserRole(userRole, router, user.id);
             }
         })
-        .catch((error) => {
-            // Handle login error
-            console.error("Login failed:", error);
+        .catch((error: ApiErrorResponse) => {
+            handleFetchError({
+                error: error,
+                setErrors: form.setErrors,
+                t: t,
+                allowedFields: ["email", "password"],
+                setErrorStore: errorStore.setError,
+            });
         });
 })
 
-const { t } = useI18n();
 </script>
 
 <template>

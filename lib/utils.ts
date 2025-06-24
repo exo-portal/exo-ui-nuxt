@@ -2,7 +2,11 @@ import { type ClassValue, clsx } from "clsx";
 import parsePhoneNumberFromString, { AsYouType } from "libphonenumber-js";
 import { twMerge } from "tailwind-merge";
 import type { TxKeyPath } from "~/i18n/i18n";
-import type { ApiErrorResponse, ExoPortalErrorMessage } from "~/types/types";
+import type {
+  AccessLevelRole,
+  ApiErrorResponse,
+  ExoPortalErrorMessage,
+} from "~/types/types";
 import { translate } from "./translate";
 import { PATH } from "~/config";
 
@@ -202,4 +206,24 @@ export function redirectByUserRole(
       break;
   }
   router.push({ path });
+}
+
+/**
+ * Transforms an AccessLevelRole by removing the ROLE_ prefix,
+ * converting to Pascal case, and replacing underscores with spaces
+ * @param role - The AccessLevelRole to transform
+ * @returns The formatted role name
+ */
+export function formatRoleName(role: AccessLevelRole): string {
+  // Remove ROLE_ prefix
+  const withoutPrefix = role.replace(/^ROLE_/, "");
+
+  // Split by underscores and convert each word to Pascal case
+  const words = withoutPrefix.split("_");
+  const pascalCased = words.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  );
+
+  // Join with spaces
+  return pascalCased.join(" ");
 }

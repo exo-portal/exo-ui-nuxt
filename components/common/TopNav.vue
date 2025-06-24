@@ -4,26 +4,20 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { useRoute } from 'vue-router';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
+import { formatRoleName } from '~/lib';
+import type { AccessLevelRole } from '~/types/types';
 
 const route = useRoute();
 
 const router = useRouter();
+const authStore = useAuthStore();
 
 async function handleLogout() {
+    authStore.reset();
     logoutUser().then(() => {
         router.push('/signin');
     });
 };
-
-const USER_ROLES = [
-    'Super Admin',
-    'Admin',
-    'Project Lead',
-    'Team Lead',
-    'Finance',
-    'Junior Developer',
-    'HR'
-];
 </script>
 
 <template>
@@ -66,22 +60,23 @@ const USER_ROLES = [
                         <DropdownMenuSeparator />
                         <div class="text-body-normal text-neutral-400 px-2 pt-2 font-normal">Theme</div>
 
-                        <Accordion class="px-2" type="single" collapsible>
+                        <Accordion v-if="authStore.roleNames && authStore.roleNames.length > 0" class="px-2" type="single" collapsible>
                             <AccordionItem value="switch-role">
                                 <AccordionTrigger class="cursor-pointer text-body-normal text-neutral-400 font-normal">
                                     Switch Role
                                 </AccordionTrigger>
                                 <AccordionContent>
-                                    <template v-for="role in USER_ROLES" :key="role">
-                                        <DropdownMenuItem :disabled="role === 'Junior Developer'"
-                                            :class="role === 'Junior Developer' ? 'text-main-500 disabled:opacity-100 disabled:text-main-500' : ''">
-                                            {{ role }}
+                                    <template v-for="role in authStore.roleNames" :key="role">
+                                        <DropdownMenuItem :disabled="role === authStore.accessLevelRole"
+                                            :class="role === authStore.accessLevelRole ? 'text-main-500 disabled:opacity-100 disabled:text-main-500' : ''">
+                                            {{ formatRoleName(role as AccessLevelRole) }}
                                         </DropdownMenuItem>
                                     </template>
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
                         <DropdownMenuSeparator />
+
                         <!-- Logout -->
                         <DropdownMenuItem class="flex gap-2 items-center" @click="handleLogout">
                             <LogOutIcon class="text-neutral-400" />
