@@ -93,8 +93,13 @@ const onSubmit = form.handleSubmit((FormValues: FormValues) => {
                 flowCookie.value = null;
 
                 registrationStore.reset();
-                // TODO:: set user data in authStore
+                // Set user data in the auth store
                 authStore.setIsLoggedIn(true);
+                authStore.setUser(user);
+                authStore.setRoleNames(result.resultData.roleNames || []);
+                authStore.setFeatureKeys(result.resultData.featureKeys || []);
+                authStore.setAccessLevelRole(userRole);
+                
                 const currentUserRole: UserMainRole = ROLE_MAP[userRole] || "guest";
                 authStore.setCurrentUserRole(currentUserRole);
 

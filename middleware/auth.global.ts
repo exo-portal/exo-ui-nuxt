@@ -25,6 +25,10 @@ export default defineNuxtRouteMiddleware(async (to) => {
           const userRole: AccessLevelRole =
             result.data.resultData.accessLevelRole;
           const currentUserRole: UserMainRole = ROLE_MAP[userRole] || "guest";
+          auth.setUser(result.data.resultData.user);
+          auth.setRoleNames(result.data.resultData.roleNames || []);
+          auth.setFeatureKeys(result.data.resultData.featureKeys || []);
+          auth.setAccessLevelRole(userRole);
 
           auth.setIsLoggedIn(true);
           auth.setIsTokenValid(true);
@@ -33,12 +37,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
         } else {
           auth.setIsLoggedIn(false);
           auth.setIsTokenValid(false);
+          auth.reset();
           auth.setCurrentUserRole("guest");
           return navigateTo(PATH.SIGNIN.path);
         }
       } catch (error: unknown) {
         auth.setIsLoggedIn(false);
         auth.setIsTokenValid(false);
+        auth.reset();
         auth.setCurrentUserRole("guest");
         return navigateTo(PATH.SIGNIN.path);
       }
