@@ -27,6 +27,8 @@ export default defineNuxtConfig({
     locales: [
       { code: "en", name: "English", file: "en.json" },
       { code: "fr", name: "Français", file: "fr.json" },
+      { code: "tl", name: "Tagalog", file: "tl.json" },
+      { code: "ja", name: "日本語", file: "ja.json" },
     ],
     defaultLocale: "en",
     lazy: true,
