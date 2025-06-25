@@ -1,0 +1,296 @@
+{
+  "HomePage": {
+    "title": "Hello World!",
+    "about": "Pumunta sa tungkol sa pahina"
+  },
+  "common": {
+    "errorMessage": {
+      "continueButton": "Magpatuloy",
+      "title": "Error",
+      "defaultMessage": "May naganap na error, mangyaring subukang muli sa ibang pagkakataon."
+    },
+    "back": "Balik"
+  },
+  "errorMessage": {
+    "serverError": "Error sa server, mangyaring subukang muli sa ibang pagkakataon.",
+    "otpInvalid": "Ang code na iyong ipinasok ay hindi wasto.",
+    "otpRequired": "Mangyaring ipasok ang verification code.",
+    "otpMaxLength": "Mangyaring magpasok ng isang wastong 4-digit na code.",
+    "emailAlreadyExists": "Mayroon nang email.",
+    "invalidEmailAndPassword": "Di -wastong email o password.",
+    "passwordSameAsPrevious": "Ang bagong password ay hindi maaaring kapareho ng nauna.",
+    "passwordSameAsOld": "Ang bagong password ay hindi maaaring kapareho ng alinman sa iyong nakaraang 3 password."
+  },
+  "register": {
+    "instruction": {
+      "register": {
+        "title": {
+          "1": "Magsimula sa amin",
+          "2": "Lumikha ng iyong account"
+        },
+        "subtitle": {
+          "1": "Pumili ng dalawang (2) uri ng pag -sign up",
+          "2": "Magbigay ng mga kinakailangang detalye."
+        },
+        "topBadge": {
+          "title": "Mag -sign up gamit (Gmail, Github)",
+          "badgeTitle": {
+            "1": "Mag -sign up gamit ang iyong umiiral na mga account."
+          }
+        },
+        "bottomBadge": {
+          "title": "Mag -sign up gamit ang email o numero ng telepono:",
+          "badgeTitle": {
+            "1": "Mag -sign up gamit ang iyong email o numero ng telepono.",
+            "2": "Punan ang username at password.",
+            "3": "Mag -click sa Magpatuloy"
+          }
+        }
+      },
+      "personalDetails": {
+        "topBadge": {
+          "title": "Magpatuloy sa paglikha ng iyong account:",
+          "badgeTitle": {
+            "1": "Punan nang mabuti ang iyong mga personal na detalye.",
+            "2": "I -click ang Susunod na pindutan upang magpatuloy."
+          }
+        }
+      },
+      "contactDetails": {
+        "topBadge": {
+          "title": "Magpatuloy sa paglikha ng iyong account:",
+          "badgeTitle": {
+            "1": "Maingat na punan ang iyong mga detalye ng contact.",
+            "2": "I -click ang pindutan ng Isumite upang magpatuloy."
+          }
+        }
+      }
+    },
+    "form": {
+      "signUp": {
+        "title": "Mag -sign up ng account",
+        "subtitle": "Magrehistro sa iyong umiiral na account",
+        "button": {
+          "google": "Google",
+          "github": "Github",
+          "continue": "Magpatuloy"
+        },
+        "or": "O",
+        "input": {
+          "label": {
+            "email": "Email",
+            "password": "Password",
+            "reEnterPassword": "Ipasok muli ang password"
+          },
+          "placeholder": {
+            "email": "Ipasok ang iyong email",
+            "password": "Ipasok ang iyong password",
+            "reEnterPassword": "Ipasok muli ang iyong password"
+          }
+        },
+        "alreadyHaveAccount": {
+          "text": "Mayroon nang isang account?",
+          "signIn": "Mag -sign in",
+          "login": "Mag -login"
+        }
+      },
+      "layout": {
+        "title": "Magrehistro ng account",
+        "personalDetailsSubtitle": "Ibigay ang iyong personal na mga detalye",
+        "contactDetailsSubtitle": "Ibigay ang iyong mga detalye sa contact"
+      },
+      "personalDetails": {
+        "input": {
+          "label": {
+            "firstName": "Unang pangalan",
+            "lastName": "Huling Pangalan",
+            "dateOfBirth": "Petsa ng kapanganakan",
+            "gender": "Kasarian"
+          },
+          "placeholder": {
+            "firstName": "Ipasok ang iyong unang pangalan",
+            "lastName": "Ipasok ang iyong apelyido",
+            "dateOfBirth": "Ipasok ang iyong petsa ng kapanganakan",
+            "gender": "Piliin ang iyong kasarian"
+          }
+        },
+        "button": {
+          "next": "Susunod",
+          "back": "Balik"
+        }
+      },
+      "contactDetails": {
+        "input": {
+          "label": {
+            "phoneNumber": "Numero ng telepono",
+            "address": "Address",
+            "city": "Lungsod",
+            "state": "Estado",
+            "country": "Bansa",
+            "postalCode": "Postal code",
+            "barangay": "Barangay"
+          },
+          "placeholder": {
+            "phoneNumber": "Ipasok ang iyong numero ng telepono",
+            "address": "Ipasok ang iyong address",
+            "city": "Piliin ang Lungsod",
+            "state": "Piliin ang Estado",
+            "country": "Piliin ang Bansa",
+            "postalCode": "Ipasok ang postal code",
+            "barangay": "Piliin ang Barangay"
+          }
+        },
+        "button": {
+          "submit": "Isumite",
+          "cancel": "Kanselahin"
+        }
+      }
+    }
+  },
+  "login": {
+    "instruction": {
+      "title": "Maligayang pagdating!",
+      "subtitle": "Mangyaring ipasok ang username o numero ng telepono at password upang magpatuloy.",
+      "topBadge": {
+        "title": "Pag -login gamit (gmail, github)",
+        "badgeTitle": {
+          "1": "Mag -sign in gamit ang iyong rehistradong Gmail at Github account."
+        }
+      },
+      "bottomBadge": {
+        "title": "Mag -login gamit ang iyong email",
+        "badgeTitle": {
+          "1": "Ipasok ang iyong email at password.",
+          "2": "Mag -click sa pag -sign in."
+        }
+      }
+    },
+    "form": {
+      "signIn": {
+        "title": "Mag -sign in",
+        "subtitle": "Mag -sign in gamit ang iyong umiiral na mga account",
+        "button": {
+          "google": "Google",
+          "github": "Github",
+          "signIn": "Mag -sign in",
+          "forgotPassword": "Nakalimutan ang password?"
+        },
+        "alreadyHaveAccount": {
+          "text": "Wala pa bang account?",
+          "signUp": "Mag -sign up"
+        },
+        "or": "O"
+      }
+    }
+  },
+  "forgotPassword": {
+    "instruction": {
+      "enterEmail": {
+        "title": "Nakalimutan ang iyong password?",
+        "subtitle": "Ipasok ang iyong rehistradong email o numero ng telepono upang i -reset ang iyong password.",
+        "topBadge": {
+          "title": "Mga Hakbang upang I -reset ang Iyong Password:",
+          "badgeTitle": {
+            "1": "Ipasok ang iyong rehistradong email address o numero ng telepono.",
+            "2": "I -click ang pindutan ng Isumite upang makatanggap ng isang verification code."
+          }
+        }
+      },
+      "otp": {
+        "title": "Pag -verify ng OTP",
+        "subtitle": "Ipasok ang code na ipinadala sa iyong email o numero ng telepono upang magpatuloy.",
+        "topBadge": {
+          "title": "Mga Hakbang sa Pag -verify ng OTP:",
+          "badgeTitle": {
+            "1": "Suriin ang iyong email o telepono para sa 4-digit na code.",
+            "2": "Ipasok ang code sa patlang sa ibaba.",
+            "3": "I -click ang Mag -verify upang magpatuloy."
+          }
+        }
+      },
+      "reset": {
+        "title": "I -reset ang iyong password",
+        "subtitle": "Lumikha ng isang bagong password upang mabawi ang pag -access.",
+        "topBadge": {
+          "title": "I -reset ang Mga Hakbang sa Password:",
+          "badgeTitle": {
+            "1": "Ipasok ang iyong bagong password.",
+            "2": "Ipasok muli ang iyong bagong password upang kumpirmahin.",
+            "3": "I -click ang I -save ang Password upang makumpleto ang pag -reset."
+          }
+        }
+      }
+    },
+    "form": {
+      "alreadyHaveAccount": {
+        "text": "Naaalala na ang iyong password?",
+        "signIn": "Mag -sign in"
+      },
+      "enterEmail": {
+        "identifier": {
+          "label": "Email o numero ng telepono",
+          "placeholder": "Ipasok ang iyong rehistradong email o numero ng telepono"
+        },
+        "header": {
+          "title": "Nakalimutan ang password",
+          "subtitle": "Mangyaring ipasok ang iyong email address o numero ng telepono upang makatanggap ng isang OTP."
+        }
+      },
+      "otp": {
+        "header": {
+          "title": "Pag -verify ng OTP",
+          "subtitle": "Ipasok ang 4-digit na code na ipinadala sa iyong email o numero ng telepono."
+        },
+        "button": {
+          "verify": "I -verify",
+          "didNotReceiveCode": {
+            "text": "Hindi natanggap ang code?",
+            "resend": "Magpatuloy ng code"
+          }
+        }
+      },
+      "reset": {
+        "header": {
+          "title": "Magtakda ng isang bagong password",
+          "subtitle": "Lumikha ng isang bagong password upang mabawi ang pag -access."
+        },
+        "input": {
+          "label": {
+            "newPassword": "Lumikha ng bagong password",
+            "reEnterNewPassword": "Ipasok muli ang bagong password"
+          },
+          "placeholder": {
+            "newPassword": "Ipasok ang iyong bagong password",
+            "reEnterNewPassword": "Ipasok muli ang iyong bagong password"
+          }
+        },
+        "button": {
+          "savePassword": "I -save ang password"
+        }
+      }
+    },
+    "button": {
+      "submit": "Isumite",
+      "verify": "I -verify",
+      "savePassword": "I -save ang password",
+      "backToLogin": "Bumalik sa pag -login"
+    }
+  },
+  "topNav": {
+    "links": {
+      "home": "Home"
+    },
+    "profile": {
+      "myAccount": "Ang aking account",
+      "settings": "Mga setting",
+      "notifications": "Mga abiso",
+      "avatarFallback": "Exo",
+      "selectALanguage": "Pumili ng isang wika",
+      "items": {
+        "theme": "Tema",
+        "switchRole": "Lumipat ang papel",
+        "logout": "Mag -logout"
+      }
+    }
+  }
+}

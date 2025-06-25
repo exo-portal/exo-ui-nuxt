@@ -1,0 +1,296 @@
+{
+  "HomePage": {
+    "title": "こんにちは世界！",
+    "about": "aboutページに移動します"
+  },
+  "common": {
+    "errorMessage": {
+      "continueButton": "続く",
+      "title": "エラー",
+      "defaultMessage": "エラーが発生しました。後でもう一度やり直してください。"
+    },
+    "back": "戻る"
+  },
+  "errorMessage": {
+    "serverError": "サーバーエラー、後でもう一度やり直してください。",
+    "otpInvalid": "入力したコードは無効です。",
+    "otpRequired": "確認コードを入力してください。",
+    "otpMaxLength": "有効な4桁のコードを入力してください。",
+    "emailAlreadyExists": "メールはすでに存在します。",
+    "invalidEmailAndPassword": "無効な電子メールまたはパスワード。",
+    "passwordSameAsPrevious": "新しいパスワードは前のパスワードと同じではありません。",
+    "passwordSameAsOld": "新しいパスワードは、以前の3つのパスワードと同じではありません。"
+  },
+  "register": {
+    "instruction": {
+      "register": {
+        "title": {
+          "1": "私たちから始めましょう",
+          "2": "アカウントを作成します"
+        },
+        "subtitle": {
+          "1": "2種類のサインアップを選択します",
+          "2": "必要な詳細を提供します。"
+        },
+        "topBadge": {
+          "title": "（gmail、github）を使用してサインアップ",
+          "badgeTitle": {
+            "1": "既存のアカウントを使用してサインアップします。"
+          }
+        },
+        "bottomBadge": {
+          "title": "電子メールまたは電話番号を使用してサインアップしてください。",
+          "badgeTitle": {
+            "1": "メールまたは電話番号を使用してサインアップします。",
+            "2": "ユーザー名とパスワードに記入します。",
+            "3": "[続行]をクリックします"
+          }
+        }
+      },
+      "personalDetails": {
+        "topBadge": {
+          "title": "アカウントの作成を続けます：",
+          "badgeTitle": {
+            "1": "個人情報に注意深く記入してください。",
+            "2": "[次へ]ボタンをクリックして続行します。"
+          }
+        }
+      },
+      "contactDetails": {
+        "topBadge": {
+          "title": "アカウントの作成を続けます：",
+          "badgeTitle": {
+            "1": "連絡先の詳細に注意してください。",
+            "2": "[送信]ボタンをクリックして続行します。"
+          }
+        }
+      }
+    },
+    "form": {
+      "signUp": {
+        "title": "アカウントにサインアップします",
+        "subtitle": "既存のアカウントに登録します",
+        "button": {
+          "google": "グーグル",
+          "github": "github",
+          "continue": "続く"
+        },
+        "or": "または",
+        "input": {
+          "label": {
+            "email": "メール",
+            "password": "パスワード",
+            "reEnterPassword": "パスワード再入力"
+          },
+          "placeholder": {
+            "email": "メールを入力してください",
+            "password": "パスワードを入力してください",
+            "reEnterPassword": "パスワードを再入力します"
+          }
+        },
+        "alreadyHaveAccount": {
+          "text": "すでにアカウントを持っていますか？",
+          "signIn": "サインイン",
+          "login": "ログイン"
+        }
+      },
+      "layout": {
+        "title": "アカウントを登録します",
+        "personalDetailsSubtitle": "あなたの個人的な詳細を提供してください",
+        "contactDetailsSubtitle": "連絡先の詳細を提供します"
+      },
+      "personalDetails": {
+        "input": {
+          "label": {
+            "firstName": "ファーストネーム",
+            "lastName": "苗字",
+            "dateOfBirth": "生年月日",
+            "gender": "性別"
+          },
+          "placeholder": {
+            "firstName": "あなたの名を入力してください",
+            "lastName": "姓を入力してください",
+            "dateOfBirth": "生年月日を入力してください",
+            "gender": "性別を選択します"
+          }
+        },
+        "button": {
+          "next": "次",
+          "back": "戻る"
+        }
+      },
+      "contactDetails": {
+        "input": {
+          "label": {
+            "phoneNumber": "電話番号",
+            "address": "住所",
+            "city": "市",
+            "state": "州",
+            "country": "国",
+            "postalCode": "郵便番号",
+            "barangay": "バランガイ"
+          },
+          "placeholder": {
+            "phoneNumber": "電話番号を入力してください",
+            "address": "アドレスを入力してください",
+            "city": "Cityを選択します",
+            "state": "状態を選択します",
+            "country": "国を選択します",
+            "postalCode": "郵便番号を入力します",
+            "barangay": "Barangayを選択します"
+          }
+        },
+        "button": {
+          "submit": "提出する",
+          "cancel": "キャンセル"
+        }
+      }
+    }
+  },
+  "login": {
+    "instruction": {
+      "title": "おかえり！",
+      "subtitle": "続行するには、ユーザー名または電話番号とパスワードを入力してください。",
+      "topBadge": {
+        "title": "（gmail、github）を使用してログイン",
+        "badgeTitle": {
+          "1": "登録されたGmailおよびGithubアカウントを使用してサインインします。"
+        }
+      },
+      "bottomBadge": {
+        "title": "メールを使用してログインします",
+        "badgeTitle": {
+          "1": "メールとパスワードを入力してください。",
+          "2": "[サインイン]をクリックします。"
+        }
+      }
+    },
+    "form": {
+      "signIn": {
+        "title": "アカウントにサインインします",
+        "subtitle": "既存のアカウントにサインインします",
+        "button": {
+          "google": "グーグル",
+          "github": "github",
+          "signIn": "サインイン",
+          "forgotPassword": "パスワードをお忘れですか？"
+        },
+        "alreadyHaveAccount": {
+          "text": "まだアカウントを持っていませんか？",
+          "signUp": "サインアップ"
+        },
+        "or": "または"
+      }
+    }
+  },
+  "forgotPassword": {
+    "instruction": {
+      "enterEmail": {
+        "title": "パスワードをお忘れですか？",
+        "subtitle": "登録済みのメールまたは電話番号を入力して、パスワードをリセットします。",
+        "topBadge": {
+          "title": "パスワードをリセットする手順：",
+          "badgeTitle": {
+            "1": "登録されたメールアドレスまたは電話番号を入力します。",
+            "2": "[送信]ボタンをクリックして、確認コードを受信します。"
+          }
+        }
+      },
+      "otp": {
+        "title": "OTP検証",
+        "subtitle": "継続するには、メールまたは電話番号に送信されたコードを入力します。",
+        "topBadge": {
+          "title": "OTP検証手順：",
+          "badgeTitle": {
+            "1": "4桁のコードについては、メールまたは電話を確認してください。",
+            "2": "以下のフィールドにコードを入力してください。",
+            "3": "[確認]をクリックして続行します。"
+          }
+        }
+      },
+      "reset": {
+        "title": "パスワードをリセットします",
+        "subtitle": "アクセスを取り戻すための新しいパスワードを作成します。",
+        "topBadge": {
+          "title": "パスワードの手順をリセットします：",
+          "badgeTitle": {
+            "1": "新しいパスワードを入力します。",
+            "2": "新しいパスワードを再入力して確認してください。",
+            "3": "[パスワードを保存]をクリックして、リセットを完了します。"
+          }
+        }
+      }
+    },
+    "form": {
+      "alreadyHaveAccount": {
+        "text": "すでにあなたのパスワードを覚えていますか？",
+        "signIn": "サインイン"
+      },
+      "enterEmail": {
+        "identifier": {
+          "label": "電子メールまたは電話番号",
+          "placeholder": "登録されたメールまたは電話番号を入力します"
+        },
+        "header": {
+          "title": "パスワードをお忘れですか",
+          "subtitle": "OTPを受信するには、メールアドレスまたは電話番号を入力してください。"
+        }
+      },
+      "otp": {
+        "header": {
+          "title": "OTP検証",
+          "subtitle": "メールまたは電話番号に送信された4桁のコードを入力します。"
+        },
+        "button": {
+          "verify": "確認する",
+          "didNotReceiveCode": {
+            "text": "コードを受け取りませんでしたか？",
+            "resend": "再送信コード"
+          }
+        }
+      },
+      "reset": {
+        "header": {
+          "title": "新しいパスワードを設定します",
+          "subtitle": "アクセスを取り戻すための新しいパスワードを作成します。"
+        },
+        "input": {
+          "label": {
+            "newPassword": "新しいパスワードを作成します",
+            "reEnterNewPassword": "新しいパスワードを再入力します"
+          },
+          "placeholder": {
+            "newPassword": "新しいパスワードを入力します",
+            "reEnterNewPassword": "新しいパスワードを再入力します"
+          }
+        },
+        "button": {
+          "savePassword": "パスワードを保存します"
+        }
+      }
+    },
+    "button": {
+      "submit": "提出する",
+      "verify": "確認する",
+      "savePassword": "パスワードを保存します",
+      "backToLogin": "ログインに戻ります"
+    }
+  },
+  "topNav": {
+    "links": {
+      "home": "家"
+    },
+    "profile": {
+      "myAccount": "私のアカウント",
+      "settings": "設定",
+      "notifications": "通知",
+      "avatarFallback": "exo",
+      "selectALanguage": "言語を選択します",
+      "items": {
+        "theme": "テーマ",
+        "switchRole": "スイッチロール",
+        "logout": "ログアウト"
+      }
+    }
+  }
+}

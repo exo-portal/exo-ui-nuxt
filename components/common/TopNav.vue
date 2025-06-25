@@ -2,11 +2,13 @@
 import { ChevronRight, LogOutIcon } from 'lucide-vue-next';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { useRoute } from 'vue-router';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { formatRoleName } from '~/lib';
 import type { AccessLevelRole } from '~/types/types';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+import { Separator } from '../ui/separator';
 
 const route = useRoute();
 
@@ -19,6 +21,36 @@ async function handleLogout() {
         router.push('/signin');
     });
 };
+
+const COUNTRY_OPTIONS = [
+    { label: "English", displayValue: "EN", value: "en", icon: "/svg/national-flag/US.svg" },
+    { label: "Français", displayValue: "FR", value: "fr", icon: "/svg/national-flag/FR.svg" },
+    { label: "Tagalog", displayValue: "PH", value: "tl", icon: "/svg/national-flag/PH.svg" },
+    { label: "日本語", displayValue: "JP", value: "ja", icon: "/svg/national-flag/JA.svg" },
+];
+
+// Language selector model
+const { $i18n } = useNuxtApp();
+const selectedLanguage = ref($i18n.locale.value || 'en');
+
+// Computed property for selected option
+const selectedOption = computed(() => {
+    return COUNTRY_OPTIONS.find(option => option.value === selectedLanguage.value);
+});
+
+// Method to handle language change
+const handleLanguageChange = (value: any) => {
+    if (value && (value === 'en' || value === 'fr' || value === 'tl' || value === 'ja')) {
+        selectedLanguage.value = value;
+        $i18n.setLocale(value);
+    }
+};
+
+const navLinks = [
+    { name: 'Home', path: `${authStore.currentUserRole}/` },
+    { name: 'About', path: `${authStore.currentUserRole}/about` },
+    { name: 'Contact', path: `${authStore.currentUserRole}/contact` },
+];
 </script>
 
 <template>
@@ -30,15 +62,16 @@ async function handleLogout() {
                     aria-label="Company logo" role="img" />
             </a>
             <ul
-                class="flex justify-between items-center space-x-4 bg-white rounded-4xl py-2.5 px-4 shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
-                <li class="px-10 py-4 rounded-2xl bg-main-500"><a class="text-neutral-50 font-bold text-body-normal"
-                        href="/">{{ $t('topNav.links.home') }}</a></li>
-                <li class="px-10 py-4"><a class="text-neutral-300 text-body-normal" href="/about">{{
-                    $t('topNav.links.home') }}</a></li>
-                <li class="px-10 py-4"><a class="text-neutral-300 text-body-normal" href="/contact">{{
-                    $t('topNav.links.home') }}</a></li>
+                class="flex justify-between items-center space-x-4 bg-background-50 rounded-4xl py-2.5 px-4 shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
+                <!-- Navigation Links -->
+                <NuxtLink v-for="link in navLinks" :key="link.name"
+                    class="text-background-400 text-body-normal px-4 py-2.5 rounded-full hover:bg-main-400 hover:text-background-50"
+                    active-class="bg-main-500 text-white" :to="link.path">
+                    {{ $t(`topNav.links.${link.name.toLowerCase()}`) }}
+                </NuxtLink>
             </ul>
-            <div class="flex items-center space-x-4 p-4  bg-white rounded-4xl shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
+            <div
+                class="flex items-center space-x-4 p-4 bg-background-50 rounded-4xl shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
                 <!-- Notifications -->
                 <TooltipProvider>
                     <Tooltip>
@@ -63,7 +96,44 @@ async function handleLogout() {
                     </Tooltip>
                 </TooltipProvider>
 
-                <div class="h-[40px] border-l-2"></div>
+                <div class="h-[40px] border-l-2" />
+
+                <!-- Language Selector -->
+                <Select v-model="selectedLanguage" @update:model-value="handleLanguageChange">
+                    <SelectTrigger is-input-group class="w-[105px]">
+                        <SelectValue>
+                            <template #default>
+                                <template v-if="selectedOption">
+                                    <img v-if="selectedOption.icon" :src="selectedOption.icon"
+                                        :alt="selectedOption.displayValue" class="inline-block w-5 h-5 mr-1" />
+                                    <span class="text-neutral-400 text-body-normal">{{
+                                        selectedOption.displayValue ||
+                                        'EN'
+                                    }}</span>
+                                </template>
+                                <template v-else>
+                                    EN
+                                </template>
+                            </template>
+                        </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectLabel class="text-body-normal font-bold text-neutral-800 py-2.5 flex flex-col gap-2">
+                                {{ $t('topNav.profile.selectALanguage') }}
+                                <Separator />
+                            </SelectLabel>
+                            <SelectItem v-for="option in COUNTRY_OPTIONS" :key="option.value" :value="option.value"
+                                class="cursor-pointer">
+                                <template v-if="option.icon">
+                                    <img :src="option.icon" :alt="option.label" class="inline-block w-5 h-5 mr-1" />
+                                </template>
+                                <span class="text-neutral-400 text-body-normal">{{ option.label }}</span>
+                            </SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+
 
                 <!-- My Account Dropdown -->
                 <DropdownMenu>
@@ -93,7 +163,7 @@ async function handleLogout() {
                                 aria-label="Go to profile">
                                 <div class="flex flex-col">
                                     <h3 class="text-body-normal font-bold text-neutral-800">{{ authStore.user?.fullName
-                                    }}</h3>
+                                        }}</h3>
                                     <p class="text-body-small text-neutral-400">{{ authStore.user?.email }}</p>
                                 </div>
                                 <ChevronRight class="text-neutral-400" />
@@ -110,7 +180,7 @@ async function handleLogout() {
                             type="single" collapsible>
                             <AccordionItem value="switch-role">
                                 <AccordionTrigger class="cursor-pointer text-body-normal text-neutral-400 font-normal">
-                                    Switch Role
+                                    {{ $t('topNav.profile.items.switchRole') }}
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <template v-for="role in authStore.roleNames" :key="role">

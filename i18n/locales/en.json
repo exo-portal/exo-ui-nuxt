@@ -278,13 +278,16 @@
   },
   "topNav": {
     "links": {
-      "home": "Home"
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact"
     },
     "profile": {
       "myAccount": "My Account",
       "settings": "Settings",
       "notifications": "Notifications",
       "avatarFallback": "EXO",
+      "selectALanguage": "Select a Language",
       "items": {
         "theme": "Theme",
         "switchRole": "Switch Role",

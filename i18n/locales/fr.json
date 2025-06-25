@@ -1,5 +1,296 @@
 {
-  "welcome": "Bienvenue sur la page d'accueil",
-  "signIn": "Se connecter",
-  "forgotPassword": "Mot de passe oublié ?"
+  "HomePage": {
+    "title": "Bonjour le monde!",
+    "about": "Allez sur la page"
+  },
+  "common": {
+    "errorMessage": {
+      "continueButton": "Continuer",
+      "title": "Erreur",
+      "defaultMessage": "Une erreur s'est produite, veuillez réessayer plus tard."
+    },
+    "back": "Dos"
+  },
+  "errorMessage": {
+    "serverError": "Erreur du serveur, veuillez réessayer plus tard.",
+    "otpInvalid": "Le code que vous avez entré n'est pas valide.",
+    "otpRequired": "Veuillez saisir le code de vérification.",
+    "otpMaxLength": "Veuillez saisir un code valide à 4 chiffres.",
+    "emailAlreadyExists": "Email existe déjà.",
+    "invalidEmailAndPassword": "E-mail ou mot de passe non valide.",
+    "passwordSameAsPrevious": "Le nouveau mot de passe ne peut pas être le même que le précédent.",
+    "passwordSameAsOld": "Le nouveau mot de passe ne peut pas être le même que l'un de vos 3 mots de passe précédents."
+  },
+  "register": {
+    "instruction": {
+      "register": {
+        "title": {
+          "1": "Commencez avec nous",
+          "2": "Créez votre compte"
+        },
+        "subtitle": {
+          "1": "Choisissez deux (2) types d'inscription",
+          "2": "Fournir les détails requis."
+        },
+        "topBadge": {
+          "title": "Inscrivez-vous à l'aide (gmail, github)",
+          "badgeTitle": {
+            "1": "Inscrivez-vous en utilisant vos comptes existants."
+          }
+        },
+        "bottomBadge": {
+          "title": "Inscrivez-vous à l'aide d'e-mail ou de numéro de téléphone:",
+          "badgeTitle": {
+            "1": "Inscrivez-vous à l'aide de votre e-mail ou de votre numéro de téléphone.",
+            "2": "Remplissez le nom d'utilisateur et le mot de passe.",
+            "3": "Cliquez sur Continuer"
+          }
+        }
+      },
+      "personalDetails": {
+        "topBadge": {
+          "title": "Continuez à créer votre compte:",
+          "badgeTitle": {
+            "1": "Remplissez soigneusement vos informations personnelles.",
+            "2": "Cliquez sur le bouton Suivant pour continuer."
+          }
+        }
+      },
+      "contactDetails": {
+        "topBadge": {
+          "title": "Continuez à créer votre compte:",
+          "badgeTitle": {
+            "1": "Remplissez soigneusement vos coordonnées.",
+            "2": "Cliquez sur le bouton Soumettre pour continuer."
+          }
+        }
+      }
+    },
+    "form": {
+      "signUp": {
+        "title": "Accueil",
+        "subtitle": "Inscrivez-vous avec votre compte existant",
+        "button": {
+          "google": "Google",
+          "github": "Github",
+          "continue": "Continuer"
+        },
+        "or": "Ou",
+        "input": {
+          "label": {
+            "email": "E-mail",
+            "password": "Mot de passe",
+            "reEnterPassword": "Entrez à nouveau le mot de passe"
+          },
+          "placeholder": {
+            "email": "Entrez votre e-mail",
+            "password": "Entrez votre mot de passe",
+            "reEnterPassword": "Rentrez votre mot de passe"
+          }
+        },
+        "alreadyHaveAccount": {
+          "text": "Vous avez déjà un compte?",
+          "signIn": "Se connecter",
+          "login": "Se connecter"
+        }
+      },
+      "layout": {
+        "title": "Enregistrer le compte",
+        "personalDetailsSubtitle": "Fournissez vos coordonnées personnelles",
+        "contactDetailsSubtitle": "Fournissez vos coordonnées"
+      },
+      "personalDetails": {
+        "input": {
+          "label": {
+            "firstName": "Prénom",
+            "lastName": "Nom de famille",
+            "dateOfBirth": "Date de naissance",
+            "gender": "Genre"
+          },
+          "placeholder": {
+            "firstName": "Entrez votre prénom",
+            "lastName": "Entrez votre nom de famille",
+            "dateOfBirth": "Entrez votre date de naissance",
+            "gender": "Sélectionnez votre sexe"
+          }
+        },
+        "button": {
+          "next": "Suivant",
+          "back": "Dos"
+        }
+      },
+      "contactDetails": {
+        "input": {
+          "label": {
+            "phoneNumber": "Numéro de téléphone",
+            "address": "Adresse",
+            "city": "Ville",
+            "state": "État",
+            "country": "Pays",
+            "postalCode": "Code Postal",
+            "barangay": "Barangay"
+          },
+          "placeholder": {
+            "phoneNumber": "Entrez votre numéro de téléphone",
+            "address": "Entrez votre adresse",
+            "city": "Ville sélectionnée",
+            "state": "Sélectionner l'état",
+            "country": "Pays de sélection",
+            "postalCode": "Entrez le code postal",
+            "barangay": "Sélectionnez Barangay"
+          }
+        },
+        "button": {
+          "submit": "Soumettre",
+          "cancel": "Annuler"
+        }
+      }
+    }
+  },
+  "login": {
+    "instruction": {
+      "title": "Content de te revoir!",
+      "subtitle": "Veuillez saisir le nom d'utilisateur ou le numéro de téléphone et le mot de passe pour continuer.",
+      "topBadge": {
+        "title": "Connexion à l'aide (gmail, github)",
+        "badgeTitle": {
+          "1": "Connectez-vous en utilisant votre compte Gmail et GitHub enregistré."
+        }
+      },
+      "bottomBadge": {
+        "title": "Connectez-vous en utilisant votre e-mail",
+        "badgeTitle": {
+          "1": "Entrez votre e-mail et votre mot de passe.",
+          "2": "Cliquez sur Connectez-vous."
+        }
+      }
+    },
+    "form": {
+      "signIn": {
+        "title": "Se connecter",
+        "subtitle": "Connectez-vous avec vos comptes existants",
+        "button": {
+          "google": "Google",
+          "github": "Github",
+          "signIn": "Se connecter",
+          "forgotPassword": "Mot de passe oublié?"
+        },
+        "alreadyHaveAccount": {
+          "text": "Vous n'avez pas encore de compte?",
+          "signUp": "S'inscrire"
+        },
+        "or": "Ou"
+      }
+    }
+  },
+  "forgotPassword": {
+    "instruction": {
+      "enterEmail": {
+        "title": "Votre mot de passe oublié?",
+        "subtitle": "Entrez votre e-mail ou le numéro de téléphone enregistré pour réinitialiser votre mot de passe.",
+        "topBadge": {
+          "title": "Étapes pour réinitialiser votre mot de passe:",
+          "badgeTitle": {
+            "1": "Entrez votre adresse e-mail enregistrée ou votre numéro de téléphone.",
+            "2": "Cliquez sur le bouton Soumettre pour recevoir un code de vérification."
+          }
+        }
+      },
+      "otp": {
+        "title": "Vérification OTP",
+        "subtitle": "Entrez le code envoyé à votre e-mail ou numéro de téléphone pour continuer.",
+        "topBadge": {
+          "title": "Étapes de vérification OTP:",
+          "badgeTitle": {
+            "1": "Vérifiez votre e-mail ou votre téléphone pour le code à 4 chiffres.",
+            "2": "Entrez le code dans le champ ci-dessous.",
+            "3": "Cliquez sur Vérifier pour continuer."
+          }
+        }
+      },
+      "reset": {
+        "title": "Réinitialisez votre mot de passe",
+        "subtitle": "Créez un nouveau mot de passe pour retrouver l'accès.",
+        "topBadge": {
+          "title": "Réinitialiser les étapes du mot de passe:",
+          "badgeTitle": {
+            "1": "Entrez votre nouveau mot de passe.",
+            "2": "Rassemblez votre nouveau mot de passe pour confirmer.",
+            "3": "Cliquez sur Enregistrer le mot de passe pour terminer la réinitialisation."
+          }
+        }
+      }
+    },
+    "form": {
+      "alreadyHaveAccount": {
+        "text": "Vous vous souvenez déjà de votre mot de passe?",
+        "signIn": "Se connecter"
+      },
+      "enterEmail": {
+        "identifier": {
+          "label": "E-mail ou numéro de téléphone",
+          "placeholder": "Entrez votre e-mail ou le numéro de téléphone enregistré"
+        },
+        "header": {
+          "title": "Mot de passe oublié",
+          "subtitle": "Veuillez saisir votre adresse e-mail ou votre numéro de téléphone pour recevoir un OTP."
+        }
+      },
+      "otp": {
+        "header": {
+          "title": "Vérification OTP",
+          "subtitle": "Entrez le code à 4 chiffres envoyé à votre e-mail ou numéro de téléphone."
+        },
+        "button": {
+          "verify": "Vérifier",
+          "didNotReceiveCode": {
+            "text": "Vous n'avez pas reçu le code?",
+            "resend": "Code de resend"
+          }
+        }
+      },
+      "reset": {
+        "header": {
+          "title": "Définir un nouveau mot de passe",
+          "subtitle": "Créez un nouveau mot de passe pour retrouver l'accès."
+        },
+        "input": {
+          "label": {
+            "newPassword": "Créer un nouveau mot de passe",
+            "reEnterNewPassword": "Rentrez dans un nouveau mot de passe"
+          },
+          "placeholder": {
+            "newPassword": "Entrez votre nouveau mot de passe",
+            "reEnterNewPassword": "Rentrez votre nouveau mot de passe"
+          }
+        },
+        "button": {
+          "savePassword": "Enregistrer le mot de passe"
+        }
+      }
+    },
+    "button": {
+      "submit": "Soumettre",
+      "verify": "Vérifier",
+      "savePassword": "Enregistrer le mot de passe",
+      "backToLogin": "Retour à la connexion"
+    }
+  },
+  "topNav": {
+    "links": {
+      "home": "Maison"
+    },
+    "profile": {
+      "myAccount": "Mon compte",
+      "settings": "Paramètres",
+      "notifications": "Notifications",
+      "avatarFallback": "Exo",
+      "selectALanguage": "Sélectionnez une langue",
+      "items": {
+        "theme": "Thème",
+        "switchRole": "Rôle de commutation",
+        "logout": "Déconnexion"
+      }
+    }
+  }
 }
