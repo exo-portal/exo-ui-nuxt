@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { TopNav } from '~/components/index';
 import { metaTItleBuilder } from '~/lib/utils';
 
 useHead({
@@ -12,6 +13,7 @@ definePageMeta({
 
 <template>
     <div>
+        <TopNav />
         <h1>HR</h1>
         <p>This page will display the HR home/dashboard.</p>
     </div>
