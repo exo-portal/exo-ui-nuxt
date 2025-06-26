@@ -103,12 +103,12 @@ export const handleFetchError = ({
 }: {
   error: ApiErrorResponse;
   allowedFields: string[];
-  setErrors: (errors: Record<string, string>) => void;
   setErrorStore: (
     errorType: ErrorType,
     errorMessage: TxKeyPath | string
   ) => void;
   t: any;
+  setErrors?: (errors: Record<string, string>) => void | null;
 }) => {
   if (error.code === "ERR_NETWORK") {
     setErrorStore("modal", "errorMessage.serverError");
@@ -140,8 +140,8 @@ export const handleFieldErrors = ({
 }: {
   errorResponse: ExoPortalErrorMessage;
   allowedFields: string[];
-  setErrors: (errors: Record<string, string>) => void;
   t: any;
+  setErrors?: (errors: Record<string, string>) => void | null;
 }) => {
   if (
     typeof errorResponse.errorType === "string" &&
@@ -150,7 +150,7 @@ export const handleFieldErrors = ({
     if (Array.isArray(errorResponse.errorMessageList)) {
       errorResponse.errorMessageList.forEach(
         (err: { fieldName: string; errorMessage: TxKeyPath }) => {
-          if (allowedFields.includes(err.fieldName)) {
+          if (allowedFields.includes(err.fieldName) && setErrors) {
             setErrors({ [err.fieldName]: translate(t, err.errorMessage) });
           }
         }

@@ -84,6 +84,19 @@ export const verifySession = () => {
 };
 
 /**
+ * Switches the user's role by making a POST request to the authentication service's switch-role endpoint.
+ *
+ * @param {string} role - The role to switch to.
+ * @returns A Promise resolving to the response from the authentication service.
+ */
+export const switchRole = (role: string) => {
+  const { $axios } = useNuxtApp();
+  return $axios.post(`${AUTH_SERVICE_ENDPOINT}/authentication/switch-role`, {
+    role: role,
+  });
+};
+
+/**
  * Verifies if the provided email exists for the forgot password process by making a GET request
  * to the authentication service's verify-email endpoint.
  *
@@ -154,4 +167,3 @@ export const updatePasswordForForgotPassword = ({
     newPassword,
   });
 };
-
