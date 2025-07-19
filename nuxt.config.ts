@@ -21,7 +21,35 @@ export default defineNuxtConfig({
       svgLoader(),
       ...(process.env.NUXT_DEV_MODE === "production" ? [vitePlugin()] : []),
     ],
+    define: {
+      global: "globalThis",
+    },
+    resolve: {
+      alias: {
+        'form-data': 'unenv/runtime/mock/empty'
+      }
+    },
+    optimizeDeps: {
+      include: ["axios"],
+      exclude: ["form-data"]
+    },
+    ssr: {
+      noExternal: ['axios'],
+      external: ['form-data']
+    }
   },
+  nitro: {
+    experimental: {
+      wasm: true,
+    },
+    rollupConfig: {
+      external: ['form-data']
+    },
+    alias: {
+      'form-data': 'unenv/runtime/mock/empty'
+    }
+  },
+  ssr: true,
   modules: ["shadcn-nuxt", "@nuxtjs/i18n", "@pinia/nuxt", "@nuxt/image"],
   i18n: {
     locales: [

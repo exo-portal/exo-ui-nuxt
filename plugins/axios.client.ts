@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useLoadingStore } from "~/stores/useLoadingStore";
 
+// Client-only plugin to avoid SSR issues with form-data
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
   const BASE_URL = config.public.baseUrl || "http://localhost:8080";
