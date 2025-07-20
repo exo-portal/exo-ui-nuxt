@@ -2,8 +2,9 @@
 import { TopNav } from '~/components/index';
 import { metaTItleBuilder } from '~/lib/utils';
 import { GridLayout, GridItem } from 'grid-layout-plus'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { createManualComponentRegistry, createLayoutItem, createLayoutItemWithProps, type LayoutItem } from '~/composables/useComponentRegistry'
+import { useDashboardTemplates, componentPresets } from '~/composables/useDashboardTemplates'
 
 const route = useRoute();
 const userId = route.query.userId as string | undefined;
@@ -11,12 +12,28 @@ const userId = route.query.userId as string | undefined;
 // Use the component registry
 const componentRegistry = createManualComponentRegistry()
 
+// Use dashboard templates for more advanced management
+const {
+  currentTemplate,
+  dashboardTemplates,
+  getCurrentLayout,
+  switchTemplate,
+  addComponent,
+  removeComponent
+} = useDashboardTemplates()
+
 // Add edit mode state
 const isEditMode = ref(false);
+const useTemplateMode = ref(false); // Toggle between manual and template mode
 
 // Function to toggle edit mode
 const toggleEditMode = () => {
     isEditMode.value = !isEditMode.value
+}
+
+// Function to toggle template mode
+const toggleTemplateMode = () => {
+    useTemplateMode.value = !useTemplateMode.value
 }
 
 // Function to get component by ID
@@ -24,7 +41,8 @@ const getComponent = (componentId: string) => {
     return componentRegistry[componentId] || null
 }
 
-const layout = reactive<LayoutItem[]>([
+// Manual layout (original approach)
+const manualLayout = reactive<LayoutItem[]>([
     createLayoutItem('user-profile', 0, 0),
     createLayoutItem('recent-activity', 6, 0),
     createLayoutItem('project-stats', 0, 6),
@@ -45,6 +63,24 @@ const layout = reactive<LayoutItem[]>([
     })
 ])
 
+// Template-based layout (reactive)
+const templateLayout = reactive<LayoutItem[]>(getCurrentLayout())
+
+// Watch for template changes and update layout
+watch(currentTemplate, () => {
+    templateLayout.splice(0, templateLayout.length, ...getCurrentLayout())
+})
+
+// Computed layout based on mode
+const layout = computed(() => {
+    return useTemplateMode.value ? templateLayout : manualLayout
+})
+
+// Available templates for selection
+const availableTemplates = computed(() => {
+    return Object.values(dashboardTemplates)
+})
+
 useHead({
     title: metaTItleBuilder('Project Team'),
 })
@@ -58,11 +94,34 @@ definePageMeta({
     <div>
         <TopNav />
 
-        <!-- Edit mode toggle button -->
-        <div class="edit-controls">
-            <button @click="toggleEditMode" class="edit-toggle-btn cursor-pointer px-4 py-2.5 rounded-full bg-main-300">
-                {{ isEditMode ? 'Exit Edit Mode' : 'Enter Edit Mode' }}
-            </button>
+        <!-- Control panel -->
+        <div class="control-panel">
+            <!-- Mode toggle -->
+            <div class="mode-controls">
+                <button @click="toggleTemplateMode" class="mode-toggle-btn cursor-pointer px-4 py-2.5 rounded-full"
+                    :class="useTemplateMode ? 'bg-blue-500 text-white' : 'bg-gray-300'">
+                    {{ useTemplateMode ? 'Template Mode' : 'Manual Mode' }}
+                </button>
+                <button @click="toggleEditMode" class="edit-toggle-btn cursor-pointer px-4 py-2.5 rounded-full bg-main-300">
+                    {{ isEditMode ? 'Exit Edit Mode' : 'Enter Edit Mode' }}
+                </button>
+            </div>
+
+            <!-- Template selector (only show in template mode) -->
+            <div v-if="useTemplateMode" class="template-controls">
+                <label class="template-label">Dashboard Template:</label>
+                <select 
+                    :value="currentTemplate" 
+                    @change="switchTemplate(($event.target as HTMLSelectElement).value)"
+                    class="template-select px-3 py-2 border rounded-md">
+                    <option v-for="template in availableTemplates" :key="template.id" :value="template.id">
+                        {{ template.name }}
+                    </option>
+                </select>
+                <span class="template-description text-sm text-gray-600">
+                    {{ dashboardTemplates[currentTemplate]?.description }}
+                </span>
+            </div>
         </div>
 
         <GridLayout :class="{ 'edit-mode': isEditMode }" v-model:layout="layout" :col-num="12" :row-height="35"
@@ -81,6 +140,47 @@ definePageMeta({
 </template>
 
 <style scoped>
+.control-panel {
+    padding: 1rem;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mode-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.template-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.template-label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.template-select {
+    min-width: 200px;
+    background: white;
+    border: 1px solid #d1d5db;
+}
+
+.template-description {
+    font-style: italic;
+}
+
+.mode-toggle-btn {
+    transition: all 0.2s;
+}
+
 .vgl-layout {
     background-color: #eee;
 }

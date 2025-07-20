@@ -31,11 +31,13 @@ export function createComponentRegistry(
 // Alternative: Manual registry for full control
 export function createManualComponentRegistry(): ComponentRegistry {
   return {
-    // Existing Components
-
     "user-profile": defineAsyncComponent(
       () => import("@/components/dashboard/UserProfileCard.vue")
     ),
+    "statistic-card": defineAsyncComponent(
+      () => import("@/components/dashboard/StatisticCard.vue")
+    ),
+    // Existing Components
     "team-overview": defineAsyncComponent(
       () => import("~/components/project-team/TeamOverviewCard.vue")
     ),
@@ -76,6 +78,20 @@ export interface ComponentMetadata {
   maxSize?: { w: number; h: number };
 }
 
+// Layout item interface
+export interface LayoutItem {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  i: string;
+  minW: number;
+  minH: number;
+  maxW?: number;
+  maxH?: number;
+  props?: Record<string, any>;
+}
+
 export const componentMetadata: ComponentMetadata[] = [
   {
     id: "user-profile",
@@ -85,6 +101,15 @@ export const componentMetadata: ComponentMetadata[] = [
     defaultSize: { w: 6, h: 5 },
     minSize: { w: 6, h: 5 },
     maxSize: { w: 12, h: 6 },
+  },
+  {
+    id: "statistic-card",
+    name: "Statistic Card",
+    description: "Display a single statistic with icon and description",
+    category: "Dashboard",
+    defaultSize: { w: 3, h: 4 },
+    minSize: { w: 3, h: 4 },
+    maxSize: { w: 6, h: 6 },
   },
   //   TODO:: Sample Only
   {
@@ -123,7 +148,7 @@ export function createLayoutItem(
   x: number,
   y: number,
   customSize?: { w?: number; h?: number }
-) {
+): LayoutItem {
   const metadata = componentMetadata.find((meta) => meta.id === componentId);
 
   if (!metadata) {
@@ -136,6 +161,7 @@ export function createLayoutItem(
       i: componentId,
       minW: 2,
       minH: 2,
+      props: {}, // Add props property
     };
   }
 
@@ -149,5 +175,21 @@ export function createLayoutItem(
     minH: metadata.minSize?.h || 2,
     maxW: metadata.maxSize?.w,
     maxH: metadata.maxSize?.h,
+    props: {}, // Add props property
+  };
+}
+
+// Helper function to create layout items with props
+export function createLayoutItemWithProps(
+  componentId: string,
+  x: number,
+  y: number,
+  props: Record<string, any>,
+  customSize?: { w?: number; h?: number }
+): LayoutItem {
+  const baseItem = createLayoutItem(componentId, x, y, customSize);
+  return {
+    ...baseItem,
+    props,
   };
 }
