@@ -3,7 +3,7 @@ import { TopNav } from '~/components/index';
 import { metaTItleBuilder } from '~/lib/utils';
 import { GridLayout, GridItem } from 'grid-layout-plus'
 import { reactive } from 'vue'
-import { createManualComponentRegistry, createLayoutItem, createLayoutItemWithProps, type LayoutItem } from '~/composables/useComponentRegistry'
+import { createManualComponentRegistry, createLayoutItem, createLayoutItemWithPropsAndId, type LayoutItem } from '~/composables/useComponentRegistry'
 
 const route = useRoute();
 const userId = route.query.userId as string | undefined;
@@ -21,28 +21,48 @@ const toggleEditMode = () => {
 
 // Function to get component by ID
 const getComponent = (componentId: string) => {
-    return componentRegistry[componentId] || null
+    // Map of unique IDs to component types
+    const componentTypeMap: Record<string, string> = {
+        'user-profile': 'user-profile',
+        'total-projects': 'statistic-card',
+        'total-clients': 'statistic-card',
+        'total-task': 'statistic-card',
+        'total-overdue-task': 'statistic-card',
+    };
+
+    const componentType = componentTypeMap[componentId] || componentId;
+    return componentRegistry[componentType] || null
 }
 
 const layout = reactive<LayoutItem[]>([
+    // User Profile
     createLayoutItem('user-profile', 0, 0),
-    createLayoutItem('recent-activity', 6, 0),
-    createLayoutItem('project-stats', 0, 6),
-    // Example with props for statistic cards
-    createLayoutItemWithProps('statistic-card', 0, 13, {
+
+    // Statistic Cards
+    createLayoutItemWithPropsAndId('statistic-card', 'total-projects', 3, 0, {
         title: 'Total Projects',
         statistics: 24,
         subtitle: 'Active projects',
-        icons: '📊',
-        redirectTo: 'projects'
+        icons: '📊'
     }),
-    createLayoutItemWithProps('statistic-card', 3, 13, {
-        title: 'Team Members',
+    createLayoutItemWithPropsAndId('statistic-card', 'total-clients', 6, 0, {
+        title: 'Total Clients',
         statistics: 12,
-        subtitle: 'Active members',
-        icons: '👥',
-        redirectTo: 'team'
-    })
+        subtitle: 'Overall Projects',
+        icons: '👥'
+    }),
+    createLayoutItemWithPropsAndId('statistic-card', 'total-task', 3, 3, {
+        title: 'Total Task',
+        statistics: 13,
+        subtitle: 'Overall Projects',
+        icons: '✅'
+    }),
+    createLayoutItemWithPropsAndId('statistic-card', 'total-overdue-task', 6, 3, {
+        title: 'Total Overdue Task',
+        statistics: 13,
+        subtitle: 'Overall Projects',
+        icons: '✅'
+    }),
 ])
 
 useHead({
@@ -65,11 +85,12 @@ definePageMeta({
             </button>
         </div>
 
-        <GridLayout :class="{ 'edit-mode': isEditMode }" v-model:layout="layout" :col-num="12" :row-height="35"
+        <GridLayout :class="{ 'edit-mode': isEditMode }" v-model:layout="layout" :col-num="12" :row-height="60"
             :is-draggable="isEditMode" :is-resizable="isEditMode" vertical-compact use-css-transforms>
             <GridItem v-for="item in layout" :key="item.i" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i"
                 :min-h="item.minH" :min-w="item.minW">
-                <component :is="getComponent(item.i)" v-if="getComponent(item.i)" :grid-item="item" v-bind="item.props || {}" />
+                <component :is="getComponent(item.i)" v-if="getComponent(item.i)" :grid-item="item"
+                    v-bind="item.props || {}" />
                 <!-- Fallback for unknown components -->
                 <div v-else class="unknown-component">
                     <h3>Unknown Component</h3>
