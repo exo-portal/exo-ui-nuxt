@@ -98,8 +98,8 @@ export const componentMetadata: ComponentMetadata[] = [
     name: "User Profile",
     description: "Display user profile information and settings",
     category: "Dashboard",
-    defaultSize: { w: 6, h: 5 },
-    minSize: { w: 6, h: 5 },
+    defaultSize: { w: 3, h: 6 },
+    minSize: { w: 3, h: 6 },
     maxSize: { w: 12, h: 6 },
   },
   {
@@ -107,7 +107,7 @@ export const componentMetadata: ComponentMetadata[] = [
     name: "Statistic Card",
     description: "Display a single statistic with icon and description",
     category: "Dashboard",
-    defaultSize: { w: 3, h: 4 },
+    defaultSize: { w: 3, h: 3 },
     minSize: { w: 3, h: 4 },
     maxSize: { w: 6, h: 6 },
   },
@@ -190,6 +190,23 @@ export function createLayoutItemWithProps(
   const baseItem = createLayoutItem(componentId, x, y, customSize);
   return {
     ...baseItem,
+    props,
+  };
+}
+
+// Helper function to create layout items with props and unique ID
+export function createLayoutItemWithPropsAndId(
+  componentId: string,
+  uniqueId: string,
+  x: number,
+  y: number,
+  props: Record<string, any>,
+  customSize?: { w?: number; h?: number }
+): LayoutItem {
+  const baseItem = createLayoutItem(componentId, x, y, customSize);
+  return {
+    ...baseItem,
+    i: uniqueId, // Override with unique ID
     props,
   };
 }
