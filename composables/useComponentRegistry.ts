@@ -111,7 +111,7 @@ export const componentMetadata: ComponentMetadata[] = [
     minSize: { w: 3, h: 4 },
     maxSize: { w: 6, h: 6 },
   },
-  //   TODO:: Sample Only
+  //   TODO: Sample Only
   {
     id: "team-overview",
     name: "Team Overview",
