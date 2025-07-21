@@ -5,6 +5,14 @@ import { GridLayout, GridItem } from 'grid-layout-plus'
 import { reactive } from 'vue'
 import { createManualComponentRegistry, createLayoutItem, createLayoutItemWithPropsAndId, type LayoutItem } from '~/composables/useComponentRegistry'
 
+useHead({
+    title: metaTItleBuilder('Project Team'),
+})
+
+definePageMeta({
+    requireAuth: true,
+});
+
 const route = useRoute();
 const userId = route.query.userId as string | undefined;
 
@@ -28,6 +36,11 @@ const getComponent = (componentId: string) => {
         'total-clients': 'statistic-card',
         'total-task': 'statistic-card',
         'total-overdue-task': 'statistic-card',
+        'time-log': 'time-log',
+        'present-day-dtr-card': 'dtr-card',
+        'absent-day-dtr-card': 'dtr-card',
+        'late-hours-dtr-card': 'dtr-card',
+        'overtime-hours-dtr-card': 'dtr-card',
     };
 
     const componentType = componentTypeMap[componentId] || componentId;
@@ -63,15 +76,36 @@ const layout = reactive<LayoutItem[]>([
         subtitle: 'Overall Projects',
         icons: '✅'
     }),
-])
 
-useHead({
-    title: metaTItleBuilder('Project Team'),
-})
+    // Time Logs Card
+    createLayoutItem('time-log', 9, 0),
 
-definePageMeta({
-    requireAuth: true,
-});
+    // Dtr Cards
+    createLayoutItemWithPropsAndId('dtr-card', 'present-day-dtr-card', 0, 6, {
+        title: 'Present Day DTR',
+        statistics: 8,
+        subtitle: 'Today\'s Time Log',
+        icons: '🕒'
+    }),
+    // createLayoutItemWithPropsAndId('dtr-card', 'absent-day-dtr-card', 2, 6, {
+    //     title: 'Absent Day DTR',
+    //     statistics: 2,
+    //     subtitle: 'Today\'s Time Log',
+    //     icons: '🕒'
+    // }),
+    createLayoutItemWithPropsAndId('dtr-card', 'late-hours-dtr-card', 3, 6, {
+        title: 'Absent Day DTR',
+        statistics: 2,
+        subtitle: 'Today\'s Time Log',
+        icons: '🕒'
+    }),
+    createLayoutItemWithPropsAndId('dtr-card', 'overtime-hours-dtr-card', 6, 6, {
+        title: 'Overtime Late Hours DTR',
+        statistics: 2,
+        subtitle: 'Today\'s Time Log',
+        icons: '🕒'
+    }),
+]);
 </script>
 
 <template>
@@ -91,6 +125,7 @@ definePageMeta({
                 :min-h="item.minH" :min-w="item.minW">
                 <component :is="getComponent(item.i)" v-if="getComponent(item.i)" :grid-item="item"
                     v-bind="item.props || {}" />
+
                 <!-- Fallback for unknown components -->
                 <div v-else class="unknown-component">
                     <h3>Unknown Component</h3>
@@ -102,8 +137,8 @@ definePageMeta({
 </template>
 
 <style scoped>
-.vgl-layout {
-    background-color: #eee;
+.vgl-layout.edit-mode {
+    background-color: #f3f3f3;
 }
 
 .vgl-layout.edit-mode::before {

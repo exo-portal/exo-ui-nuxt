@@ -20,7 +20,7 @@ const props = defineProps<Props>();
             <h3 class="title">{{ props.title }}</h3>
             <div class="statistics">{{ props.statistics }}</div>
             <p v-if="props.subtitle" class="subtitle">{{ props.subtitle }}</p>
-            <router-link v-if="props.redirectTo" :to="{ name: props.redirectTo }" class="redirect-link">
+            <router-link v-if="props.redirectTo" :to="props.redirectTo" class="redirect-link">
                 View Details
             </router-link>
         </div>

@@ -47,6 +47,12 @@ export function createManualComponentRegistry(): ComponentRegistry {
     "project-stats": defineAsyncComponent(
       () => import("@/components/project-team/ProjectStatsCard.vue")
     ),
+    "time-log": defineAsyncComponent(
+      () => import("@/components/dashboard/TimeLog.vue")
+    ),
+    "dtr-card": defineAsyncComponent(
+      () => import("@/components/dashboard/DtrCard.vue")
+    ),
 
     // Example of how to add more components:
     // 'task-board': defineAsyncComponent(() => import('~/components/project-team/TaskBoardCard.vue')),
@@ -111,6 +117,24 @@ export const componentMetadata: ComponentMetadata[] = [
     minSize: { w: 3, h: 4 },
     maxSize: { w: 6, h: 6 },
   },
+  {
+    id: "time-log",
+    name: "DTR Card",
+    description: "Display Daily Time Record information",
+    category: "Dashboard",
+    defaultSize: { w: 3, h: 7 },
+    minSize: { w: 3, h: 7 },
+    maxSize: { w: 12, h: 10 },
+  },
+  {
+    id: "dtr-card",
+    name: "DTR Card",
+    description: "Display Daily Time Record information",
+    category: "Dashboard",
+    defaultSize: { w: 3, h: 3 },
+    minSize: { w: 3, h: 7 },
+    maxSize: { w: 12, h: 10 },
+  },
   //   TODO: Sample Only
   {
     id: "team-overview",
@@ -139,6 +163,7 @@ export const componentMetadata: ComponentMetadata[] = [
     minSize: { w: 6, h: 7 },
     maxSize: { w: 12, h: 10 },
   },
+
   // Add metadata for all your components...
 ];
 
