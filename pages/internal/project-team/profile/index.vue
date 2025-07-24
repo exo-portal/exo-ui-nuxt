@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { TopNav } from '~/components/index';
 import { metaTItleBuilder } from '~/lib/utils';
 
 useHead({
@@ -16,6 +17,7 @@ const handleOnClickButton = () => {
 
 <template>
     <client-only>
+        <TopNav />
         <h1>Project Team</h1>
         <p>This page will display the project team details.</p>
         <button @click="handleOnClickButton">click me</button>

@@ -94,6 +94,15 @@ export const HR_PATH: PathInterface = {
     isProtected: true,
   },
 };
+export const MANAGEMENT_PATH: PathInterface = {
+  MANAGEMENT_HOME: {
+    name: "management",
+    path: "/internal/management",
+    value: "internal/management",
+    getPath: (locale: string) => `/${locale}/internal/management`,
+    isProtected: true,
+  },
+};
 
 export const PROJECT_TEAM_PATH: PathInterface = {
   PROJECT_TEAM_HOME: {
@@ -132,4 +141,5 @@ export const PATH: PathInterface = {
   ...PROJECT_TEAM_PATH,
   ...APPLICANT_PATH,
   ...CLIENT_PATH,
+  ...MANAGEMENT_PATH
 };

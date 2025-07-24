@@ -39,3 +39,6 @@ export { default as ResetPasswordForm } from "./forgot-password/ResetPasswordFor
 // Project Team Components
 export { default as DashboardSection } from "./project-team/DashboardSection.vue";
 export { default as DashboardGrid } from "./project-team/DashboardGrid.vue";
+
+// Management Components
+export {default as ManagementDashboardSection } from "./management/DashboardSection.vue";

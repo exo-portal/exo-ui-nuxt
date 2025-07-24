@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import type { AccessLevelRole, UserInterface } from "~/types/types";
 
-export type UserMainRole = "admin" | "hr" | "project-team" | "guest";
+export type UserMainRole = "admin" | "hr" | "management" | "project-team" | "guest";
 
 interface AuthState {
   user: UserInterface | null;
