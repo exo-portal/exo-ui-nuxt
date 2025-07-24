@@ -1,14 +1,14 @@
 <script setup lang="ts">
-interface Props {
-  title: string;
-  subtitle?: string;
-  statistics: string | number;
-  icons?: string;
-  redirectTo?: string; // router name for navigation
-  gridItem?: any; // Accept grid item prop (passed by grid layout)
+interface StatisticCardInterface {
+    title: string;
+    subtitle?: string;
+    statistics: string | number;
+    icons?: string;
+    redirectTo?: string; // router name for navigation
+    gridItem?: any; // Accept grid item prop (passed by grid layout)
 }
 
-const props = defineProps<Props>();
+const props = defineProps<StatisticCardInterface>();
 </script>
 
 <template>
