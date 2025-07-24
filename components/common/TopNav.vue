@@ -83,7 +83,7 @@ const switchRoleApi = (newRole: string) => {
 </script>
 
 <template>
-    <nav aria-label="Main navigation" class="sticky top-0 z-50 px-28 py-8">
+    <nav aria-label="Main navigation" class="sticky top-0 z-50 px-28 pt-8 pb-4">
         <div class="flex items-center justify-between">
             <a href="/" class="nav-logo" aria-label="Homepage">
                 <!-- Replace with your logo image or SVG -->
@@ -91,16 +91,16 @@ const switchRoleApi = (newRole: string) => {
                     aria-label="Company logo" role="img" />
             </a>
             <ul
-                class="flex justify-between items-center space-x-4 bg-background-50 rounded-4xl py-2.5 px-4 shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
+                class="flex justify-between items-center bg-background-50 rounded-4xl py-2 px-4 shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
                 <!-- Navigation Links -->
                 <NuxtLink v-for="link in navLinks" :key="link.name"
-                    class="text-background-400 text-body-normal px-4 py-2.5 rounded-full hover:bg-main-400 hover:text-background-50"
+                    class="text-background-400 text-body-normal px-6 py-4 rounded-full hover:bg-main-400 hover:text-background-50"
                     active-class="bg-main-500 text-white" :to="link.path">
                     {{ $t(`topNav.links.${link.name.toLowerCase()}`) }}
                 </NuxtLink>
             </ul>
             <div
-                class="flex items-center space-x-4 p-4 bg-background-50 rounded-4xl shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
+                class="flex items-center space-x-4 p-2 bg-background-50 rounded-4xl shadow-[0_0_24px_0_rgba(0,0,0,0.10)]">
                 <!-- Notifications -->
                 <TooltipProvider>
                     <Tooltip>

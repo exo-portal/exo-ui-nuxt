@@ -35,3 +35,7 @@ export { default as OtpForm } from "./forgot-password/OtpForm.vue";
 // ResetPassword components
 export { default as ResetPasswordHeader } from "./forgot-password/ResetPasswordHeader.vue";
 export { default as ResetPasswordForm } from "./forgot-password/ResetPasswordForm.vue";
+
+// Project Team Components
+export { default as DashboardSection } from "./project-team/DashboardSection.vue";
+export { default as DashboardGrid } from "./project-team/DashboardGrid.vue";

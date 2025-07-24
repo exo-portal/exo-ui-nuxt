@@ -47,7 +47,7 @@ export function createManualComponentRegistry(): ComponentRegistry {
     "project-stats": defineAsyncComponent(
       () => import("@/components/project-team/ProjectStatsCard.vue")
     ),
-    "time-log": defineAsyncComponent(
+    "time-card": defineAsyncComponent(
       () => import("@/components/dashboard/TimeLog.vue")
     ),
     "dtr-card": defineAsyncComponent(
@@ -84,6 +84,15 @@ export interface ComponentMetadata {
   maxSize?: { w: number; h: number };
 }
 
+// Breakpoint-specific component metadata
+export type ComponentMetadataByBreakpoint = {
+  lg: ComponentMetadata[];
+  md?: ComponentMetadata[];
+  sm?: ComponentMetadata[];
+  xs?: ComponentMetadata[];
+  xl?: ComponentMetadata[];
+};
+
 // Layout item interface
 export interface LayoutItem {
   x: number;
@@ -98,83 +107,217 @@ export interface LayoutItem {
   props?: Record<string, any>;
 }
 
-export const componentMetadata: ComponentMetadata[] = [
-  {
-    id: "user-profile",
-    name: "User Profile",
-    description: "Display user profile information and settings",
-    category: "Dashboard",
-    defaultSize: { w: 3, h: 6 },
-    minSize: { w: 3, h: 6 },
-    maxSize: { w: 12, h: 6 },
-  },
-  {
-    id: "statistic-card",
-    name: "Statistic Card",
-    description: "Display a single statistic with icon and description",
-    category: "Dashboard",
-    defaultSize: { w: 3, h: 3 },
-    minSize: { w: 3, h: 4 },
-    maxSize: { w: 6, h: 6 },
-  },
-  {
-    id: "time-log",
-    name: "DTR Card",
-    description: "Display Daily Time Record information",
-    category: "Dashboard",
-    defaultSize: { w: 3, h: 7 },
-    minSize: { w: 3, h: 7 },
-    maxSize: { w: 12, h: 10 },
-  },
-  {
-    id: "dtr-card",
-    name: "DTR Card",
-    description: "Display Daily Time Record information",
-    category: "Dashboard",
-    defaultSize: { w: 3, h: 3 },
-    minSize: { w: 3, h: 7 },
-    maxSize: { w: 12, h: 10 },
-  },
-  //   TODO: Sample Only
-  {
-    id: "team-overview",
-    name: "Team Overview",
-    description: "Display team statistics and key metrics",
-    category: "Dashboard",
-    defaultSize: { w: 6, h: 6 },
-    minSize: { w: 6, h: 6 },
-    maxSize: { w: 12, h: 12 },
-  },
-  {
-    id: "recent-activity",
-    name: "Recent Activity",
-    description: "Show latest team activities and updates",
-    category: "Dashboard",
-    defaultSize: { w: 6, h: 8 },
-    minSize: { w: 4, h: 6 },
-    maxSize: { w: 12, h: 15 },
-  },
-  {
-    id: "project-stats",
-    name: "Project Statistics",
-    description: "View project progress and key metrics",
-    category: "Analytics",
-    defaultSize: { w: 6, h: 7 },
-    minSize: { w: 6, h: 7 },
-    maxSize: { w: 12, h: 10 },
-  },
-
-  // Add metadata for all your components...
-];
+export const componentMetadata: ComponentMetadataByBreakpoint = {
+  lg: [
+    {
+      id: "user-profile",
+      name: "User Profile",
+      description: "Display user profile information and settings",
+      category: "Dashboard",
+      defaultSize: { w: 4, h: 6 },
+      minSize: { w: 3, h: 6 },
+      maxSize: { w: 12, h: 6 },
+    },
+    {
+      id: "statistic-card",
+      name: "Statistic Card",
+      description: "Display a single statistic with icon and description",
+      category: "Dashboard",
+      defaultSize: { w: 4, h: 3 },
+      minSize: { w: 3, h: 4 },
+      maxSize: { w: 6, h: 6 },
+    },
+    {
+      id: "time-card",
+      name: "DTR Card",
+      description: "Display Daily Time Record information",
+      category: "Dashboard",
+      defaultSize: { w: 4, h: 6 },
+      minSize: { w: 3, h: 7 },
+      maxSize: { w: 12, h: 10 },
+    },
+    {
+      id: "dtr-card",
+      name: "DTR Card",
+      description: "Display Daily Time Record information",
+      category: "Dashboard",
+      defaultSize: { w: 3, h: 3 },
+      minSize: { w: 3, h: 7 },
+      maxSize: { w: 12, h: 10 },
+    },
+    {
+      id: "team-overview",
+      name: "Team Overview",
+      description: "Display team statistics and key metrics",
+      category: "Dashboard",
+      defaultSize: { w: 6, h: 6 },
+      minSize: { w: 6, h: 6 },
+      maxSize: { w: 12, h: 12 },
+    },
+    {
+      id: "recent-activity",
+      name: "Recent Activity",
+      description: "Show latest team activities and updates",
+      category: "Dashboard",
+      defaultSize: { w: 6, h: 8 },
+      minSize: { w: 4, h: 6 },
+      maxSize: { w: 12, h: 15 },
+    },
+    {
+      id: "project-stats",
+      name: "Project Statistics",
+      description: "View project progress and key metrics",
+      category: "Analytics",
+      defaultSize: { w: 6, h: 7 },
+      minSize: { w: 6, h: 7 },
+      maxSize: { w: 12, h: 10 },
+    },
+  ],
+  md: [
+    {
+      id: "user-profile",
+      name: "User Profile",
+      description: "Display user profile information and settings",
+      category: "Dashboard",
+      defaultSize: { w: 4, h: 6 },
+      minSize: { w: 4, h: 6 },
+      maxSize: { w: 10, h: 6 },
+    },
+    {
+      id: "statistic-card",
+      name: "Statistic Card",
+      description: "Display a single statistic with icon and description",
+      category: "Dashboard",
+      defaultSize: { w: 4, h: 4 },
+      minSize: { w: 4, h: 4 },
+      maxSize: { w: 8, h: 6 },
+    },
+    {
+      id: "time-card",
+      name: "DTR Card",
+      description: "Display Daily Time Record information",
+      category: "Dashboard",
+      defaultSize: { w: 4, h: 7 },
+      minSize: { w: 4, h: 7 },
+      maxSize: { w: 10, h: 10 },
+    },
+    {
+      id: "dtr-card",
+      name: "DTR Card",
+      description: "Display Daily Time Record information",
+      category: "Dashboard",
+      defaultSize: { w: 4, h: 4 },
+      minSize: { w: 4, h: 7 },
+      maxSize: { w: 10, h: 10 },
+    },
+    {
+      id: "team-overview",
+      name: "Team Overview",
+      description: "Display team statistics and key metrics",
+      category: "Dashboard",
+      defaultSize: { w: 8, h: 6 },
+      minSize: { w: 6, h: 6 },
+      maxSize: { w: 10, h: 12 },
+    },
+    {
+      id: "recent-activity",
+      name: "Recent Activity",
+      description: "Show latest team activities and updates",
+      category: "Dashboard",
+      defaultSize: { w: 8, h: 8 },
+      minSize: { w: 6, h: 6 },
+      maxSize: { w: 10, h: 15 },
+    },
+    {
+      id: "project-stats",
+      name: "Project Statistics",
+      description: "View project progress and key metrics",
+      category: "Analytics",
+      defaultSize: { w: 8, h: 7 },
+      minSize: { w: 6, h: 7 },
+      maxSize: { w: 10, h: 10 },
+    },
+  ],
+  sm: [
+    {
+      id: "user-profile",
+      name: "User Profile",
+      description: "Display user profile information and settings",
+      category: "Dashboard",
+      defaultSize: { w: 6, h: 6 },
+      minSize: { w: 6, h: 6 },
+      maxSize: { w: 6, h: 8 },
+    },
+    {
+      id: "statistic-card",
+      name: "Statistic Card",
+      description: "Display a single statistic with icon and description",
+      category: "Dashboard",
+      defaultSize: { w: 6, h: 4 },
+      minSize: { w: 6, h: 4 },
+      maxSize: { w: 6, h: 6 },
+    },
+    {
+      id: "time-card",
+      name: "DTR Card",
+      description: "Display Daily Time Record information",
+      category: "Dashboard",
+      defaultSize: { w: 6, h: 7 },
+      minSize: { w: 6, h: 7 },
+      maxSize: { w: 6, h: 10 },
+    },
+    {
+      id: "dtr-card",
+      name: "DTR Card",
+      description: "Display Daily Time Record information",
+      category: "Dashboard",
+      defaultSize: { w: 6, h: 6 },
+      minSize: { w: 6, h: 7 },
+      maxSize: { w: 6, h: 10 },
+    },
+    {
+      id: "team-overview",
+      name: "Team Overview",
+      description: "Display team statistics and key metrics",
+      category: "Dashboard",
+      defaultSize: { w: 6, h: 8 },
+      minSize: { w: 6, h: 6 },
+      maxSize: { w: 6, h: 12 },
+    },
+    {
+      id: "recent-activity",
+      name: "Recent Activity",
+      description: "Show latest team activities and updates",
+      category: "Dashboard",
+      defaultSize: { w: 6, h: 10 },
+      minSize: { w: 6, h: 8 },
+      maxSize: { w: 6, h: 15 },
+    },
+    {
+      id: "project-stats",
+      name: "Project Statistics",
+      description: "View project progress and key metrics",
+      category: "Analytics",
+      defaultSize: { w: 6, h: 8 },
+      minSize: { w: 6, h: 7 },
+      maxSize: { w: 6, h: 10 },
+    },
+  ],
+};
 
 // Helper function to create layout items with proper sizing constraints
-export function createLayoutItem(
-  componentId: string,
-  x: number,
-  y: number,
-  customSize?: { w?: number; h?: number }
-): LayoutItem {
-  const metadata = componentMetadata.find((meta) => meta.id === componentId);
+export function createLayoutItem(props: {
+  componentId: string;
+  x: number;
+  y: number;
+  customSize?: { w?: number; h?: number };
+  breakpoint: "xs" | "sm" | "md" | "lg" | "xl";
+}): LayoutItem {
+  const { componentId, x, y, customSize, breakpoint } = props;
+
+  // Get metadata for the specified breakpoint, fallback to lg
+  const metadataArray = componentMetadata[breakpoint] || componentMetadata.lg;
+  const metadata = metadataArray.find((meta) => meta.id === componentId);
 
   if (!metadata) {
     console.warn(`No metadata found for component: ${componentId}`);
@@ -210,9 +353,16 @@ export function createLayoutItemWithProps(
   x: number,
   y: number,
   props: Record<string, any>,
-  customSize?: { w?: number; h?: number }
+  customSize?: { w?: number; h?: number },
+  breakpoint: "xs" | "sm" | "md" | "lg" | "xl" = "lg"
 ): LayoutItem {
-  const baseItem = createLayoutItem(componentId, x, y, customSize);
+  const baseItem = createLayoutItem({
+    componentId,
+    x,
+    y,
+    customSize,
+    breakpoint,
+  });
   return {
     ...baseItem,
     props,
@@ -226,9 +376,16 @@ export function createLayoutItemWithPropsAndId(
   x: number,
   y: number,
   props: Record<string, any>,
-  customSize?: { w?: number; h?: number }
+  customSize?: { w?: number; h?: number },
+  breakpoint: "xs" | "sm" | "md" | "lg" | "xl" = "lg"
 ): LayoutItem {
-  const baseItem = createLayoutItem(componentId, x, y, customSize);
+  const baseItem = createLayoutItem({
+    componentId,
+    x,
+    y,
+    customSize,
+    breakpoint,
+  });
   return {
     ...baseItem,
     i: uniqueId, // Override with unique ID
