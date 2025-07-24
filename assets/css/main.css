@@ -111,24 +111,37 @@
   --color-background-800: var(--background-800);
   --color-background-900: var(--background-900);
   --color-background-950: var(--background-950);
-  
+
+  /* success color */
+  --color-success-50: var(--success-50);
+  --color-success-100: var(--success-100);
+  --color-success-200: var(--success-200);
+  --color-success-300: var(--success-300);
+  --color-success-400: var(--success-400);
+  --color-success-500: var(--success-500);
+  --color-success-600: var(--success-600);
+  --color-success-700: var(--success-700);
+  --color-success-800: var(--success-800);
+  --color-success-900: var(--success-900);
+  --color-success-950: var(--success-950);
+
   /* Animation */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
   @keyframes accordion-down {
-  from {
-    height: 0;
+    from {
+      height: 0;
     }
-  to {
-    height: var(--reka-accordion-content-height);
+    to {
+      height: var(--reka-accordion-content-height);
     }
   }
   @keyframes accordion-up {
-  from {
-    height: var(--reka-accordion-content-height);
+    from {
+      height: var(--reka-accordion-content-height);
     }
-  to {
-    height: 0;
+    to {
+      height: 0;
     }
   }
 }
@@ -220,17 +233,29 @@
   --main-950: #0e335d;
 
   /* background color */
-  --background-50: #FBFBFB;
-  --background-100: #EFEFEF;
-  --background-200: #DCDCDC;
-  --background-300: #BDBDBD;
+  --background-50: #fbfbfb;
+  --background-100: #efefef;
+  --background-200: #dcdcdc;
+  --background-300: #bdbdbd;
   --background-400: #989898;
-  --background-500: #7C7C7C;
+  --background-500: #7c7c7c;
   --background-600: #656565;
   --background-700: #525252;
   --background-800: #464646;
-  --background-900: #3D3D3D;
+  --background-900: #3d3d3d;
   --background-950: #292929;
+
+  /* success color */
+  --success-50: #f0f9f3;
+  --success-100: #daf1df;
+  --success-200: #b7e3c3;
+  --success-300: #88cda0;
+  --success-400: #499f69;
+  --success-500: #34955b;
+  --success-600: #247747;
+  --success-700: #1d5f3b;
+  --success-800: #194c31;
+  --success-900: #0b2317;
 }
 
 .dark {
