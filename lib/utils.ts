@@ -190,6 +190,8 @@ export function redirectByUserRole(
     case "ROLE_PROJECT_LEAD":
     case "ROLE_TEAM_LEAD":
     case "ROLE_TECH_LEAD":
+      path = PATH.MANAGEMENT_HOME.path;
+      break;
     case "ROLE_SENIOR_EMPLOYEE":
     case "ROLE_MID_LEVEL_EMPLOYEE":
     case "ROLE_JUNIOR_EMPLOYEE":
