@@ -21,7 +21,7 @@ const { title, subtitle, value, icon } = defineProps<DtrCardInterface>();
                 {{ title }}
             </span>
             <div class="p-3 bg-main-50 rounded-full">
-                <component :is="icon" />
+                <component class="stroke-neutral-400" :is="icon" />
             </div>
         </div>
         <div class="flex flex-col gap-2">

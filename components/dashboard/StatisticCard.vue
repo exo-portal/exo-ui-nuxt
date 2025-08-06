@@ -1,81 +1,37 @@
 <script setup lang="ts">
+import type { Component } from 'vue';
+import { Card } from '../ui/card';
+import { MoveUpRight } from 'lucide-vue-next';
+
 interface StatisticCardInterface {
     title: string;
-    subtitle?: string;
+    subtitle: string;
     statistics: string | number;
-    icons?: string;
-    redirectTo?: string; // router name for navigation
-    gridItem?: any; // Accept grid item prop (passed by grid layout)
+    icon: Component;
+    redirectTo: string; // router name for navigation
 }
 
 const props = defineProps<StatisticCardInterface>();
 </script>
 
 <template>
-    <div class="flex justify-center items-center h-full">
-        <div class="statistic-card">
-            <div v-if="props.icons" class="icon">
-                {{ props.icons }}
+    <Card class="w-full flex-col p-4 gap-7">
+        <div class="flex justify-between items-center">
+            <h3 class="text-neutral-800 text-body-normal font-medium">{{ props.title }}</h3>
+            <div class="flex justify-center items-center p-4 bg-background-100 rounded-full">
+                <component class="stroke-background-900" :is="props.icon" />
             </div>
-            <h3 class="title">{{ props.title }}</h3>
-            <div class="statistics">{{ props.statistics }}</div>
-            <p v-if="props.subtitle" class="subtitle">{{ props.subtitle }}</p>
-            <router-link v-if="props.redirectTo" :to="props.redirectTo" class="redirect-link">
-                View Details
+        </div>
+        <div class="flex justify-between w-full items-center">
+            <div class="flex flex-col">
+                <h2 class="text-neutral-800 text-heading-2 font-medium">{{ props.statistics }}</h2>
+                <p class="text-neutral-400">{{ props.subtitle }}</p>
+            </div>
+            <router-link v-if="props.redirectTo" :to="props.redirectTo" class="p-6 rounded-full">
+                <MoveUpRight class="stroke-neutral-800" />
             </router-link>
         </div>
-    </div>
+    </Card>
 </template>
 
-<style scoped>
-.statistic-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-    width: 100%;
-    height: 100%;
-    text-align: center;
-}
-
-.icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.title {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #374151;
-    margin: 0 0 0.5rem 0;
-}
-
-.statistics {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 0.25rem;
-}
-
-.subtitle {
-    font-size: 0.75rem;
-    color: #6b7280;
-    margin: 0 0 1rem 0;
-}
-
-.redirect-link {
-    font-size: 0.75rem;
-    color: #3b82f6;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.redirect-link:hover {
-    text-decoration: underline;
-}
-</style>
+<style scoped></style>
