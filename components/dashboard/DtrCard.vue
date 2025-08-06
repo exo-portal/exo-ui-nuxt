@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { PieChart } from 'lucide-vue-next';
 import { Card } from '../ui/card';
-import type { Component } from 'vue';;
+import type { Component } from 'vue';
+import { Progress } from '../ui/progress';
 
 interface DtrCardInterface {
     title: string;
@@ -10,7 +10,6 @@ interface DtrCardInterface {
     value: number;
     date: string;
 }
-
 const { title, subtitle, value, icon } = defineProps<DtrCardInterface>();
 
 </script>
@@ -30,7 +29,12 @@ const { title, subtitle, value, icon } = defineProps<DtrCardInterface>();
                 <h2 class="text-neutral-800 text-heading-2 font-medium">
                     {{ value }}
                 </h2>
-                
+                <div class="flex gap-6">
+                    <Progress :model-value="30" :is-vertical="true" />
+                    <Progress :model-value="20" :is-vertical="true" />
+                    <Progress :model-value="5" :is-vertical="true" />
+                    <Progress :model-value="15" :is-vertical="true" />
+                </div>
             </div>
 
             <div class="flex justify-between">
@@ -40,6 +44,7 @@ const { title, subtitle, value, icon } = defineProps<DtrCardInterface>();
                 <span class="text-body-small text-neutral-500">
                     {{ subtitle }}
                 </span>
+
             </div>
         </div>
     </Card>
