@@ -19,7 +19,7 @@ import StatisticCard from '../dashboard/StatisticCard.vue';
                 <div class="flex flex-col gap-6 w-full">
                     <StatisticCard redirect-to="#" :icon="Users" :title="'Total Clients'" :subtitle="'Overall Projects'"
                         :statistics="'12'" />
-                    <StatisticCard redirect-to="#" :icon="Folder" :title="'Total Overall Tasks'" :subtitle="'Overall Tasks'"
+                    <StatisticCard redirect-to="#" :icon="Folder" :title="'Overall Tasks'" :subtitle="'Overall Tasks'"
                         :statistics="'12'" />
                 </div>
             </div>
