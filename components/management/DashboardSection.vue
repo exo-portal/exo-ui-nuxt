@@ -3,6 +3,7 @@ import { DashboardUserProfileCard } from '#components';
 import { AlarmClock, ArchiveX, Briefcase, ClipboardMinus, Folder, Lightbulb, PieChart, Users } from 'lucide-vue-next';
 import DtrCard from '../dashboard/DtrCard.vue';
 import StatisticCard from '../dashboard/StatisticCard.vue';
+import TimeLog from '../dashboard/TimeLog.vue';
 </script>
 
 <template>
@@ -11,10 +12,10 @@ import StatisticCard from '../dashboard/StatisticCard.vue';
             <div class="flex gap-6">
                 <DashboardUserProfileCard />
                 <div class="flex flex-col gap-6 w-full">
-                    <StatisticCard redirect-to="#" :icon="Briefcase" :title="'Total Projects'" :subtitle="'Overall Projects'"
-                        :statistics="'12'" />
-                    <StatisticCard redirect-to="#" :icon="ClipboardMinus" :title="'Total Task'" :subtitle="'Overall Tasks'"
-                        :statistics="'12'" />
+                    <StatisticCard redirect-to="#" :icon="Briefcase" :title="'Total Projects'"
+                        :subtitle="'Overall Projects'" :statistics="'12'" />
+                    <StatisticCard redirect-to="#" :icon="ClipboardMinus" :title="'Total Task'"
+                        :subtitle="'Overall Tasks'" :statistics="'12'" />
                 </div>
                 <div class="flex flex-col gap-6 w-full">
                     <StatisticCard redirect-to="#" :icon="Users" :title="'Total Clients'" :subtitle="'Overall Projects'"
@@ -40,7 +41,7 @@ import StatisticCard from '../dashboard/StatisticCard.vue';
             </div>
         </div>
         <div class="flex flex-col basis-5/12">
-            <div class="">dtr time log</div>
+            <TimeLog />
             <div class="">attendance</div>
             <div class="">announcement</div>
         </div>
