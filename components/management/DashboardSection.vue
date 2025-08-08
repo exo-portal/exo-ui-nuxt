@@ -4,6 +4,7 @@ import { AlarmClock, ArchiveX, Briefcase, ClipboardMinus, Folder, Lightbulb, Pie
 import DtrCard from '../dashboard/DtrCard.vue';
 import StatisticCard from '../dashboard/StatisticCard.vue';
 import TimeLog from '../dashboard/TimeLog.vue';
+import AttendanceCard from '../dashboard/AttendanceCard.vue';
 </script>
 
 <template>
@@ -40,9 +41,9 @@ import TimeLog from '../dashboard/TimeLog.vue';
                 project management table
             </div>
         </div>
-        <div class="flex flex-col basis-5/12">
+        <div class="flex flex-col gap-6 basis-5/12">
             <TimeLog />
-            <div class="">attendance</div>
+            <AttendanceCard />
             <div class="">announcement</div>
         </div>
     </section>
