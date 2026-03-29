@@ -14,7 +14,7 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="basis-8/12 flex gap-9 flex-col justify-center items-center">
+  <main class="flex-1 flex gap-8 flex-col justify-center items-center px-6 py-12 sm:px-10 md:px-16">
     <SignInOauthForm />
     <SignInDividerForm />
     <SigninForm />

@@ -302,6 +302,40 @@
   }
 }
 
+/* Responsive container padding utility */
+@utility app-container {
+  padding-inline: 1rem;
+
+  @variant xs {
+    padding-inline: 1.5rem;
+  }
+
+  @variant sm {
+    padding-inline: 2rem;
+  }
+
+  @variant md {
+    padding-inline: 4rem;
+  }
+
+  @variant lg {
+    padding-inline: 7rem;
+  }
+}
+
+/* Section vertical spacing */
+@utility section-y {
+  padding-block: 1.5rem;
+
+  @variant sm {
+    padding-block: 2rem;
+  }
+
+  @variant md {
+    padding-block: 2.5rem;
+  }
+}
+
 /* Chrome, Safari, Edge */
 .no-calendar-icon::-webkit-calendar-picker-indicator {
   display: none;

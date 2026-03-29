@@ -4,7 +4,7 @@ import { Instruction, LoadingMask } from '~/components/index';
 
 <template>
   <client-only>
-    <main class="flex min-h-screen bg-neutral-50">
+    <main class="flex min-h-screen bg-neutral-50 overflow-x-hidden">
       <LoadingMask />
       <Instruction />
       <slot />

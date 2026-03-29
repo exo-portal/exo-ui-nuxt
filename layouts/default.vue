@@ -22,6 +22,8 @@ useSeoMeta({
 <template>
     <main class="bg-neutral-100 min-h-screen">
         <LoadingMask />
-        <slot />
+        <div class="max-w-[1920px] mx-auto">
+            <slot />
+        </div>
     </main>
 </template>

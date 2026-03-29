@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <aside class="basis-4/12 bg-main-700 flex flex-col px-11 py-12 select-none">
+  <aside class="hidden sm:flex flex-col shrink-0 sm:basis-5/12 md:basis-4/12 bg-main-700 px-6 sm:px-8 md:px-11 py-8 md:py-12 select-none">
     <header class="flex flex-col gap-8">
       <div data-testid="company-logo" class="h-[50px] w-[120px] bg-neutral-50 rounded-lg" aria-label="Company logo"
         role="img" />

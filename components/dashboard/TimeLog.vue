@@ -41,11 +41,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <Card class="flex flex-col w-full p-4 justify-center items-center">
+    <Card class="flex flex-col w-full p-4 justify-center items-center hover:shadow-md transition-shadow duration-200">
         <div class="flex flex-col gap-0 w-full">
             <div class="rounded-3xl p-4 rounded-b-none bg-main-50 w-full flex justify-center h-full overflow-hidden">
                 <div
-                    class="rounded-full w-[172px] h-[172px] my-10 flex items-center flex-col justify-center border-4 border-background-200 relative">
+                    class="rounded-full w-[148px] h-[148px] sm:w-[172px] sm:h-[172px] my-8 sm:my-10 flex items-center flex-col justify-center border-4 border-background-200 relative">
                     <!-- SVG with 4 arcs -->
                     <svg class="absolute inset-0 w-full h-full" viewBox="0 0 172 172">
                         <!-- Top-right arc (Clock In) -->
@@ -100,7 +100,7 @@ onUnmounted(() => {
                 </div>
             </div>
             <div class="flex flex-col gap-2">
-                <Button class="mx-20 rounded-full bg-main-500 border-main-500 py-5">
+                <Button class="rounded-full bg-main-500 border-main-500 py-5 hover:bg-main-600 transition-colors duration-200">
                     <!-- TODO:: add translate static text -->
                     <span class="font-medium text-[#EDF9FF]">
                         Break

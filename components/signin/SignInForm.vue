@@ -92,11 +92,11 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
 </script>
 
 <template>
-    <form class="flex flex-col gap-6" @submit="onSubmit" autoComplete="on">
+    <form class="flex flex-col gap-5 w-full max-w-lg" @submit="onSubmit" autoComplete="on">
         <!-- Email Field -->
         <FormFieldInput name="email" componentType="input" max="10" maxLength="5"
             :label="translate(t, 'register.form.signUp.input.label.email')" :other-props="{
-                class: 'w-lg',
+                class: 'w-full',
                 type: 'email',
                 placeholder: translate(t, 'register.form.signUp.input.placeholder.email'),
                 autocomplete: 'email',
@@ -107,7 +107,7 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
         <div class="flex flex-col items-end gap-2">
             <FormFieldInput name="password" componentType="input"
                 :label="translate(t, 'register.form.signUp.input.label.password')" :other-props="{
-                    class: 'w-lg',
+                    class: 'w-full',
                     type: 'password',
                     placeholder: translate(t, 'register.form.signUp.input.placeholder.password'),
                     autocomplete: 'current-password',
@@ -118,7 +118,7 @@ const onSubmit = form.handleSubmit(({ email, password }: FormValues) => {
         </div>
 
         <!-- Submit Button -->
-        <Button class="w-lg" type="submit">
+        <Button class="w-full" type="submit">
             {{ $t("login.form.signIn.button.signIn") }}
         </Button>
 
