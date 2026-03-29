@@ -89,8 +89,8 @@ onMounted(() => {
 <template>
     <ExoSuspense :loading="loading">
         <template #default>
-            <form class="flex flex-col gap-6 w-lg" @submit="onSubmit" autoComplete="on">
-                <div class="flex gap-4 items-start w-full">
+            <form class="flex flex-col gap-5 w-full" @submit="onSubmit" autoComplete="on">
+                <div class="flex flex-col xs:flex-row gap-4 items-start w-full">
                     <!-- First Name -->
                     <FormFieldInput id="firstName" name="firstName" componentType="input"
                         :label="$t('register.form.personalDetails.input.label.firstName')" :other-props="{
@@ -131,10 +131,10 @@ onMounted(() => {
             </form>
         </template>
         <template #fallback>
-            <div data-testid="personal-details-form-skeleton" class="flex flex-col gap-4 w-lg" role="status"
+            <div data-testid="personal-details-form-skeleton" class="flex flex-col gap-4 w-full" role="status"
                 aria-busy="true">
                 <!-- first name and last name skeleton -->
-                <div class="flex gap-4 items-start">
+                <div class="flex flex-col xs:flex-row gap-4 items-start">
                     <div class="flex flex-col gap-2 w-full">
                         <Skeleton class="h-4 w-26" />
                         <Skeleton class="h-10 w-full rounded-xl" />

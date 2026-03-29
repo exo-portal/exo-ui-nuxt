@@ -108,7 +108,7 @@ onMounted(() => {
 <template>
     <ExoSuspense :loading="loading">
         <template #default>
-            <form class="flex flex-col gap-6" @submit.prevent="onSubmit">
+            <form class="flex flex-col gap-5 w-full max-w-lg" @submit.prevent="onSubmit">
                 <!-- Email Field -->
                 <FormFieldInput name="email" :label="translate(t, 'register.form.signUp.input.label.email')"
                     componentType="input" max="10"
@@ -137,7 +137,7 @@ onMounted(() => {
                     }" />
 
                 <!-- Submit Button -->
-                <Button class="w-lg" type="submit">
+                <Button class="w-full" type="submit">
                     {{ $t("login.form.signIn.button.signIn") }}
                 </Button>
 
@@ -151,7 +151,7 @@ onMounted(() => {
             </form>
         </template>
         <template #fallback>
-            <div class="flex flex-col gap-4 w-lg" role="status" aria-busy="true" data-testid="email-form-skeleton">
+            <div class="flex flex-col gap-4 w-full max-w-lg" role="status" aria-busy="true" data-testid="email-form-skeleton">
                 <div class="flex flex-col gap-2" data-testid="email-field-skeleton">
                     <Skeleton class="h-4 w-10" data-testid="email-label-skeleton" />
                     <Skeleton class="h-10 w-full rounded-xl" data-testid="email-input-skeleton" />

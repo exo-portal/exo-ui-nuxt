@@ -14,7 +14,7 @@ useHead({
 
 <template>
     <client-only>
-        <section class="basis-8/12 flex gap-9 flex-col justify-center items-center">
+        <section class="flex-1 flex gap-8 flex-col justify-center items-center px-6 py-12 sm:px-10 md:px-16">
             <SignUpOauthForm />
             <SignUpDividerForm />
             <SignUpForm />

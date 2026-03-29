@@ -121,7 +121,7 @@ onMounted(() => {
 <template>
     <ExoSuspense :loading="loading">
         <template #default>
-            <form class="flex flex-col gap-6 w-lg" @submit.prevent="onSubmit" autoComplete="on">
+            <form class="flex flex-col gap-5 w-full" @submit.prevent="onSubmit" autoComplete="on">
                 <!-- Country -->
                 <FormFieldInput id="country" name="country" component-type="select"
                     :label="$t('register.form.contactDetails.input.label.country')" :other-props="{
@@ -145,7 +145,7 @@ onMounted(() => {
                     }" />
 
                 <!-- State and City -->
-                <div class="flex gap-4 items-start">
+                <div class="flex flex-col xs:flex-row gap-4 items-start">
                     <FormFieldInput id="state" name="state" component-type="select"
                         :label="$t('register.form.contactDetails.input.label.state')" :other-props="{
                             options: STATE_OPTIONS,
@@ -159,7 +159,7 @@ onMounted(() => {
                 </div>
 
                 <!-- Barangay and Postal Code -->
-                <div class="flex gap-4 items-start">
+                <div class="flex flex-col xs:flex-row gap-4 items-start">
                     <FormFieldInput id="barangay" name="barangay" component-type="select"
                         :label="$t('register.form.contactDetails.input.label.barangay')" :other-props="{
                             type: 'text',
@@ -182,7 +182,7 @@ onMounted(() => {
             </form>
         </template>
         <template #fallback>
-            <div class="flex flex-col gap-4 w-lg" data-testid="contact-details-form-skeleton" role="status"
+            <div class="flex flex-col gap-4 w-full" data-testid="contact-details-form-skeleton" role="status"
                 aria-busy="true">
                 <!-- Country skeleton -->
                 <div class="flex flex-col gap-2" data-testid="country-skeleton">
@@ -200,7 +200,7 @@ onMounted(() => {
                     <Skeleton class="h-10 w-full rounded-xl" data-testid="address-input-skeleton" />
                 </div>
                 <!-- state and city skeleton -->
-                <div class="flex gap-4 items-start" data-testid="state-city-skeleton">
+                <div class="flex flex-col xs:flex-row gap-4 items-start" data-testid="state-city-skeleton">
                     <div class="flex flex-col gap-2 w-full" data-testid="state-skeleton">
                         <Skeleton class="h-4 w-16" data-testid="state-label-skeleton" />
                         <Skeleton class="h-10 w-full rounded-xl" data-testid="state-input-skeleton" />
@@ -211,7 +211,7 @@ onMounted(() => {
                     </div>
                 </div>
                 <!-- barangay and postal skeleton -->
-                <div class="flex gap-4 items-start" data-testid="barangay-postal-skeleton">
+                <div class="flex flex-col xs:flex-row gap-4 items-start" data-testid="barangay-postal-skeleton">
                     <div class="flex flex-col gap-2 w-full" data-testid="barangay-skeleton">
                         <Skeleton class="h-4 w-20" data-testid="barangay-label-skeleton" />
                         <Skeleton class="h-10 w-full rounded-xl" data-testid="barangay-input-skeleton" />
