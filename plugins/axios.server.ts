@@ -1,7 +1,7 @@
 // Server-side plugin that provides a $fetch-based axios-like interface
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
-  const BASE_URL = config.public.baseUrl || "http://localhost:8080";
+  const BASE_URL = config.public.baseUrl || "http://localhost:5080";
 
   // Create an axios-like interface using $fetch for SSR
   const axiosLikeInstance = {
