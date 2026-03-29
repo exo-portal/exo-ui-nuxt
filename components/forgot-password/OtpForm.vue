@@ -168,7 +168,7 @@ watch(
         <FormField name="pin" v-slot="{ componentField, value, errors }">
             <FormItem>
                 <FormControl>
-                    <PinInput id="pin-input" :model-value="value" class="flex gap-2 items-center mt-1" otp
+                    <PinInput id="pin-input" :model-value="value" class="flex justify-center gap-3 items-center mt-1" otp
                         :name="componentField.name" @complete="handleComplete" @update:model-value="(arrStr) => {
                             setFieldValue('pin', arrStr)
                         }">

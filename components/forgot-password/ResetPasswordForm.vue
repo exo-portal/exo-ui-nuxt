@@ -79,11 +79,11 @@ const onSubmit = form.handleSubmit(({ password }: FormValues) => {
 </script>
 
 <template>
-    <form class="flex flex-col gap-6" @submit="onSubmit" autoComplete="on">
+    <form class="flex flex-col gap-5 w-full" @submit="onSubmit" autoComplete="on">
         <!-- Password Field -->
         <FormFieldInput id="password" name="password" componentType="input"
             :label="$t('forgotPassword.form.reset.input.label.newPassword')" :other-props="{
-                class: 'w-lg',
+                class: 'w-full',
                 type: 'password',
                 placeholder: $t('forgotPassword.form.reset.input.placeholder.newPassword'),
                 autocomplete: 'new-password'
@@ -92,14 +92,14 @@ const onSubmit = form.handleSubmit(({ password }: FormValues) => {
         <!-- Confirm Password Field -->
         <FormFieldInput id="confirmPassword" name="confirmPassword" componentType="input"
             :label="$t('forgotPassword.form.reset.input.label.reEnterNewPassword')" :other-props="{
-                class: 'w-lg',
+                class: 'w-full',
                 type: 'password',
                 placeholder: $t('forgotPassword.form.reset.input.placeholder.reEnterNewPassword'),
                 autocomplete: 'new-password'
             }" />
 
         <!-- Submit Button -->
-        <Button class="w-lg" type="submit">
+        <Button class="w-full" type="submit">
             {{ $t('forgotPassword.form.reset.button.savePassword') }}
         </Button>
     </form>

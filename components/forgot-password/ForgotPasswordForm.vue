@@ -62,18 +62,18 @@ const onSubmit = form.handleSubmit(({ identifier }: FormValues) => {
 </script>
 
 <template>
-  <form class="flex flex-col gap-6" @submit="onSubmit" autoComplete="on">
+  <form class="flex flex-col gap-5 w-full" @submit="onSubmit" autoComplete="on">
     <!-- Identifier Field -->
     <FormFieldInput id="identifier" name="identifier" componentType="input"
       :label="$t('forgotPassword.form.enterEmail.identifier.label')" :other-props="{
-        class: 'w-lg',
+        class: 'w-full',
         type: 'text',
         placeholder: $t('forgotPassword.form.enterEmail.identifier.placeholder'),
         autocomplete: 'username'
       }" />
 
     <!-- Submit Button -->
-    <Button class="w-lg" type="submit">
+    <Button class="w-full" type="submit">
       {{ $t("forgotPassword.button.submit") }}
     </Button>
 
