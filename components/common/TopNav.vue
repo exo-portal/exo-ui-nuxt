@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ChevronRight, LogOutIcon, Menu, X } from 'lucide-vue-next';
+import ExoBrand from './ExoBrand.vue';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
@@ -84,11 +85,9 @@ const switchRoleApi = (newRole: string) => {
         <div class="flex items-center justify-between gap-4">
 
             <!-- Logo -->
-            <a href="/" class="shrink-0" aria-label="Homepage">
-                <div data-testid="company-logo"
-                    class="h-[40px] w-[100px] md:h-[50px] md:w-[120px] bg-neutral-50 rounded-lg border border-neutral-200"
-                    aria-label="Company logo" role="img" />
-            </a>
+            <NuxtLink to="/" class="shrink-0" aria-label="Homepage">
+                <ExoBrand orientation="horizontal" size="sm" />
+            </NuxtLink>
 
             <!-- Desktop Nav links — visible md+ -->
             <ul class="hidden md:flex justify-between items-center bg-background-50 rounded-4xl py-2 px-4 shadow-[0_0_24px_0_rgba(0,0,0,0.08)]">

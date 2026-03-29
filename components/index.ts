@@ -1,4 +1,5 @@
 // Common Components
+export { default as ExoBrand } from "./common/ExoBrand.vue";
 export { default as BackButton } from "./common/BackButton.vue";
 export { default as LoadingMask } from "./common/LoadingMask.vue";
 export { default as Instruction } from "./auth-instruction/instruction.vue";
