@@ -210,10 +210,10 @@ const avatarDropdownContent = computed(() => authStore.roleNames ?? []);
                             </NuxtLink>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <div class="text-caption text-neutral-400 px-2 pt-1.5 pb-0.5 font-medium uppercase tracking-wide">
+                        <div v-if="avatarDropdownContent.length > 1" class="text-caption text-neutral-400 px-2 pt-1.5 pb-0.5 font-medium uppercase tracking-wide">
                             Theme
                         </div>
-                        <Accordion v-if="avatarDropdownContent.length > 0" class="px-2" type="single" collapsible>
+                        <Accordion v-if="avatarDropdownContent.length > 1" class="px-2" type="single" collapsible>
                             <AccordionItem value="switch-role" class="border-0">
                                 <AccordionTrigger
                                     class="cursor-pointer text-body-small text-neutral-500 font-normal py-2">
@@ -230,7 +230,7 @@ const avatarDropdownContent = computed(() => authStore.roleNames ?? []);
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
-                        <DropdownMenuSeparator />
+                        <DropdownMenuSeparator v-if="avatarDropdownContent.length > 1" />
                         <DropdownMenuItem class="flex gap-2 items-center text-body-small" @click="handleLogout">
                             <LogOutIcon class="w-4 h-4 text-neutral-400" />
                             <span>{{ $t('topNav.profile.items.logout') }}</span>
@@ -268,7 +268,7 @@ const avatarDropdownContent = computed(() => authStore.roleNames ?? []);
                             </NuxtLink>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Accordion v-if="avatarDropdownContent.length > 0" class="px-2" type="single" collapsible>
+                        <Accordion v-if="avatarDropdownContent.length > 1" class="px-2" type="single" collapsible>
                             <AccordionItem value="switch-role" class="border-0">
                                 <AccordionTrigger
                                     class="cursor-pointer text-body-small text-neutral-500 font-normal py-2">
